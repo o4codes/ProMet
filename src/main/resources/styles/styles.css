@@ -1,0 +1,111 @@
+/* Application wide styles */
+
+
+.background{
+  -fx-background-color:  linear-gradient(#36D1DC,rgba(63,76,119,1));
+}
+.pane-background{
+    -fx-background-color: white;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+
+.closeButton {
+    -fx-text-fill: white;
+    -fx-font-family: "sans-serif";
+    -fx-font-Size: 15px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20px;
+    -fx-background-color: red;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+.main-button{
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-background-color: rgba(63,76,119,1);
+    -fx-text-fill: white;
+    -fx-font-Size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10 0 10 0;
+}
+
+.button:hover{
+    -fx-base: #395bae;
+}
+
+/* Component specific styles */
+
+
+
+.main-panel {
+    -fx-background-image: url("../images/background.jpg");
+}
+
+.app-title {
+    -fx-text-fill: white;
+    -fx-font-family: Candara;
+    -fx-font-Size: 20px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+
+.app-title-message {
+    -fx-text-fill: white;
+    -fx-font-Size: 20px;
+    -fx-font-family: Candara;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+    -fx-border-color: #ff9800;
+    -fx-border-radius: 3px;
+}
+
+.title-label{
+    -fx-text-fill: #424242;
+    -fx-font-weight: bold;
+    -fx-font-Size: 18px;
+ }
+
+.fields-label{
+  -fx-text-fill: #424242;
+  -fx-font-weight: bold;
+  -fx-font-Size: 11px;
+}
+
+.fields{
+    -fx-background-color: #eeeeee;
+    -fx-background-radius: 3px;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 3px;
+}
+.fields:focused{
+    -fx-border-color: #bdbdbd;
+}
+
+.password-button{
+    -fx-font-Size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 3px;
+    -fx-border-color: #e0e0e0;
+    -fx-background-color: white;
+    -fx-pref-width: 97px;
+    -fx-pref-height: 42px;
+}
+.last-password-button{
+        -fx-font-Size: 13px;
+        -fx-font-weight: bold;
+        -fx-border-radius: 3px;
+        -fx-border-color: #e0e0e0;
+        -fx-background-color: white;
+        -fx-pref-width: 150px;
+        -fx-pref-height: 42px;
+}
+.backspace-btn {
+         -fx-font-Size: 13px;
+         -fx-font-weight: bold;
+         -fx-border-radius: 3px;
+         -fx-border-color: #ff9800;
+         -fx-background-color: white;
+         -fx-pref-width: 150px;
+         -fx-pref-height: 42px;
+}
+
