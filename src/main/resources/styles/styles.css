@@ -71,6 +71,15 @@
   -fx-font-Size: 11px;
 }
 
+.general-labels{
+  -fx-text-fill: #424242;
+  -fx-font-weight: bold;
+  -fx-font-Size: 12px;
+}
+.general-labels:hover {
+    -fx-text-fill: red;
+}
+
 .fields{
     -fx-background-color: #eeeeee;
     -fx-background-radius: 3px;

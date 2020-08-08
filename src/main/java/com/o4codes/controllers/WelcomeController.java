@@ -4,15 +4,20 @@ import animatefx.animation.FadeInLeft;
 import animatefx.animation.FadeOutLeft;
 import com.jfoenix.controls.JFXButton;
 import com.o4codes.MainApp;
+import com.o4codes.database.dbTransactions.UserSession;
+import com.o4codes.helpers.Alerts;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
@@ -23,6 +28,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class WelcomeController implements Initializable {
@@ -111,41 +117,97 @@ public class WelcomeController implements Initializable {
     @FXML
     private Label forgotPasswordLbl;
 
+    @FXML
+    private VBox fpPane;
+
+    @FXML
+    private TextField fpMobileNumber;
+
+    @FXML
+    private PasswordField fpPasswordField;
+
+    @FXML
+    private PasswordField fpConfirmPasswordField;
+
+    @FXML
+    private JFXButton resetPassword;
+
+    @FXML
+    private Label fpSignInLabel;
+
+    @FXML
+    private StackPane stackPaneContainer;
+
+    @FXML
+    private BorderPane borderPane;
+
     private String passwordDisplayed;
 
 
     public void initialize(URL location, ResourceBundle resources) {
-        setSystemImage();
-        registerPane.toFront();
-        signInPane.setOpacity( 0 );
+        try {
+            startUpMode();
+            setSystemImage();
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
         imgPane.setTranslateX( 250 );
         stackPane.setTranslateX( 600 );
         animateIntroduction();
     }
 
-    private void animateIntroduction() {
-        TranslateTransition translateTransition = new TranslateTransition();
-        translateTransition.setNode( imgPane );
-        translateTransition.setDelay( Duration.seconds( 6 ) );
-        translateTransition.setDuration( Duration.seconds( 3 ) );
-        translateTransition.setFromX( 250 );
-        translateTransition.setToX( 0 );
-
-        TranslateTransition translateTransition1 = new TranslateTransition();
-        translateTransition1.setNode( stackPane );
-        translateTransition1.setDelay( Duration.seconds( 6 ) );
-        translateTransition1.setDuration( Duration.seconds( 3 ) );
-        translateTransition1.setFromX( 600 );
-        translateTransition1.setToX( 0 );
-        translateTransition.play();
-        translateTransition1.play();
+    private void startUpMode() throws IOException, SQLException {
+        if (UserSession.isTableNotEmpty()) {
+            signInPane.setOpacity( 1 );
+            signInPane.toFront();
+            registerPane.setOpacity( 0 );
+            fpPane.setOpacity( 0 );
+        } else {
+            registerPane.toFront();
+            signInPane.setOpacity( 0 );
+            fpPane.setOpacity( 0 );
+        }
     }
 
-    private void signInTransit() {
-        FadeOutLeft fadeOutLeft = new FadeOutLeft( registerPane );
+    private void animateIntroduction() {
+        Platform.runLater( () -> {
+            TranslateTransition translateTransition = new TranslateTransition();
+            translateTransition.setNode( imgPane );
+            translateTransition.setDelay( Duration.seconds( 6 ) );
+            translateTransition.setDuration( Duration.seconds( 3 ) );
+            translateTransition.setFromX( 250 );
+            translateTransition.setToX( 0 );
+
+            TranslateTransition translateTransition1 = new TranslateTransition();
+            translateTransition1.setNode( stackPane );
+            translateTransition1.setDelay( Duration.seconds( 6 ) );
+            translateTransition1.setDuration( Duration.seconds( 3 ) );
+            translateTransition1.setFromX( 600 );
+            translateTransition1.setToX( 0 );
+            translateTransition.play();
+            translateTransition1.play();
+        } );
+
+    }
+
+    private void forgotPasswordTransit(){
+        FadeOutLeft fadeOutLeft = new FadeOutLeft( signInPane);
         fadeOutLeft.play();
-        FadeInLeft fadeInLeft = new FadeInLeft( signInPane );
-        fadeOutLeft.playOnFinished( fadeInLeft );
+        fadeOutLeft.getTimeline().setOnFinished( e -> {
+            fpPane.toFront();
+            FadeInLeft fadeInLeft = new FadeInLeft( fpPane );
+            fadeInLeft.play();
+        } );
+    }
+
+    private void transitInOut(Node initNode, Node newNode){
+        FadeOutLeft fadeOutLeft = new FadeOutLeft( initNode );
+        fadeOutLeft.play();
+        fadeOutLeft.getTimeline().setOnFinished( e -> {
+            newNode.toFront();
+            FadeInLeft fadeInLeft = new FadeInLeft( newNode );
+            fadeInLeft.play();
+        } );
     }
 
     private void setSystemImage() {
@@ -166,8 +228,13 @@ public class WelcomeController implements Initializable {
 
     @FXML
     private void CloseAppEvent(ActionEvent event) throws IOException {
-        MainApp.showInfoAlert( "QUIT", "Information will be saved" );
-        System.exit( 0 );
+//        MainApp.showInfoAlert( "QUIT", "Information will be saved" );
+        Alerts alerts = new Alerts();
+        alerts.materialInfoAlert( stackPaneContainer,borderPane,"EXIT","Information will be saved" );
+        alerts.cancelBtn.setOnAction( event1 -> {
+            System.exit( 0 );
+        } );
+
     }
 
     @FXML
@@ -222,17 +289,27 @@ public class WelcomeController implements Initializable {
 
     @FXML
     void ForgotPasswordEvent(MouseEvent event) {
-
+        transitInOut( signInPane,fpPane );
     }
 
     @FXML
     private void RegisterAccountEvent(ActionEvent event) {
-        signInTransit();
+        transitInOut( registerPane,signInPane );
     }
 
     @FXML
     void SignInEvent(ActionEvent event) {
 
+    }
+
+    @FXML
+    private void HandleResetPassword(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void SignIntoAccountEvent(MouseEvent event) {
+        transitInOut( fpPane,signInPane );
     }
 
 
