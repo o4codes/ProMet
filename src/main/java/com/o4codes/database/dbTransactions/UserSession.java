@@ -148,6 +148,25 @@ public class UserSession {
         return user;
     }
 
+    public static User getMainUser() throws SQLException, IOException{
+        Connection con = DbConfig.Connector();
+        String query = "SELECT * FROM User  ";
+        assert con != null;
+        ResultSet rst = con.prepareStatement( query ).executeQuery();
+        User user = null;
+        if (rst.next()) {
+
+            user = new User( rst.getString( "Name" ),
+                    rst.getString( "MobileNo" ),
+                    rst.getString( "DeviceName" ),
+                    rst.getString( "DevicePassword" ),
+                    null );
+
+        }
+        con.close();
+        return user;
+    }
+
     private byte[] readFile(String filePath) throws IOException {
         ByteArrayOutputStream bos = null;
         File file = new File( filePath );

@@ -6,8 +6,12 @@ import com.jfoenix.controls.JFXButton;
 import com.o4codes.MainApp;
 import com.o4codes.database.dbTransactions.UserSession;
 import com.o4codes.helpers.Alerts;
+import com.o4codes.helpers.Validators;
+import com.o4codes.models.User;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -61,7 +66,7 @@ public class WelcomeController implements Initializable {
     private TextField signUpDeviceNameField;
 
     @FXML
-    private TextField signUpDevicePasswordField;
+    private PasswordField signUpDevicePasswordField;
 
     @FXML
     private JFXButton registerAccountBtn;
@@ -76,7 +81,7 @@ public class WelcomeController implements Initializable {
     private Label deviceNameLbl;
 
     @FXML
-    private TextField signInPasswordField;
+    private PasswordField signInPasswordField;
 
     @FXML
     private JFXButton one_btn;
@@ -143,6 +148,10 @@ public class WelcomeController implements Initializable {
 
     private String passwordDisplayed;
 
+    private StringProperty passwordShown = new SimpleStringProperty();
+
+    Alerts alerts = new Alerts();
+    Validators validators = new Validators();
 
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -154,7 +163,19 @@ public class WelcomeController implements Initializable {
         imgPane.setTranslateX( 250 );
         stackPane.setTranslateX( 600 );
         animateIntroduction();
+        signInPasswordField.textProperty().bind( passwordShown );
+        passwordShown.setValue( "" );
+
+        //ensure only numbers are typed in this fields
+        fpPasswordField.setOnKeyTyped( this::numberTypedConsumers );
+        fpConfirmPasswordField.setOnKeyTyped( this::numberTypedConsumers );
+        signInPasswordField.setOnKeyTyped(this::numberTypedConsumers  );
+        signUpDevicePasswordField.setOnKeyTyped( this::numberTypedConsumers );
+        signUpMobileNumberField.setOnKeyTyped( this::numberTypedConsumers );
+        fpMobileNumber.setOnKeyTyped( this::numberTypedConsumers );
     }
+
+    //_____________user defined methods
 
     private void startUpMode() throws IOException, SQLException {
         if (UserSession.isTableNotEmpty()) {
@@ -162,6 +183,7 @@ public class WelcomeController implements Initializable {
             signInPane.toFront();
             registerPane.setOpacity( 0 );
             fpPane.setOpacity( 0 );
+            deviceNameLbl.setText( UserSession.getMainUser().getDeviceName() );
         } else {
             registerPane.toFront();
             signInPane.setOpacity( 0 );
@@ -190,17 +212,7 @@ public class WelcomeController implements Initializable {
 
     }
 
-    private void forgotPasswordTransit(){
-        FadeOutLeft fadeOutLeft = new FadeOutLeft( signInPane);
-        fadeOutLeft.play();
-        fadeOutLeft.getTimeline().setOnFinished( e -> {
-            fpPane.toFront();
-            FadeInLeft fadeInLeft = new FadeInLeft( fpPane );
-            fadeInLeft.play();
-        } );
-    }
-
-    private void transitInOut(Node initNode, Node newNode){
+    private void transitInOut(Node initNode, Node newNode) {
         FadeOutLeft fadeOutLeft = new FadeOutLeft( initNode );
         fadeOutLeft.play();
         fadeOutLeft.getTimeline().setOnFinished( e -> {
@@ -220,17 +232,29 @@ public class WelcomeController implements Initializable {
 
     }
 
+    private void numberTypedConsumers(KeyEvent e){
+        String ch = e.getCharacter();
+        char CH = ch.charAt( 0 );
+        if (!(Character.isDigit( CH ))) {
+            e.consume();
+        }
 
+    }
+
+    //____________________controller defined methods
     @FXML
-    void BackSpaceEvent(ActionEvent event) {
-
+    private void BackSpaceEvent(ActionEvent event) {
+        if (passwordShown.getValue().length() >= 1) {
+            int lastCharIndex = passwordShown.getValue().length() - 1;
+            passwordShown.setValue( passwordShown.getValue().substring( 0, lastCharIndex ) );
+        }
     }
 
     @FXML
     private void CloseAppEvent(ActionEvent event) throws IOException {
 //        MainApp.showInfoAlert( "QUIT", "Information will be saved" );
         Alerts alerts = new Alerts();
-        alerts.materialInfoAlert( stackPaneContainer,borderPane,"EXIT","Information will be saved" );
+        alerts.materialInfoAlert( stackPaneContainer, borderPane, "EXIT", "Information will be saved" );
         alerts.cancelBtn.setOnAction( event1 -> {
             System.exit( 0 );
         } );
@@ -238,78 +262,143 @@ public class WelcomeController implements Initializable {
     }
 
     @FXML
-    void DigitEightEvent(ActionEvent event) {
-
+    private void DigitEightEvent(ActionEvent event) {
+        passwordShown.set( passwordShown.getValue() + "8" );
     }
 
     @FXML
-    void DigitFiveEvent(ActionEvent event) {
-
+    private void DigitFiveEvent(ActionEvent event) {
+        passwordShown.set( passwordShown.getValue().concat("5") );
     }
 
     @FXML
-    void DigitFourEvent(ActionEvent event) {
-
+    private void DigitFourEvent(ActionEvent event) {
+        passwordShown.set( passwordShown.getValue().concat( "4" ) );
     }
 
     @FXML
-    void DigitNineEvent(ActionEvent event) {
-
+    private void DigitNineEvent(ActionEvent event) {
+        passwordShown.set( passwordShown.getValue().concat( "9" ));
     }
 
     @FXML
     private void DigitOneEvent(ActionEvent event) {
+        passwordShown.set( passwordShown.getValue().concat( "1" ) );
+    }
+
+    @FXML
+    private void DigitSevenEvent(ActionEvent event) {
+        passwordShown.set( passwordShown.getValue().concat( "7" ) );
+    }
+
+    @FXML
+    private void DigitSixEvent(ActionEvent event) {
+        passwordShown.set( passwordShown.getValue().concat( "6" ) );
+    }
+
+    @FXML
+    private void DigitThreeEvent(ActionEvent event) {
+        passwordShown.set( passwordShown.getValue().concat( "3" ) );
+    }
+
+    @FXML
+    private void DigitTwoEvent(ActionEvent event) {
+        passwordShown.set( passwordShown.getValue().concat( "2" ) );
+    }
+
+    @FXML
+    private void DigitZeroEvent(ActionEvent event) {
+        passwordShown.set( passwordShown.getValue().concat( "0" ) );
+    }
+
+    @FXML
+    private void ForgotPasswordEvent(MouseEvent event) {
+        transitInOut( signInPane, fpPane );
+    }
+
+    @FXML
+    private void RegisterAccountEvent(ActionEvent event) throws IOException, SQLException {
+        String name = signUpNameField.getText();
+        String deviceName = signUpDeviceNameField.getText();
+        String mobileNo = signUpMobileNumberField.getText().trim();
+        String password = signUpDevicePasswordField.getText();
+
+        if (name.isEmpty() || deviceName.isEmpty() || mobileNo.isEmpty() || password.isEmpty()){
+            alerts.Notification( "Empty Field(s)","Ensure all fields are filled up" );
+        }
+        else {
+            if (validators.validateMobileNumber( mobileNo )){
+                User user = new User( name,mobileNo,deviceName,password,null );
+
+                if (UserSession.insertBasicUserDetails( user )){
+                    alerts.materialInfoAlert( stackPaneContainer,borderPane,"User Sign Up Successful","User "+name+" has been successfully saved" );
+                    alerts.cancelBtn.setOnAction( e -> {
+                        transitInOut( registerPane, signInPane );
+                        deviceNameLbl.setText( user.getDeviceName() );
+                    } );
+                }
+                else {
+                    alerts.materialInfoAlert( stackPaneContainer,borderPane,"User Saving Failed","User "+name+" could not be saved" );
+                }
+            }
+            else {
+                alerts.Notification( "Invalid Mobile Number", "Ensure your mobile number is entered correctly" );
+            }
+        }
 
     }
 
     @FXML
-    void DigitSevenEvent(ActionEvent event) {
-
+    private void SignInEvent(ActionEvent event) throws IOException, SQLException {
+        String password = signInPasswordField.getText();
+        if (password.isEmpty()) {
+            alerts.Notification( "Empty Field(s)","Ensure the password field is not empty" );
+        }
+        else {
+            if (UserSession.comparePassword( password )){
+                alerts.materialInfoAlert( stackPaneContainer,borderPane,"Sign In Successful","You will be directed to your dashboard" );
+            }
+            else {
+                alerts.materialInfoAlert( stackPaneContainer,borderPane,"Sign In Failed","Enter the correct password" );
+            }
+        }
     }
 
     @FXML
-    void DigitSixEvent(ActionEvent event) {
+    private void HandleResetPassword(ActionEvent event) throws IOException, SQLException {
+        String newPassword = fpPasswordField.getText();
+        String confirmPassword = fpConfirmPasswordField.getText();
+        String mobileNumber = fpMobileNumber.getText();
 
-    }
-
-    @FXML
-    void DigitThreeEvent(ActionEvent event) {
-
-    }
-
-    @FXML
-    void DigitTwoEvent(ActionEvent event) {
-
-    }
-
-    @FXML
-    void DigitZeroEvent(ActionEvent event) {
-
-    }
-
-    @FXML
-    void ForgotPasswordEvent(MouseEvent event) {
-        transitInOut( signInPane,fpPane );
-    }
-
-    @FXML
-    private void RegisterAccountEvent(ActionEvent event) {
-        transitInOut( registerPane,signInPane );
-    }
-
-    @FXML
-    void SignInEvent(ActionEvent event) {
-
-    }
-
-    @FXML
-    private void HandleResetPassword(ActionEvent event) {
-
+        if (newPassword.isEmpty() || confirmPassword.isEmpty() || mobileNumber.isEmpty()){
+            alerts.Notification( "Empty Field(s)","Ensure all fields are filled up" );
+        }
+        else {
+            if (validators.validateMobileNumber( mobileNumber )){
+                if (UserSession.getMainUser().getMobileNumber().equals( mobileNumber )){
+                    if (newPassword.equals( confirmPassword )){
+                        User user = UserSession.getMainUser();
+                        user.setDevicePassword( newPassword );
+                        UserSession.updateUserDetails( user, user.getName() );
+                        alerts.materialInfoAlert( stackPaneContainer,borderPane,"Password Reset Successful","Password has been successfully reset. Sign In with new password" );
+                    }
+                    else {
+                        alerts.Notification( "Mismatching Password","Passwords entered do not match, \n Check Passwords " );
+                    }
+                }
+                else {
+                    alerts.Notification( "Wrong Mobile Number","Mobile number entered doesn't match user mobile number" );
+                }
+            }
+            else {
+                alerts.Notification( "Invalid Mobile Number", "Ensure your mobile number is entered correctly" );
+            }
+        }
     }
 
     @FXML
     private void SignIntoAccountEvent(MouseEvent event) {
-        transitInOut( fpPane,signInPane );
+        transitInOut( fpPane, signInPane );
     }
 
 

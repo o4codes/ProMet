@@ -24,14 +24,13 @@ public class Alerts {
     private JFXDialogLayout dialogLayout;
     private JFXDialog dialog;
 
-    public static void Notification(String title, String text) {
+    public void Notification(String title, String text) {
         Notifications notificationBuilder = Notifications.create()
                 .title( title )
                 .text( text )
                 .graphic( null )
                 .hideAfter( Duration.seconds( 3 ) )
                 .position( Pos.TOP_RIGHT );
-        notificationBuilder.darkStyle();
         notificationBuilder.showInformation();
         notificationBuilder.hideCloseButton();
 
@@ -67,6 +66,7 @@ public class Alerts {
         Label headingLabel = new Label( Heading );
         headingLabel.setStyle( " -fx-font-weight: bold; -fx-font-size: 16px; " );
         Label messageLabel = new Label(message);
+        messageLabel.setPrefSize( 500,156 );
         dialogLayout.setHeading( headingLabel );
         dialogLayout.setBody( messageLabel );
         dialogLayout.setStyle( "-fx-background-color: white; -fx-border-color: #424242;" );
@@ -108,6 +108,7 @@ public class Alerts {
         Label headingLabel = new Label( Heading );
         headingLabel.setStyle( " -fx-font-weight: bold; -fx-font-size: 16px; " );
         Label messageLabel = new Label(message);
+        messageLabel.setPrefSize( 500, 156 );
         dialogLayout.setHeading( headingLabel );
         dialogLayout.setBody( messageLabel );
         dialogLayout.setPrefSize( 600,156 );

@@ -23,19 +23,20 @@ public class MainApp extends Application {
         //boot up necessary resources
         preLoad();
         MainApp.stage = stage;
-        showWelcomeView();
-    }
-
-    private void preLoad() {
-        // create Db and Tables
         Platform.runLater( () -> {
             try {
-                System.out.println( "User Table will be created" );
-                UserSession.createUserTable();
-            } catch (IOException | SQLException e) {
+                showWelcomeView();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         } );
+
+    }
+
+    private void preLoad() throws IOException, SQLException {
+        // create Db and Tables
+        System.out.println( "User Table will be created" );
+        UserSession.createUserTable();
     }
 
     public static void showWelcomeView() throws IOException {
