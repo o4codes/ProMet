@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -30,7 +31,7 @@
                            <children>
                               <Label fx:id="appTitleLbl" styleClass="app-title" text="Project Manager">
                                  <graphic>
-                                    <FontAwesomeIconView fill="#ffc100" glyphName="CIRCLE" size="20" />
+                                    <MaterialDesignIconView fill="#ffbb00" glyphName="ARRANGE_BRING_FORWARD" size="20" stroke="BLACK" />
                                  </graphic>
                               </Label>
                            </children>

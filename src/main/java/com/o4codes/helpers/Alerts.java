@@ -69,9 +69,7 @@ public class Alerts {
         messageLabel.setPrefSize( 500,156 );
         dialogLayout.setHeading( headingLabel );
         dialogLayout.setBody( messageLabel );
-        dialogLayout.setStyle( "-fx-background-color: white; -fx-border-color: #424242;" );
         dialogLayout.setPrefSize( 600,156 );
-        dialog.setStyle( "-fx-background-color: white; -fx-border-color: #424242; " );
         dialog.setPrefSize( 600,156 );
         dialogLayout.setActions( controls );
         dialog.show();

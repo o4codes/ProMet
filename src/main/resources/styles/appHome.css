@@ -1,0 +1,27 @@
+.background{
+  -fx-background-color:  linear-gradient(#36D1DC,rgba(63,76,119,1));
+}
+.pane-background{
+    -fx-background-color: white;
+    -fx-background-radius: 20 0 0 20;
+
+}
+.cards{
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-background-color: white;
+    -fx-border-radius: 10px;
+}
+.nav_icons{
+    -fx-Fill: white;
+}
+.nav_buttons{
+    -fx-font-size: 11px;
+    -fx-font-weight: Bold;
+    -fx-text-fill: white;
+}
+.pane-circle{
+    -fx-font-weight: Bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+
+}
