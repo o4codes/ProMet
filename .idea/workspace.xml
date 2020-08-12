@@ -23,159 +23,7 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/MainApp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="89" column="67" selection-start-line="89" selection-start-column="67" selection-end-line="89" selection-end-column="67" />
-              <folding>
-                <element signature="e#922#974#0" />
-                <element signature="method#preLoad#0;class#MainApp#0" />
-                <element signature="method#showWelcomeView#0;class#MainApp#0" />
-                <element signature="e#1846#1892#0" />
-                <element signature="method#showMainAppView#0;class#MainApp#0" />
-                <element signature="e#2652#2699#0" />
-                <element signature="method#showMainAppView#1;class#MainApp#0" />
-                <element signature="method#main#0;class#MainApp#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/controllers/AppHomeController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="63" column="34" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#initialize#0;class#AppHomeController#0" />
-                <element signature="method#exit#0;class#AppHomeController#0" />
-                <element signature="method#introAnimation#0;class#AppHomeController#0" />
-                <element signature="method#setNode#0;class#AppHomeController#0" />
-                <element signature="method#createPage#0;class#AppHomeController#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/controllers/ProfileViewController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="158" column="115" selection-start-line="158" selection-start-column="115" selection-end-line="158" selection-end-column="115" />
-              <folding>
-                <element signature="method#numberTypedConsumers#0;class#ProfileViewController#0" />
-                <element signature="e#2197#2233#1" />
-                <element signature="method#HandleDefaultImage#0;class#ProfileViewController#0" />
-                <element signature="method#HandleUploadDeviceImage#0;class#ProfileViewController#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/database/dbTransactions/UserSession.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
-              <caret line="66" column="50" selection-start-line="66" selection-start-column="50" selection-end-line="66" selection-end-column="50" />
-              <folding>
-                <element signature="method#createUserTable#0;class#UserSession#0" />
-                <element signature="e#687#774#1" />
-                <element signature="e#838#1105#1" />
-                <element signature="method#deleteTableRecords#0;class#UserSession#0" />
-                <element signature="e#1575#1662#1" />
-                <element signature="e#1725#1883#1" />
-                <element signature="method#insertBasicUserDetails#0;class#UserSession#0" />
-                <element signature="method#isUserRegistered#0;class#UserSession#0" />
-                <element signature="e#3685#3959#1" />
-                <element signature="e#3973#4012#1" />
-                <element signature="method#comparePassword#0;class#UserSession#0" />
-                <element signature="e#4409#4480#1" />
-                <element signature="method#isTableNotEmpty#0;class#UserSession#0" />
-                <element signature="e#4974#5023#1" />
-                <element signature="method#getUser#0;class#UserSession#0" />
-                <element signature="e#5506#5776#1" />
-                <element signature="method#getMainUser#0;class#UserSession#0" />
-                <element signature="e#6139#6389#1" />
-                <element signature="e#6418#6492#0" />
-                <element signature="method#updateDevicePicture#0;class#UserSession#0" />
-                <element signature="e#7216#7302#1" />
-                <element signature="e#7308#7492#1" />
-                <element signature="method#readDevicePicture#0;class#UserSession#0" />
-                <element signature="e#7907#8229#1" />
-                <element signature="e#7972#8219#1" />
-                <element signature="e#8049#8101#1" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/database/DbConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="27" column="61" selection-start-line="27" selection-start-column="61" selection-end-line="27" selection-end-column="61" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/controllers/WelcomeController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1336">
-              <caret line="407" column="13" lean-forward="true" selection-start-line="405" selection-start-column="14" selection-end-line="407" selection-end-column="13" />
-              <folding>
-                <element signature="e#3281#4225#0" />
-                <element signature="e#3358#3426#0" />
-                <element signature="e#3464#3508#0" />
-                <element signature="e#4272#4755#0" />
-                <element signature="e#4377#4620#1" />
-                <element signature="e#4626#4749#1" />
-                <element signature="e#4761#5670#0" />
-                <element signature="e#4825#5660#0" />
-                <element signature="e#5676#6023#0" />
-                <element signature="e#5873#6014#0" />
-                <element signature="e#6060#7340#0" />
-                <element signature="e#6119#7330#0" />
-                <element signature="e#6108#6173#0" />
-                <element signature="e#6262#7230#0" />
-                <element signature="e#6314#6887#1" />
-                <element signature="e#6600#6791#1" />
-                <element signature="e#6809#6907#1" />
-                <element signature="e#6376#6573#1" />
-                <element signature="e#6538#6590#0" />
-                <element signature="e#6402#6604#0" />
-                <element signature="e#6561#6597#1" />
-                <element signature="e#6610#6956#0" />
-                <element signature="e#6774#6950#1" />
-                <element signature="e#6962#7353#0" />
-                <element signature="e#7292#7343#0" />
-                <element signature="e#9291#9389#1" />
-                <element signature="e#9403#10345#1" />
-                <element signature="e#9465#10188#1" />
-                <element signature="e#9611#9998#1" />
-                <element signature="e#9812#9977#0" />
-                <element signature="e#10020#10174#1" />
-                <element signature="e#10206#10335#1" />
-                <element signature="e#10358#11035#0" />
-                <element signature="e#10536#10641#1" />
-                <element signature="e#10883#11019#1" />
-                <element signature="e#11674#12335#1" />
-                <element signature="e#11738#12143#1" />
-                <element signature="e#12169#12317#1" />
-                <element signature="e#12357#12499#1" />
-                <element signature="e#12531#12660#1" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -482,7 +330,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.45839638" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -500,7 +347,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32943144" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32943144" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32943144" />
       <window_info anchor="bottom" id="DB Execution Console" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32943144" />
@@ -929,23 +776,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/MainApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="89" column="67" selection-start-line="89" selection-start-column="67" selection-end-line="89" selection-end-column="67" />
-          <folding>
-            <element signature="e#922#974#0" />
-            <element signature="method#preLoad#0;class#MainApp#0" />
-            <element signature="method#showWelcomeView#0;class#MainApp#0" />
-            <element signature="e#1846#1892#0" />
-            <element signature="method#showMainAppView#0;class#MainApp#0" />
-            <element signature="e#2652#2699#0" />
-            <element signature="method#showMainAppView#1;class#MainApp#0" />
-            <element signature="method#main#0;class#MainApp#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/src.zip!/java/lang/Runnable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="313">
@@ -953,25 +783,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/controllers/AppHomeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="63" column="34" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#initialize#0;class#AppHomeController#0" />
-            <element signature="method#exit#0;class#AppHomeController#0" />
-            <element signature="method#introAnimation#0;class#AppHomeController#0" />
-            <element signature="method#setNode#0;class#AppHomeController#0" />
-            <element signature="method#createPage#0;class#AppHomeController#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/controllers/WelcomeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1336">
-          <caret line="407" column="13" lean-forward="true" selection-start-line="405" selection-start-column="14" selection-end-line="407" selection-end-column="13" />
+        <state relative-caret-position="113">
+          <caret line="397" column="61" selection-start-line="397" selection-start-column="61" selection-end-line="397" selection-end-column="75" />
           <folding>
             <element signature="e#3281#4225#0" />
             <element signature="e#3358#3426#0" />
@@ -1008,8 +823,6 @@
             <element signature="e#10358#11035#0" />
             <element signature="e#10536#10641#1" />
             <element signature="e#10883#11019#1" />
-            <element signature="e#11674#12335#1" />
-            <element signature="e#11738#12143#1" />
             <element signature="e#12169#12317#1" />
             <element signature="e#12357#12499#1" />
             <element signature="e#12531#12660#1" />
@@ -1019,8 +832,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/database/dbTransactions/UserSession.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="66" column="50" selection-start-line="66" selection-start-column="50" selection-end-line="66" selection-end-column="50" />
+        <state relative-caret-position="140">
+          <caret line="69" column="34" selection-start-line="69" selection-start-column="34" selection-end-line="69" selection-end-column="34" />
           <folding>
             <element signature="method#createUserTable#0;class#UserSession#0" />
             <element signature="e#687#774#1" />
@@ -1054,13 +867,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/controllers/ProfileViewController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="158" column="115" selection-start-line="158" selection-start-column="115" selection-end-line="158" selection-end-column="115" />
+        <state relative-caret-position="79">
+          <caret line="151" column="55" selection-start-line="151" selection-start-column="55" selection-end-line="151" selection-end-column="55" />
           <folding>
             <element signature="method#numberTypedConsumers#0;class#ProfileViewController#0" />
             <element signature="e#2197#2233#1" />
             <element signature="method#HandleDefaultImage#0;class#ProfileViewController#0" />
             <element signature="method#HandleUploadDeviceImage#0;class#ProfileViewController#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/controllers/AppHomeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="63" column="34" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#initialize#0;class#AppHomeController#0" />
+            <element signature="method#exit#0;class#AppHomeController#0" />
+            <element signature="method#introAnimation#0;class#AppHomeController#0" />
+            <element signature="method#setNode#0;class#AppHomeController#0" />
+            <element signature="method#createPage#0;class#AppHomeController#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/MainApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="89" column="67" selection-start-line="89" selection-start-column="67" selection-end-line="89" selection-end-column="67" />
+          <folding>
+            <element signature="e#922#974#0" />
+            <element signature="method#preLoad#0;class#MainApp#0" />
+            <element signature="method#showWelcomeView#0;class#MainApp#0" />
+            <element signature="e#1846#1892#0" />
+            <element signature="method#showMainAppView#0;class#MainApp#0" />
+            <element signature="e#2652#2699#0" />
+            <element signature="method#showMainAppView#1;class#MainApp#0" />
+            <element signature="method#main#0;class#MainApp#0" />
           </folding>
         </state>
       </provider>
