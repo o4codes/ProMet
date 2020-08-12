@@ -4,7 +4,9 @@ import animatefx.animation.Bounce;
 import animatefx.animation.FadeInLeft;
 import com.jfoenix.controls.JFXButton;
 import com.o4codes.MainApp;
+import com.o4codes.database.dbTransactions.UserSession;
 import com.o4codes.helpers.Alerts;
+import com.o4codes.models.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -20,6 +23,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class AppHomeController implements Initializable {
@@ -55,10 +59,23 @@ public class AppHomeController implements Initializable {
 
     private Alerts alerts = new Alerts();
 
+
+    private void setLoggedInUser(){
+        Platform.runLater( () -> {
+            try {
+                WelcomeController.user = UserSession.getMainUser();
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
+        } );
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-       //animate the navigation buttons
+        //animate the navigation buttons
         introAnimation();
+        setLoggedInUser();
+
     }
 
     @FXML
@@ -67,8 +84,11 @@ public class AppHomeController implements Initializable {
     }
 
     @FXML
-    void ShowEditProfile(ActionEvent event) {
-
+    private void ShowEditProfile(ActionEvent event) throws IOException {
+        BoxBlur blur = new BoxBlur( 3, 3, 3 );
+        borderPane.setEffect( blur );
+        MainApp.showProfileUpdateView().showAndWait();
+        borderPane.setEffect( null );
     }
 
     @FXML
@@ -88,16 +108,16 @@ public class AppHomeController implements Initializable {
 
     @FXML
     private void SignOutEvent(ActionEvent event) {
-       exit();
+        exit();
     }
 
-    public void exit(){
+    public void exit() {
         alerts.materialConfirmAlert( stackPane, borderPane, "SIGN OUT", "Are you sre you want to sign out ?" );
         alerts.acceptBtn.setOnAction( e -> System.exit( 0 ) );
     }
 
-    private void introAnimation(){
-        Platform.runLater(() -> {
+    private void introAnimation() {
+        Platform.runLater( () -> {
             Bounce bounce = new Bounce( dashboardBtn );
             Bounce bounce1 = new Bounce( projectsBtn );
             Bounce bounce2 = new Bounce( timelineBtn );
@@ -108,27 +128,27 @@ public class AppHomeController implements Initializable {
             bounce.playOnFinished( bounce1 );
             bounce1.playOnFinished( bounce2 );
             bounce2.playOnFinished( bounce3 );
-        });
+        } );
     }
 
     private void setNode(Node node) {
         contentPane.getChildren().clear();
         contentPane.getChildren().add( node );
         contentPane.setEffect( null );
-        node.setLayoutX(0);
-        node.setLayoutY(0);
-        FadeInLeft fade = new FadeInLeft(node);
-        fade.setDelay( Duration.seconds(1) );
+        node.setLayoutX( 0 );
+        node.setLayoutY( 0 );
+        FadeInLeft fade = new FadeInLeft( node );
+        fade.setDelay( Duration.seconds( 1 ) );
         fade.play();
     }
 
     private void createPage(String loc) throws IOException {
         AnchorPane home = FXMLLoader.load( MainApp.class.getResource( loc ) );
         setNode( home );
-        AnchorPane.setTopAnchor( home, 0.0);
-        AnchorPane.setBottomAnchor( home, 0.0);
-        AnchorPane.setLeftAnchor( home, 0.0);
-        AnchorPane.setRightAnchor( home, 0.0);
+        AnchorPane.setTopAnchor( home, 0.0 );
+        AnchorPane.setBottomAnchor( home, 0.0 );
+        AnchorPane.setLeftAnchor( home, 0.0 );
+        AnchorPane.setRightAnchor( home, 0.0 );
     }
 
 }

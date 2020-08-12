@@ -14,7 +14,7 @@ public class DbConfig {
     private static void createFolder() throws IOException {
         // check if folder exists before creating it
         String userDir = System.getProperty( "user.dir" );
-        String dbDir = userDir+ File.separator+".persist";
+        String dbDir = userDir+ File.separator+"persist";
         if (!Files.exists( Paths.get(dbDir))){
             Files.createDirectory( Paths.get(dbDir));
         }
@@ -25,7 +25,7 @@ public class DbConfig {
         try {
             createFolder();
             Class.forName( "org.sqlite.JDBC" );
-            return DriverManager.getConnection( "jdbc:sqlite:.persist/Data.db");
+            return DriverManager.getConnection( "jdbc:sqlite:persist/Data.db");
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println( e.toString() );
             return null;

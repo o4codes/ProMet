@@ -151,7 +151,10 @@ public class WelcomeController implements Initializable {
     private StringProperty passwordShown = new SimpleStringProperty();
 
     Alerts alerts = new Alerts();
+
     Validators validators = new Validators();
+
+    public static User user;
 
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -169,7 +172,7 @@ public class WelcomeController implements Initializable {
         //ensure only numbers are typed in this fields
         fpPasswordField.setOnKeyTyped( this::numberTypedConsumers );
         fpConfirmPasswordField.setOnKeyTyped( this::numberTypedConsumers );
-        signInPasswordField.setOnKeyTyped(this::numberTypedConsumers  );
+        signInPasswordField.setOnKeyTyped( this::numberTypedConsumers );
         signUpDevicePasswordField.setOnKeyTyped( this::numberTypedConsumers );
         signUpMobileNumberField.setOnKeyTyped( this::numberTypedConsumers );
         fpMobileNumber.setOnKeyTyped( this::numberTypedConsumers );
@@ -226,13 +229,30 @@ public class WelcomeController implements Initializable {
         Platform.runLater( () -> {
             //this is this way until there is a database to persist the image
             // here is the default image
-            Image image = new Image( MainApp.class.getResource( "/images/robot.jpg" ).toString() );
-            circleImage.setFill( new ImagePattern( image ) );
+            try {
+                if (UserSession.isTableNotEmpty()) {
+                    user = UserSession.getMainUser();
+                    UserSession.readDevicePicture( user );
+
+                    if (user.getUserImage() == null) {
+                        Image image = new Image( MainApp.class.getResource( "/images/robot.jpg" ).toString() );
+                        circleImage.setFill( new ImagePattern( image ) );
+                    } else {
+                        circleImage.setFill( new ImagePattern( user.getUserImage() ) );
+                    }
+                } else {
+                    Image image = new Image( MainApp.class.getResource( "/images/robot.jpg" ).toString() );
+                    circleImage.setFill( new ImagePattern( image ) );
+                }
+
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
         } );
 
     }
 
-    private void numberTypedConsumers(KeyEvent e){
+    private void numberTypedConsumers(KeyEvent e) {
         String ch = e.getCharacter();
         char CH = ch.charAt( 0 );
         if (!(Character.isDigit( CH ))) {
@@ -268,7 +288,7 @@ public class WelcomeController implements Initializable {
 
     @FXML
     private void DigitFiveEvent(ActionEvent event) {
-        passwordShown.set( passwordShown.getValue().concat("5") );
+        passwordShown.set( passwordShown.getValue().concat( "5" ) );
     }
 
     @FXML
@@ -278,7 +298,7 @@ public class WelcomeController implements Initializable {
 
     @FXML
     private void DigitNineEvent(ActionEvent event) {
-        passwordShown.set( passwordShown.getValue().concat( "9" ));
+        passwordShown.set( passwordShown.getValue().concat( "9" ) );
     }
 
     @FXML
@@ -323,25 +343,22 @@ public class WelcomeController implements Initializable {
         String mobileNo = signUpMobileNumberField.getText().trim();
         String password = signUpDevicePasswordField.getText();
 
-        if (name.isEmpty() || deviceName.isEmpty() || mobileNo.isEmpty() || password.isEmpty()){
-            alerts.Notification( "Empty Field(s)","Ensure all fields are filled up" );
-        }
-        else {
-            if (validators.validateMobileNumber( mobileNo )){
-                User user = new User( name,mobileNo,deviceName,password,null );
+        if (name.isEmpty() || deviceName.isEmpty() || mobileNo.isEmpty() || password.isEmpty()) {
+            alerts.Notification( "Empty Field(s)", "Ensure all fields are filled up" );
+        } else {
+            if (validators.validateMobileNumber( mobileNo )) {
+                user = new User( name, mobileNo, deviceName, password, null );
 
-                if (UserSession.insertBasicUserDetails( user )){
-                    alerts.materialInfoAlert( stackPaneContainer,borderPane,"User Sign Up Successful","User "+name+" has been successfully saved" );
+                if (UserSession.insertBasicUserDetails( user )) {
+                    alerts.materialInfoAlert( stackPaneContainer, borderPane, "User Sign Up Successful", "User " + name + " has been successfully saved" );
                     alerts.cancelBtn.setOnAction( e -> {
                         transitInOut( registerPane, signInPane );
                         deviceNameLbl.setText( user.getDeviceName() );
                     } );
+                } else {
+                    alerts.materialInfoAlert( stackPaneContainer, borderPane, "User Saving Failed", "User " + name + " could not be saved" );
                 }
-                else {
-                    alerts.materialInfoAlert( stackPaneContainer,borderPane,"User Saving Failed","User "+name+" could not be saved" );
-                }
-            }
-            else {
+            } else {
                 alerts.Notification( "Invalid Mobile Number", "Ensure your mobile number is entered correctly" );
             }
         }
@@ -352,14 +369,14 @@ public class WelcomeController implements Initializable {
     private void SignInEvent(ActionEvent event) throws IOException, SQLException {
         String password = signInPasswordField.getText();
         if (password.isEmpty()) {
-            alerts.Notification( "Empty Field(s)","Ensure the password field is not empty" );
-        }
-        else {
-            if (UserSession.comparePassword( password )){
-                alerts.materialInfoAlert( stackPaneContainer,borderPane,"Sign In Successful","You will be directed to your dashboard" );
-            }
-            else {
-                alerts.materialInfoAlert( stackPaneContainer,borderPane,"Sign In Failed","Enter the correct password" );
+            alerts.Notification( "Empty Field(s)", "Ensure the password field is not empty" );
+        } else {
+            if (UserSession.comparePassword( password )) {
+                alerts.materialInfoAlert( stackPaneContainer, borderPane, "Sign In Successful", "You will be directed to your dashboard" );
+                MainApp.showMainAppView().show();
+                backspace_btn.getScene().getWindow().hide();
+            } else {
+                alerts.materialInfoAlert( stackPaneContainer, borderPane, "Sign In Failed", "Enter the correct password" );
             }
         }
     }
@@ -370,27 +387,23 @@ public class WelcomeController implements Initializable {
         String confirmPassword = fpConfirmPasswordField.getText();
         String mobileNumber = fpMobileNumber.getText();
 
-        if (newPassword.isEmpty() || confirmPassword.isEmpty() || mobileNumber.isEmpty()){
-            alerts.Notification( "Empty Field(s)","Ensure all fields are filled up" );
-        }
-        else {
-            if (validators.validateMobileNumber( mobileNumber )){
-                if (UserSession.getMainUser().getMobileNumber().equals( mobileNumber )){
-                    if (newPassword.equals( confirmPassword )){
+        if (newPassword.isEmpty() || confirmPassword.isEmpty() || mobileNumber.isEmpty()) {
+            alerts.Notification( "Empty Field(s)", "Ensure all fields are filled up" );
+        } else {
+            if (validators.validateMobileNumber( mobileNumber )) {
+                if (UserSession.getMainUser().getMobileNumber().equals( mobileNumber )) {
+                    if (newPassword.equals( confirmPassword )) {
                         User user = UserSession.getMainUser();
                         user.setDevicePassword( newPassword );
                         UserSession.updateUserDetails( user, user.getName() );
-                        alerts.materialInfoAlert( stackPaneContainer,borderPane,"Password Reset Successful","Password has been successfully reset. Sign In with new password" );
+                        alerts.materialInfoAlert( stackPaneContainer, borderPane, "Password Reset Successful", "Password has been successfully reset. Sign In with new password" );
+                    } else {
+                        alerts.Notification( "Mismatching Password", "Passwords entered do not match, \n Check Passwords " );
                     }
-                    else {
-                        alerts.Notification( "Mismatching Password","Passwords entered do not match, \n Check Passwords " );
-                    }
+                } else {
+                    alerts.Notification( "Wrong Mobile Number", "Mobile number entered doesn't match user mobile number" );
                 }
-                else {
-                    alerts.Notification( "Wrong Mobile Number","Mobile number entered doesn't match user mobile number" );
-                }
-            }
-            else {
+            } else {
                 alerts.Notification( "Invalid Mobile Number", "Ensure your mobile number is entered correctly" );
             }
         }

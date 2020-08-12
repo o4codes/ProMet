@@ -89,10 +89,9 @@ public class UserSession {
                     rst.getString( "MobileNo" ),
                     rst.getString( "DeviceName" ),
                     rst.getString( "DevicePassword" ),
-                    null);
+                    null );
             status = true;
-        }
-        else {
+        } else {
             status = false;
         }
         con.close();
@@ -129,26 +128,26 @@ public class UserSession {
         return status;
     }
 
-    public static User getUser(String name, String mobileNo) throws SQLException, IOException{
+    public static User getUser(String name, String mobileNo) throws SQLException, IOException {
         Connection con = DbConfig.Connector();
-        String query = "SELECT * FROM User WHERE Name ='" +name+ "' AND MobileNo = '" +mobileNo+ "' ";
+        String query = "SELECT * FROM User WHERE Name ='" + name + "' AND MobileNo = '" + mobileNo + "' ";
         assert con != null;
         ResultSet rst = con.prepareStatement( query ).executeQuery();
         User user = null;
         if (rst.next()) {
 
-                user = new User( rst.getString( "Name" ),
-                        rst.getString( "MobileNo" ),
-                        rst.getString( "DeviceName" ),
-                        rst.getString( "DevicePassword" ),
-                        null );
+            user = new User( rst.getString( "Name" ),
+                    rst.getString( "MobileNo" ),
+                    rst.getString( "DeviceName" ),
+                    rst.getString( "DevicePassword" ),
+                    null );
 
         }
         con.close();
         return user;
     }
 
-    public static User getMainUser() throws SQLException, IOException{
+    public static User getMainUser() throws SQLException, IOException {
         Connection con = DbConfig.Connector();
         String query = "SELECT * FROM User  ";
         assert con != null;
@@ -167,50 +166,62 @@ public class UserSession {
         return user;
     }
 
-    private byte[] readFile(String filePath) throws IOException {
-        ByteArrayOutputStream bos = null;
-        File file = new File( filePath );
-        FileInputStream fis = new FileInputStream( file );
-        byte[] buffer = new byte[1024];
-        bos = new ByteArrayOutputStream();
+//    private static byte[] readFile(String filePath) throws IOException {
+//        ByteArrayOutputStream bos = null;
+//        File file = new File( filePath );
+//        FileInputStream fis = new FileInputStream( file );
+//        byte[] buffer = new byte[1024];
+//        bos = new ByteArrayOutputStream();
+//
+//        for (int len; (len = fis.read( buffer )) != 1; ) {
+//            bos.write( buffer, 0, len );
+//        }
+//        return bos.toByteArray();
+//    }
 
-        for (int len; (len = fis.read( buffer )) != 1; ) {
-            bos.write( buffer, 0, len );
-        }
-        return bos.toByteArray();
-    }
-
-    private void updateDevicePicture(String filePath) throws IOException, SQLException {
+    public static void updateDevicePicture(String filePath) throws IOException, SQLException {
         Connection con = DbConfig.Connector();
-        String query = "UPDATE User SET DeviceImage = ?";
+        String query = "UPDATE User SET DeviceImage = ? ";
         assert con != null;
         PreparedStatement pst = con.prepareStatement( query );
-        pst.setBytes( 1, readFile( filePath ) );
-        pst.executeUpdate();
+
+        if (filePath == null) {
+            pst.setNull( 1, Types.BLOB );
+            pst.executeUpdate();
+        } else {
+            File file = new File( filePath );
+            FileInputStream fis = new FileInputStream( file );
+            pst.setBinaryStream( 1, fis, (int) file.length() );
+            pst.executeUpdate();
+        }
         con.close();
     }
 
-    private void readDevicePicture(User user) throws IOException, SQLException {
+    public static void readDevicePicture(User user) throws IOException, SQLException {
         // direction to save image to
         String userDir = System.getProperty( "user.dir" );
-        String dbDir = userDir + File.separator + ".persist/deviceImage.jpg";
+        String dbDir = userDir + File.separator + "persist/deviceImage.jpg";
 
         //Sqlite transactions
         Connection con = DbConfig.Connector();
         String query = "SELECT DeviceImage FROM User";
         assert con != null;
         ResultSet rst = con.prepareStatement( query ).executeQuery();
-        File file = new File( dbDir );
-        FileOutputStream fos = new FileOutputStream( file );
         while (rst.next()) {
-            InputStream input = rst.getBinaryStream( "DeviceImage" );
-            byte[] buffer = new byte[1024];
-            while (input.read( buffer ) > 0) {
-                fos.write( buffer );
+            if (rst.getBinaryStream( "DeviceImage" ) != null) {
+                InputStream input = rst.getBinaryStream( "DeviceImage" );
+                OutputStream os = new FileOutputStream( new File( dbDir ) );
+                byte[] buffer = new byte[1024];
+                int size = 0;
+                while ((size = input.read( buffer )) != -1) {
+                    os.write( buffer, 0, size );
+                }
+                input.close();
+                os.close();
+                user.setUserImage( new Image( "file:" + dbDir ) );
             }
         }
         con.close();
-        user.setUserImage( new Image( dbDir ) );
     }
 
 

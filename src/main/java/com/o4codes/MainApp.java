@@ -8,6 +8,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.slf4j.Logger;
@@ -27,7 +29,7 @@ public class MainApp extends Application {
         MainApp.stage = stage;
         Platform.runLater( () -> {
             try {
-                showMainAppView();
+               showWelcomeView();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -61,7 +63,7 @@ public class MainApp extends Application {
         } );
     }
 
-    public static void showMainAppView() throws IOException {
+    public static Stage showMainAppView() throws IOException {
         log.info( "Starting Hello JavaFX and Maven demonstration application" );
 
         String fxmlFile = "/fxml/appHome.fxml";
@@ -74,13 +76,32 @@ public class MainApp extends Application {
         log.debug( "Showing Welcome scene" );
         Scene scene = new Scene( rootNode );
 
-        stage.initStyle( StageStyle.UNDECORATED );
-        stage.setMaximized( true );
-        stage.setScene( scene );
-        stage.show();
-        stage.setOnCloseRequest( e -> {
+        Stage myStage = new Stage();
+        myStage.initStyle( StageStyle.UNDECORATED );
+        myStage.setMaximized( true );
+        myStage.setScene( scene );
+        myStage.show();
+        myStage.setOnCloseRequest( e -> {
             controller.exit();
         } );
+        return myStage;
+    }
+
+    public static Stage showProfileUpdateView() throws IOException {
+        String fxmlFile = "/fxml/profileView.fxml";
+        log.debug( "Loading FXML for main view from: {}", fxmlFile );
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation( MainApp.class.getResource( fxmlFile ) );
+        AnchorPane pane = loader.load();
+
+        log.debug( "Showing Welcome scene" );
+        Scene scene = new Scene( pane );
+        Stage stage = new Stage();
+        stage.initModality( Modality.APPLICATION_MODAL );
+        stage.initStyle( StageStyle.UNDECORATED );
+        stage.setScene( scene );
+
+        return stage;
     }
 
     public static void main(String[] args) throws Exception {

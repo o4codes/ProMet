@@ -38,7 +38,7 @@
 
 
 .main-panel {
-    -fx-background-image: url("../images/background.jpg");
+    -fx-background-color: white;
 }
 
 .app-title {

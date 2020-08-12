@@ -1,0 +1,69 @@
+.main-panel {
+    -fx-background-color: white;
+    -fx-border-color: #4d4d4d;
+}
+.module-title {
+    -fx-text-fill: #4d4d4d;
+    -fx-font-family: Candara;
+    -fx-font-Size: 18px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+.module-description {
+    -fx-text-fill: #bdbdbd;
+    -fx-font-family: sans-serif;
+    -fx-font-Size: 12px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+
+.uploadPhotoBtn{
+    -fx-text-fill: black;
+    -fx-font-Size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 20px;
+    -fx-border-color: #e0e0e0;
+}
+
+.defaultPhotoBtn{
+    -fx-text-fill: white;
+    -fx-font-Size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20px;
+    -fx-background-color: red;
+}
+
+.main-button{
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-background-color: rgba(63,76,119,1);
+    -fx-text-fill: white;
+    -fx-font-Size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10 0 10 0;
+}
+
+.closeButton {
+    -fx-text-fill: white;
+    -fx-font-family: "sans-serif";
+    -fx-font-Size: 15px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20px;
+    -fx-background-color: red;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.fields-label{
+  -fx-text-fill: #424242;
+  -fx-font-weight: bold;
+  -fx-font-Size: 11px;
+}
+
+.fields{
+    -fx-background-color: #eeeeee;
+    -fx-background-radius: 3px;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 3px;
+}
+.fields:focused{
+    -fx-border-color: #bdbdbd;
+}
