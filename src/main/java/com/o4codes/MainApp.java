@@ -1,6 +1,7 @@
 package com.o4codes;
 
 import com.o4codes.controllers.AppHomeController;
+import com.o4codes.database.dbTransactions.AppConfigSession;
 import com.o4codes.database.dbTransactions.UserSession;
 import com.o4codes.helpers.Alerts;
 import javafx.application.Application;
@@ -39,8 +40,8 @@ public class MainApp extends Application {
 
     private void preLoad() throws IOException, SQLException {
         // create Db and Tables
-        System.out.println( "User Table will be created" );
         UserSession.createUserTable();
+        AppConfigSession.createAppConfigTable();
     }
 
     public static void showWelcomeView() throws IOException {

@@ -14,7 +14,6 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="650.0" prefWidth="1100.0" stylesheets="@../styles/appHome.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.o4codes.controllers.AppHomeController">
    <children>
       <StackPane fx:id="stackPane" layoutX="241.0" layoutY="232.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -102,7 +101,10 @@
                   </VBox>
                </left>
                <center>
-                  <AnchorPane fx:id="contentPane" prefHeight="650.0" prefWidth="995.0" styleClass="pane-background" BorderPane.alignment="CENTER" />
+                  <AnchorPane fx:id="contentPane" prefHeight="650.0" prefWidth="995.0" styleClass="pane-background" BorderPane.alignment="CENTER">
+                     <padding>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                     </padding></AnchorPane>
                </center>
             </BorderPane>
          </children>

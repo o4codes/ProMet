@@ -2,6 +2,24 @@
     -fx-background-color: white;
     -fx-border-color: #4d4d4d;
 }
+.background {
+    -fx-background-color: white;
+}
+.background-radius{
+    -fx-background-radius: 10px;
+}
+.drop-shadow{
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+
+.title {
+    -fx-text-fill: #4d4d4d;
+    -fx-font-family: Candara;
+    -fx-font-Size: 22px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+
 .module-title {
     -fx-text-fill: #4d4d4d;
     -fx-font-family: Candara;
@@ -21,6 +39,8 @@
     -fx-text-fill: black;
     -fx-font-Size: 13px;
     -fx-font-weight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 20px;
     -fx-border-radius: 20px;
     -fx-border-color: #e0e0e0;
 }
@@ -52,10 +72,20 @@
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 
+.settings-label{
+  -fx-text-fill: #424242;
+  -fx-font-weight: bold;
+  -fx-font-Size: 13px;
+}
+
 .fields-label{
   -fx-text-fill: #424242;
   -fx-font-weight: bold;
   -fx-font-Size: 11px;
+}
+
+.fields-text{
+    -fx-font-Size: 13px;
 }
 
 .fields{

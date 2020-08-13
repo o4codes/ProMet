@@ -2,6 +2,7 @@ package com.o4codes.controllers;
 
 import animatefx.animation.Bounce;
 import animatefx.animation.FadeInLeft;
+import animatefx.animation.FadeOutLeft;
 import com.jfoenix.controls.JFXButton;
 import com.o4codes.MainApp;
 import com.o4codes.database.dbTransactions.UserSession;
@@ -97,8 +98,8 @@ public class AppHomeController implements Initializable {
     }
 
     @FXML
-    void ShowSettings(ActionEvent event) {
-
+    private void ShowSettings(ActionEvent event) throws IOException {
+        createPage( "/fxml/appConfigView.fxml" );
     }
 
     @FXML
@@ -132,14 +133,32 @@ public class AppHomeController implements Initializable {
     }
 
     private void setNode(Node node) {
-        contentPane.getChildren().clear();
-        contentPane.getChildren().add( node );
-        contentPane.setEffect( null );
-        node.setLayoutX( 0 );
-        node.setLayoutY( 0 );
-        FadeInLeft fade = new FadeInLeft( node );
-        fade.setDelay( Duration.seconds( 1 ) );
-        fade.play();
+        if (contentPane.getChildren().size() == 0){
+            contentPane.getChildren().add( node );
+            contentPane.setEffect( null );
+            node.setLayoutX( 0 );
+            node.setLayoutY( 0 );
+            node.setOpacity( 0 );
+            FadeInLeft fade = new FadeInLeft( node );
+            fade.setDelay( Duration.seconds( 1 ) );
+            fade.play();
+        }
+        else {
+            FadeOutLeft fadeOutLeft = new FadeOutLeft( contentPane.getChildren().get( 0 ) );
+            fadeOutLeft.play();
+            fadeOutLeft.getTimeline().setOnFinished( e -> {
+                contentPane.getChildren().clear();
+                contentPane.getChildren().add( node );
+                contentPane.setEffect( null );
+                node.setLayoutX( 0 );
+                node.setLayoutY( 0 );
+                node.setOpacity( 0 );
+                FadeInLeft fade = new FadeInLeft( node );
+                fade.setDelay( Duration.seconds( 1 ) );
+                fade.play();
+            } );
+        }
+
     }
 
     private void createPage(String loc) throws IOException {

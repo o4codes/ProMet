@@ -23,6 +23,7 @@ public class AppConfigSession {
             table_names.add( rst.getString( "TABLE_NAME" ).toLowerCase() );
         }
         if (!table_names.contains( table_name.toLowerCase() )) {
+            System.out.println( "App configurations table is being created" );
             String query = "CREATE TABLE " + table_name + " (`MaxProjects` INTEGER, `TaskDuration` INTEGER, " +
                     "`ShortBreakDuration` INTEGER, `LongBreakDuration` INTEGER, `AppTheme` TEXT);";
             PreparedStatement pst = con.prepareStatement( query );
@@ -31,6 +32,9 @@ public class AppConfigSession {
 
             //insert default configurations on app install;
             insertDefaultAppConfigurations();
+        }
+        else {
+            System.out.println( "App configurations table already exists" );
         }
 
     }

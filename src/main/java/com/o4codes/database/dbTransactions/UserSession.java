@@ -22,9 +22,13 @@ public class UserSession {
             table_names.add( rst.getString( "TABLE_NAME" ).toLowerCase() );
         }
         if (!table_names.contains( table_name.toLowerCase() )) {
+            System.out.println( "Users Table is being created" );
             String query = "CREATE TABLE " + table_name + " (`DeviceImage` BLOB, `Name` TEXT, `MobileNo` TEXT, `DeviceName` TEXT, `DevicePassword` TEXT);";
             PreparedStatement pst = con.prepareStatement( query );
             pst.executeUpdate();
+        }
+        else {
+            System.out.println( "Users Table already exists" );
         }
         con.close();
 
