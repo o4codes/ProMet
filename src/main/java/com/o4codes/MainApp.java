@@ -79,7 +79,7 @@ public class MainApp extends Application {
 
         Stage myStage = new Stage();
         myStage.initStyle( StageStyle.UNDECORATED );
-        myStage.setMaximized( true );
+        myStage.setMaximized( false );
         myStage.setScene( scene );
         myStage.show();
         myStage.setOnCloseRequest( e -> {

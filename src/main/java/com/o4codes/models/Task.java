@@ -7,12 +7,14 @@ public class Task {
     private String taskId, projectId, title;
     private LocalDate beginDate, deadlineDate, completionDate;
     private LocalTime beginTime, deadlineTime, completionTime;
+    private int duration;
     private boolean mileStone;
 
-    public Task(String taskId, String projectId, String title, LocalDate beginDate, LocalTime beginTime, LocalDate deadlineDate, LocalTime deadlineTime, LocalDate completionDate, LocalTime completionTime, boolean mileStone) {
+    public Task(String taskId, String projectId, String title, int duration, LocalDate beginDate, LocalTime beginTime, LocalDate deadlineDate, LocalTime deadlineTime, LocalDate completionDate, LocalTime completionTime, boolean mileStone) {
         this.taskId = taskId;
         this.projectId = projectId;
         this.title = title;
+        this.duration = duration;
         this.beginDate = beginDate;
         this.beginTime = beginTime;
         this.deadlineDate = deadlineDate;
@@ -22,9 +24,10 @@ public class Task {
         this.mileStone = mileStone;
     }
 
-    public Task(String projectId, String title, LocalDate beginDate, LocalTime beginTime, LocalDate deadlineDate, LocalTime deadlineTime, boolean milestone ) {
+    public Task(String projectId, String title, int duration, LocalDate beginDate, LocalTime beginTime, LocalDate deadlineDate, LocalTime deadlineTime, boolean milestone ) {
         this.projectId = projectId;
         this.title = title;
+        this.duration = duration;
         this.beginDate = beginDate;
         this.beginTime = beginTime;
         this.deadlineDate = deadlineDate;
@@ -110,5 +113,13 @@ public class Task {
 
     public void setMileStone(boolean mileStone) {
         this.mileStone = mileStone;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 }

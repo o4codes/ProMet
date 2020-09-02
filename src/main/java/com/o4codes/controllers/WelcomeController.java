@@ -10,23 +10,24 @@ import com.o4codes.helpers.Validators;
 import com.o4codes.models.User;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.util.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,13 +76,13 @@ public class WelcomeController implements Initializable {
     private VBox signInPane;
 
     @FXML
-    private Circle circleImage;
+    private Rectangle circleImage;
 
     @FXML
     private Label deviceNameLbl;
 
     @FXML
-    private PasswordField signInPasswordField;
+    private Label signInNameLbl;
 
     @FXML
     private JFXButton one_btn;
@@ -120,6 +121,18 @@ public class WelcomeController implements Initializable {
     private JFXButton signInAccountBtn;
 
     @FXML
+    private PasswordField pass1;
+
+    @FXML
+    private PasswordField pass2;
+
+    @FXML
+    private PasswordField pass3;
+
+    @FXML
+    private PasswordField pass4;
+
+    @FXML
     private Label forgotPasswordLbl;
 
     @FXML
@@ -146,15 +159,29 @@ public class WelcomeController implements Initializable {
     @FXML
     private BorderPane borderPane;
 
-    private String passwordDisplayed;
+    @FXML
+    private JFXButton maximizeBtn;
 
-    private StringProperty passwordShown = new SimpleStringProperty();
+    @FXML
+    private JFXButton minimizeBtn;
 
-    Alerts alerts = new Alerts();
+    @FXML
+    private HBox titleBar;
 
-    Validators validators = new Validators();
+    @FXML
+    private AnchorPane root;
+
+    private String passwordTyped;
+
+    private Alerts alerts = new Alerts();
+
+    private Validators validators = new Validators();
 
     public static User user;
+
+    private double lastX = 0.0d, lastY = 0.0d, lastWidth = 0.0d, lastHeight = 0.0d;
+
+    private double xOffset = 0, yOffset = 0;
 
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -166,16 +193,67 @@ public class WelcomeController implements Initializable {
         imgPane.setTranslateX( 250 );
         stackPane.setTranslateX( 600 );
         animateIntroduction();
-        signInPasswordField.textProperty().bind( passwordShown );
-        passwordShown.setValue( "" );
 
         //ensure only numbers are typed in this fields
         fpPasswordField.setOnKeyTyped( this::numberTypedConsumers );
         fpConfirmPasswordField.setOnKeyTyped( this::numberTypedConsumers );
-        signInPasswordField.setOnKeyTyped( this::numberTypedConsumers );
         signUpDevicePasswordField.setOnKeyTyped( this::numberTypedConsumers );
         signUpMobileNumberField.setOnKeyTyped( this::numberTypedConsumers );
         fpMobileNumber.setOnKeyTyped( this::numberTypedConsumers );
+        passwordTyped = "";
+
+        //add action events to the following buttons
+        minimizeBtn.setOnAction( e -> {
+        Stage stage = (Stage)minimizeBtn.getScene().getWindow();
+        stage.setIconified( true );
+        } );
+
+        maximizeBtn.setOnAction( e -> {
+            Node node = (Node)e.getSource();
+            Window window = node.getScene().getWindow();
+            double currentX = window.getX();
+            double currentY = window.getY();
+            double currentWidth = window.getWidth();
+            double currentHeight = window.getHeight();
+
+            Screen screen = Screen.getPrimary();
+            Rectangle2D bounds = screen.getVisualBounds();
+
+            if (currentX != bounds.getMinX() && currentY != bounds.getMinY()
+                    && currentWidth != bounds.getWidth() && currentHeight != bounds.getHeight()){
+                window.setX( bounds.getMinX() );
+                window.setY( bounds.getMinY() );
+                window.setWidth( bounds.getWidth() );
+                window.setHeight( bounds.getHeight() );
+
+                //save old dimensions
+                lastX = currentX;
+                lastY = currentY;
+                lastWidth = currentWidth;
+                lastHeight = currentHeight;
+            }
+            else {
+                //de-maximize the window
+                window.setX( lastX );
+                window.setY( lastY );
+                window.setWidth( lastWidth );
+                window.setHeight( lastHeight );
+            }
+
+            // ensure to not bubble up tot title bar
+            e.consume();
+        } );
+
+        root.setOnMousePressed( e -> {
+            xOffset = e.getSceneX();
+            yOffset = e.getScreenY();
+        } );
+
+        root.setOnMouseDragged( e -> {
+            Stage stage = (Stage)minimizeBtn.getScene().getWindow();
+            stage.setX( e.getScreenX() - xOffset );
+            stage.setY( e.getScreenY() - yOffset );
+        } );
     }
 
     //_____________user defined methods
@@ -187,6 +265,7 @@ public class WelcomeController implements Initializable {
             registerPane.setOpacity( 0 );
             fpPane.setOpacity( 0 );
             deviceNameLbl.setText( UserSession.getMainUser().getDeviceName() );
+            signInNameLbl.setText( UserSession.getMainUser().getName() );
         } else {
             registerPane.toFront();
             signInPane.setOpacity( 0 );
@@ -216,6 +295,7 @@ public class WelcomeController implements Initializable {
     }
 
     private void transitInOut(Node initNode, Node newNode) {
+        passwordTyped = "";
         FadeOutLeft fadeOutLeft = new FadeOutLeft( initNode );
         fadeOutLeft.play();
         fadeOutLeft.getTimeline().setOnFinished( e -> {
@@ -259,16 +339,54 @@ public class WelcomeController implements Initializable {
             e.consume();
         }
 
+        Object target = e.getTarget();
+        if (target instanceof PasswordField){
+            PasswordField passwordField = (PasswordField) target;
+            if (passwordField.getText().length() > 3){
+                e.consume();
+            }
+        }
+    }
+
+    private void numbersTyped(String number) {
+        if (pass1.getText().isEmpty()) {
+            pass1.setText( number );
+        } else {
+            if (pass2.getText().isEmpty()) {
+                pass2.setText( number );
+            } else {
+                if (pass3.getText().isEmpty()) {
+                    pass3.setText( number );
+                } else {
+                    if (pass4.getText().isEmpty()) {
+                        pass4.setText( number );
+                    }
+                }
+            }
+        }
+    }
+
+    private void backSpaceEvent() {
+        if (!pass4.getText().isEmpty()) {
+            pass4.clear();
+        } else {
+            if (!pass3.getText().isEmpty()) {
+                pass3.clear();
+            } else {
+                if (!pass2.getText().isEmpty()) {
+                    pass2.clear();
+                } else {
+                    if (!pass1.getText().isEmpty()) {
+                        pass1.clear();
+                    }
+                }
+            }
+        }
     }
 
     //____________________controller defined methods
     @FXML
-    private void BackSpaceEvent(ActionEvent event) {
-        if (passwordShown.getValue().length() >= 1) {
-            int lastCharIndex = passwordShown.getValue().length() - 1;
-            passwordShown.setValue( passwordShown.getValue().substring( 0, lastCharIndex ) );
-        }
-    }
+    private void BackSpaceEvent(ActionEvent event) { backSpaceEvent();  }
 
     @FXML
     private void CloseAppEvent(ActionEvent event) throws IOException {
@@ -283,53 +401,49 @@ public class WelcomeController implements Initializable {
 
     @FXML
     private void DigitEightEvent(ActionEvent event) {
-        passwordShown.set( passwordShown.getValue() + "8" );
+        numbersTyped( "8" );
     }
 
     @FXML
     private void DigitFiveEvent(ActionEvent event) {
-        passwordShown.set( passwordShown.getValue().concat( "5" ) );
+        numbersTyped( "5" );
     }
 
     @FXML
     private void DigitFourEvent(ActionEvent event) {
-        passwordShown.set( passwordShown.getValue().concat( "4" ) );
+        numbersTyped( "4" );
     }
 
     @FXML
     private void DigitNineEvent(ActionEvent event) {
-        passwordShown.set( passwordShown.getValue().concat( "9" ) );
+        numbersTyped( "9" );
     }
 
     @FXML
     private void DigitOneEvent(ActionEvent event) {
-        passwordShown.set( passwordShown.getValue().concat( "1" ) );
+        numbersTyped( "1" );
     }
 
     @FXML
     private void DigitSevenEvent(ActionEvent event) {
-        passwordShown.set( passwordShown.getValue().concat( "7" ) );
+        numbersTyped( "7" );
     }
 
     @FXML
     private void DigitSixEvent(ActionEvent event) {
-        passwordShown.set( passwordShown.getValue().concat( "6" ) );
+        numbersTyped( "6" );
     }
 
     @FXML
     private void DigitThreeEvent(ActionEvent event) {
-        passwordShown.set( passwordShown.getValue().concat( "3" ) );
+        numbersTyped( "3" );
     }
 
     @FXML
-    private void DigitTwoEvent(ActionEvent event) {
-        passwordShown.set( passwordShown.getValue().concat( "2" ) );
-    }
+    private void DigitTwoEvent(ActionEvent event) { numbersTyped( "2" ); }
 
     @FXML
-    private void DigitZeroEvent(ActionEvent event) {
-        passwordShown.set( passwordShown.getValue().concat( "0" ) );
-    }
+    private void DigitZeroEvent(ActionEvent event) { numbersTyped( "0" );  }
 
     @FXML
     private void ForgotPasswordEvent(MouseEvent event) {
@@ -367,10 +481,11 @@ public class WelcomeController implements Initializable {
 
     @FXML
     private void SignInEvent(ActionEvent event) throws IOException, SQLException {
-        String password = signInPasswordField.getText();
-        if (password.isEmpty()) {
+
+        if (pass1.getText().isEmpty() || pass2.getText().isEmpty() || pass3.getText().isEmpty() || pass4.getText().isEmpty()) {
             alerts.Notification( "Empty Field(s)", "Ensure the password field is not empty" );
         } else {
+            String password = pass1.getText() + pass2.getText() + pass3.getText() + pass4.getText();
             if (UserSession.comparePassword( password )) {
                 alerts.materialInfoAlert( stackPaneContainer, borderPane, "Sign In Successful", "You will be directed to your dashboard" );
                 MainApp.showMainAppView().show();
@@ -413,6 +528,8 @@ public class WelcomeController implements Initializable {
     private void SignIntoAccountEvent(MouseEvent event) {
         transitInOut( fpPane, signInPane );
     }
+
+
 
 
 }
