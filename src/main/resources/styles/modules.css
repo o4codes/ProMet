@@ -1,19 +1,23 @@
+
 .main-panel {
     -fx-background-color: white;
-    -fx-border-color: #4d4d4d;
+    -fx-border-color: #2f2f2f;
 }
+
 .background {
-    -fx-background-color: white;
+    -fx-background-color: #fafafa;
 }
+
 .background-radius{
     -fx-background-radius: 10px;
 }
+
 .drop-shadow{
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
 }
 
 .title {
-    -fx-text-fill: #4d4d4d;
+    -fx-text-fill: #2f2f2f;
     -fx-font-family: Candara;
     -fx-font-Size: 22px;
     -fx-font-weight: bold;
@@ -22,48 +26,39 @@
 
 .casual-label {
     -fx-text-fill: #4d4d4d;
-    -fx-font-Size: 20px;
-    -fx-font-weight: bold;
-    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
-    -fx-font-family: Candara;
 }
 
 .module-title {
-    -fx-text-fill: #4d4d4d;
+    -fx-text-fill: #2f2f2f;
     -fx-font-family: Candara;
     -fx-font-Size: 18px;
-    -fx-font-weight: bold;
+    -fx-font-weight: normal;
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
 }
+
 .module-description {
-    -fx-text-fill: #bdbdbd;
-    -fx-font-family: sans-serif;
-    -fx-font-Size: 12px;
-    -fx-font-weight: bold;
-    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+    -fx-text-fill: #2f2f2f;
 }
 
 .uploadPhotoBtn{
     -fx-text-fill: black;
     -fx-font-Size: 13px;
     -fx-font-weight: bold;
-    -fx-background-color: white;
-    -fx-background-radius: 20px;
-    -fx-border-radius: 20px;
-    -fx-border-color: #e0e0e0;
+    -fx-background-color: #B2C0D2;
+    -fx-background-radius: 7px;
 }
 
 .defaultPhotoBtn{
-    -fx-text-fill: white;
+    -fx-text-fill: #2f2f2f;
     -fx-font-Size: 13px;
     -fx-font-weight: bold;
-    -fx-background-radius: 20px;
-    -fx-background-color: red;
+    -fx-background-radius: 7px;
+    -fx-background-color: #ADC3F7;
 }
 
 .casualPane{
     -fx-background-radius: 10px;
-    -fx-background-color: #eeeeee;
+    -fx-background-color: white;
 }
 
 .main-button{
@@ -86,13 +81,13 @@
 }
 
 .settings-label{
-  -fx-text-fill: #424242;
+  -fx-text-fill: #2f2f2f;
   -fx-font-weight: bold;
   -fx-font-Size: 13px;
 }
 
 .fields-label{
-  -fx-text-fill: #424242;
+  -fx-text-fill: #2f2f2f;
   -fx-font-weight: bold;
   -fx-font-Size: 11px;
 }

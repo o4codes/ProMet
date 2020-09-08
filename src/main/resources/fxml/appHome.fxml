@@ -4,7 +4,6 @@
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -88,25 +87,19 @@
                                        </HBox.margin></Label>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="55.0" prefWidth="278.0">
+                              <HBox alignment="CENTER_RIGHT" prefHeight="43.0" prefWidth="493.0">
                                  <HBox.margin>
                                     <Insets top="10.0" />
                                  </HBox.margin>
                                  <children>
-                                    <VBox prefHeight="44.0" prefWidth="132.0">
+                                    <VBox prefHeight="43.0" prefWidth="501.0">
                                        <children>
-                                          <Label fx:id="profileNameLbl" alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="135.0" styleClass="small-lettering" text="Profile Name">
-                                             <effect>
-                                                <Blend />
-                                             </effect>
+                                          <Label fx:id="profileNameLbl" alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="468.0" text="Profile Name">
                                              <padding>
                                                 <Insets right="5.0" />
                                              </padding>
                                           </Label>
-                                          <Label fx:id="deviceNameLbl" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="22.0" prefWidth="135.0" styleClass="medium-lettering" text="Device Name">
-                                             <effect>
-                                                <Blend />
-                                             </effect>
+                                          <Label fx:id="deviceNameLbl" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="22.0" prefWidth="449.0" text="Device Name">
                                              <padding>
                                                 <Insets right="5.0" />
                                              </padding>
@@ -125,7 +118,7 @@
                         </AnchorPane>
                         <HBox alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="1021.0">
                            <children>
-                              <Label fx:id="dateTimeLbl" styleClass="small-lettering" text="5:04 PM 23rd September,2020" />
+                              <Label fx:id="dateTimeLbl" text="5:04 PM 23rd September,2020" />
                            </children>
                            <VBox.margin>
                               <Insets bottom="10.0" left="20.0" right="20.0" />
@@ -135,7 +128,7 @@
                   </VBox>
                </center>
                <top>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="1100.0" style="-fx-background-color: #2F4475;" BorderPane.alignment="CENTER">
+                  <HBox fx:id="titleBar" alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="1100.0" style="-fx-background-color: #2F4475;" BorderPane.alignment="CENTER">
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                            <HBox.margin>

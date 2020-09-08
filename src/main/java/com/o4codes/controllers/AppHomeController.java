@@ -21,10 +21,12 @@ import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -85,6 +87,9 @@ public class AppHomeController implements Initializable {
     @FXML
     private AnchorPane root;
 
+    @FXML
+    private HBox titleBar;
+
     private double lastX = 0.0d, lastY = 0.0d, lastWidth = 0.0d, lastHeight = 0.0d;
 
     private double xOffset = 0, yOffset = 0;
@@ -94,6 +99,12 @@ public class AppHomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //set fonts for some Label
+        moduleTitleLbl.setFont( Font.loadFont( MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Regular.ttf"), 20 ));
+        dateTimeLbl.setFont( Font.loadFont( MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Regular.ttf"), 14 ));
+        deviceNameLbl.setFont( Font.loadFont( MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Bold.ttf"), 16 ));
+        profileNameLbl.setFont( Font.loadFont( MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Regular.ttf"), 14 ));
+
         //animate the navigation buttons
         introAnimation();
         setLoggedInUser();
@@ -140,17 +151,18 @@ public class AppHomeController implements Initializable {
             e.consume();
         } );
 
-        root.setOnMousePressed( e -> {
+        titleBar.setOnMousePressed( e -> {
             xOffset = e.getSceneX();
             yOffset = e.getScreenY();
         } );
 
-        root.setOnMouseDragged( e -> {
+        titleBar.setOnMouseDragged( e -> {
             Stage stage = (Stage)minimizeBtn.getScene().getWindow();
             stage.setX( e.getScreenX() - xOffset );
             stage.setY( e.getScreenY() - yOffset );
         } );
-    }
+
+        }
 
     private void setLoggedInUser(){
         Platform.runLater( () -> {
@@ -207,7 +219,7 @@ public class AppHomeController implements Initializable {
 
     @FXML
     private void showSettings(ActionEvent event) throws IOException {
-        createPage( "/fxml/appConfigView.fxml" );
+        createPage( "/fxml/appSettingsView.fxml" );
     }
 
     @FXML

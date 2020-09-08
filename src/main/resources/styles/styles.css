@@ -51,7 +51,7 @@
 
 .app-title-message {
     -fx-text-fill: white;
-    -fx-font-Size: 18px;
+    -fx-font-Size: 16px;
     -fx-font-family: Candara;
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
 }

@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="560.0" prefWidth="981.0" styleClass="background" stylesheets="@../styles/modules.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.o4codes.controllers.AppConfigController">
+<AnchorPane prefHeight="560.0" prefWidth="981.0" styleClass="background" stylesheets="@../styles/modules.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.o4codes.controllers.AppSettingsController">
    <children>
       <StackPane fx:id="stackPane" layoutX="411.0" layoutY="250.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -29,39 +29,44 @@
                               <Insets left="10.0" />
                            </HBox.margin>
                            <children>
-                              <VBox alignment="BOTTOM_LEFT" prefHeight="150.0" prefWidth="186.0" spacing="10.0">
+                              <VBox alignment="BOTTOM_LEFT" prefHeight="143.0" prefWidth="392.0">
                                  <children>
-                                    <Label styleClass="casual-label" text="Oforkansi Shadrach">
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <Label layoutX="10.0" layoutY="136.0" styleClass="casual-label" text="ADAM">
+                                    <Label fx:id="userNameLabel" styleClass="casual-label" text="Oforkansi Shadrach">
                                        <VBox.margin>
                                           <Insets />
                                        </VBox.margin>
                                     </Label>
+                                    <Label fx:id="deviceNameLabel" layoutX="10.0" layoutY="136.0" styleClass="casual-label" text="ADAM">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </Label>
+                                    <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <JFXButton fx:id="editProfileButton" contentDisplay="RIGHT" onAction="#EditProfileEvent" styleClass="defaultPhotoBtn" text="Edit your profile">
+                                             <graphic>
+                                                <MaterialDesignIconView glyphName="ACCOUNT_OUTLINE" size="18" />
+                                             </graphic>
+                                          </JFXButton>
+                                          <JFXButton fx:id="changePasscodeEvent" contentDisplay="RIGHT" onAction="#PasscodeChangeEvent" styleClass="defaultPhotoBtn" text="Change your passcode">
+                                             <graphic>
+                                                <MaterialDesignIconView glyphName="LOCK_OPEN_OUTLINE" size="18" />
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </HBox>
                                  </children>
                                  <padding>
                                     <Insets bottom="10.0" />
                                  </padding>
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
                               </VBox>
                               <VBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="152.0" prefWidth="237.0" spacing="10.0">
                                  <padding>
                                     <Insets bottom="10.0" />
                                  </padding>
-                                 <children>
-                                    <JFXButton contentDisplay="RIGHT" styleClass="defaultPhotoBtn" text="Edit your profile">
-                                       <graphic>
-                                          <MaterialDesignIconView fill="WHITE" glyphName="ACCOUNT_OUTLINE" size="18" />
-                                       </graphic>
-                                    </JFXButton>
-                                    <JFXButton contentDisplay="RIGHT" layoutX="10.0" layoutY="119.0" styleClass="defaultPhotoBtn" text="Change your passcode">
-                                       <graphic>
-                                          <MaterialDesignIconView fill="WHITE" glyphName="LOCK_OUTLINE" size="18" />
-                                       </graphic>
-                                    </JFXButton>
-                                 </children>
                               </VBox>
                            </children>
                         </HBox>
@@ -75,24 +80,37 @@
                         <DropShadow color="#9e9797" height="11.0" offsetY="3.0" radius="5.0" width="11.0" />
                      </effect>
                      <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="15.0" />
                      </padding>
                      <children>
-                        <Label styleClass="module-title" text="Pomodoro settings">
-                           <font>
-                              <Font name="Candara Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                        <HBox>
+                           <children>
+                              <Label styleClass="module-title" text="Pomodoro settings">
+                                 <font>
+                                    <Font name="Candara Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <JFXButton fx:id="editPomodoreSettings" contentDisplay="RIGHT" onAction="#EditPomodoreEvent" prefHeight="29.0" prefWidth="96.0" styleClass="uploadPhotoBtn" text="Edit">
+                                       <graphic>
+                                          <MaterialDesignIconView glyphName="PENCIL" size="18" />
+                                       </graphic>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="103.0" prefWidth="941.0" spacing="10.0" VBox.vgrow="ALWAYS">
                            <children>
                               <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="167.0" prefWidth="208.0">
                                  <children>
-                                    <VBox alignment="CENTER" prefHeight="121.0" prefWidth="131.0" style="-fx-background-color: #e0e0e0; -fx-background-radius: 50%;" VBox.vgrow="ALWAYS">
+                                    <VBox alignment="CENTER" prefHeight="121.0" prefWidth="131.0" style="-fx-background-color: #fafafa; -fx-background-radius: 50%;" VBox.vgrow="ALWAYS">
                                        <VBox.margin>
                                           <Insets top="30.0" />
                                        </VBox.margin>
                                        <children>
-                                          <Label prefHeight="42.0" prefWidth="65.0" text="45m">
+                                          <Label fx:id="taskIntervalValueLbl" prefHeight="42.0" prefWidth="65.0" text="45m">
                                              <VBox.margin>
                                                 <Insets bottom="10.0" />
                                              </VBox.margin>
@@ -104,19 +122,19 @@
                                     </VBox>
                                     <AnchorPane prefHeight="80.0" prefWidth="200.0" styleClass="casualPane" translateY="-20.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label alignment="TOP_CENTER" layoutX="86.0" layoutY="27.0" styleClass="module-title" text="Task Interval" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0" />
+                                          <Label fx:id="taskIntervalLbl" alignment="TOP_CENTER" layoutX="86.0" layoutY="27.0" styleClass="module-description" text="Task Interval" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>
                               </VBox>
                               <VBox alignment="TOP_CENTER" fillWidth="false" layoutX="10.0" layoutY="20.0" prefHeight="167.0" prefWidth="208.0">
                                  <children>
-                                    <VBox alignment="CENTER" prefHeight="121.0" prefWidth="131.0" style="-fx-background-color: #e0e0e0; -fx-background-radius: 50%;" VBox.vgrow="ALWAYS">
+                                    <VBox alignment="CENTER" prefHeight="121.0" prefWidth="131.0" style="-fx-background-color: #fafafa; -fx-background-radius: 50%;" VBox.vgrow="ALWAYS">
                                        <VBox.margin>
                                           <Insets top="30.0" />
                                        </VBox.margin>
                                        <children>
-                                          <Label text="45m">
+                                          <Label fx:id="shortRestIntervalValueLbl" text="45m">
                                              <VBox.margin>
                                                 <Insets bottom="10.0" />
                                              </VBox.margin>
@@ -128,19 +146,19 @@
                                     </VBox>
                                     <AnchorPane prefHeight="80.0" prefWidth="200.0" styleClass="casualPane" translateY="-20.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label alignment="TOP_CENTER" layoutX="86.0" layoutY="27.0" styleClass="module-title" text="Short Rest Interval" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0" />
+                                          <Label fx:id="shortRestIntervalLbl" alignment="TOP_CENTER" layoutX="86.0" layoutY="27.0" styleClass="module-description" text="Short Rest Interval" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>
                               </VBox>
                               <VBox alignment="TOP_CENTER" fillWidth="false" layoutX="218.0" layoutY="20.0" prefHeight="167.0" prefWidth="208.0">
                                  <children>
-                                    <VBox alignment="CENTER" prefHeight="121.0" prefWidth="131.0" style="-fx-background-color: #e0e0e0; -fx-background-radius: 50%;" VBox.vgrow="ALWAYS">
+                                    <VBox alignment="CENTER" prefHeight="121.0" prefWidth="131.0" style="-fx-background-color: #fafafa; -fx-background-radius: 50%;" VBox.vgrow="ALWAYS">
                                        <VBox.margin>
                                           <Insets top="30.0" />
                                        </VBox.margin>
                                        <children>
-                                          <Label text="45m">
+                                          <Label fx:id="longRestIntervalValueLbl" text="45m">
                                              <VBox.margin>
                                                 <Insets bottom="10.0" />
                                              </VBox.margin>
@@ -152,19 +170,19 @@
                                     </VBox>
                                     <AnchorPane prefHeight="80.0" prefWidth="200.0" styleClass="casualPane" translateY="-20.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label alignment="TOP_CENTER" layoutX="86.0" layoutY="27.0" styleClass="module-title" text="Long Rest Interval" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0" />
+                                          <Label fx:id="longRestIntervalLbl" alignment="TOP_CENTER" layoutX="86.0" layoutY="27.0" styleClass="module-description" text="Long Rest Interval" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>
                               </VBox>
                               <VBox alignment="TOP_CENTER" fillWidth="false" layoutX="426.0" layoutY="20.0" prefHeight="167.0" prefWidth="208.0">
                                  <children>
-                                    <VBox alignment="CENTER" prefHeight="121.0" prefWidth="131.0" style="-fx-background-color: #e0e0e0; -fx-background-radius: 50%;" VBox.vgrow="ALWAYS">
+                                    <VBox alignment="CENTER" prefHeight="121.0" prefWidth="131.0" style="-fx-background-color: #fafafa; -fx-background-radius: 50%;" VBox.vgrow="ALWAYS">
                                        <VBox.margin>
                                           <Insets top="30.0" />
                                        </VBox.margin>
                                        <children>
-                                          <Label text="45m">
+                                          <Label fx:id="cocurentsProjectsValueLbl" text="45m">
                                              <VBox.margin>
                                                 <Insets bottom="10.0" />
                                              </VBox.margin>
@@ -176,27 +194,13 @@
                                     </VBox>
                                     <AnchorPane prefHeight="80.0" prefWidth="200.0" styleClass="casualPane" translateY="-20.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label alignment="TOP_CENTER" layoutX="86.0" layoutY="27.0" styleClass="module-title" text="Concurrents Projects" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0" />
+                                          <Label fx:id="cocurentsProjectsLbl" alignment="TOP_CENTER" layoutX="86.0" layoutY="27.0" styleClass="module-description" text="Concurrents Projects" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>
                               </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <JFXButton contentDisplay="RIGHT" prefHeight="29.0" prefWidth="112.0" styleClass="defaultPhotoBtn" text="Edit">
-                                       <graphic>
-                                          <MaterialDesignIconView fill="WHITE" glyphName="PENCIL" size="18" />
-                                       </graphic>
-                                       <VBox.margin>
-                                          <Insets left="20.0" />
-                                       </VBox.margin>
-                                    </JFXButton>
-                                 </children>
-                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
                            </children>
-                           <padding>
-                              <Insets top="10.0" />
-                           </padding>
                         </HBox>
                      </children>
                   </VBox>
@@ -205,14 +209,27 @@
                         <DropShadow color="#9e9797" height="11.0" offsetY="3.0" radius="5.0" width="11.0" />
                      </effect>
                      <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="15.0" />
                      </padding>
                      <children>
-                        <Label styleClass="module-title" text="Pomodoro settings">
-                           <font>
-                              <Font name="Candara" size="20.0" />
-                           </font>
-                        </Label>
+                        <HBox>
+                           <children>
+                              <Label styleClass="module-title" text="Notifications">
+                                 <font>
+                                    <Font name="Candara" size="20.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <JFXButton fx:id="preferencesBtn" contentDisplay="RIGHT" onAction="#PreferencesEditEvent" prefHeight="29.0" prefWidth="139.0" styleClass="uploadPhotoBtn" text="Preferences">
+                                       <graphic>
+                                          <MaterialDesignIconView glyphName="PENCIL" size="18" />
+                                       </graphic>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
                      </children>
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

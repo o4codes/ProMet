@@ -78,7 +78,7 @@
                                     <Insets bottom="5.0" top="5.0" />
                                  </padding>
                                  <VBox.margin>
-                                    <Insets top="10.0" />
+                                    <Insets top="5.0" />
                                  </VBox.margin>
                               </Label>
                               <VBox fx:id="imgPane" alignment="CENTER" prefHeight="615.0" prefWidth="459.0" spacing="20.0">

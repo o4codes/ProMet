@@ -25,6 +25,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -244,18 +245,23 @@ public class WelcomeController implements Initializable {
             e.consume();
         } );
 
-        root.setOnMousePressed( e -> {
+        titleBar.setOnMousePressed( e -> {
             xOffset = e.getSceneX();
             yOffset = e.getScreenY();
         } );
 
-        root.setOnMouseDragged( e -> {
+        titleBar.setOnMouseDragged( e -> {
             Stage stage = (Stage)minimizeBtn.getScene().getWindow();
             stage.setX( e.getScreenX() - xOffset );
             stage.setY( e.getScreenY() - yOffset );
         } );
-    }
-
+        
+        // apply external fonts to some labels
+        Platform.runLater( () -> {
+            signInNameLbl.setFont( Font.loadFont( MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Regular.ttf"), 16 ));
+            deviceNameLbl.setFont( Font.loadFont( MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Regular.ttf"), 24 ));
+        } );
+        }
     //_____________user defined methods
 
     private void startUpMode() throws IOException, SQLException {

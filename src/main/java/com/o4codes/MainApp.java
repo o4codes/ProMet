@@ -55,7 +55,6 @@ public class MainApp extends Application {
 
         log.debug( "Showing Welcome scene" );
         Scene scene = new Scene( rootNode );
-
         stage.initStyle( StageStyle.UNDECORATED );
         stage.setScene( scene );
         stage.show();
@@ -66,7 +65,6 @@ public class MainApp extends Application {
 
     public static Stage showMainAppView() throws IOException {
         log.info( "Starting Hello JavaFX and Maven demonstration application" );
-
         String fxmlFile = "/fxml/appHome.fxml";
         log.debug( "Loading FXML for main view from: {}", fxmlFile );
         FXMLLoader loader = new FXMLLoader();
@@ -94,7 +92,6 @@ public class MainApp extends Application {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation( MainApp.class.getResource( fxmlFile ) );
         AnchorPane pane = loader.load();
-
         log.debug( "Showing Welcome scene" );
         Scene scene = new Scene( pane );
         Stage stage = new Stage();
