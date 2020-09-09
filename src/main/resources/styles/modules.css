@@ -6,6 +6,11 @@
 
 .background {
     -fx-background-color: #fafafa;
+
+}
+
+.border{
+    -fx-border-color: #bdbdbd;
 }
 
 .background-radius{

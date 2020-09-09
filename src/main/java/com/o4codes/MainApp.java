@@ -1,5 +1,6 @@
 package com.o4codes;
 
+import com.jfoenix.controls.JFXDecorator;
 import com.o4codes.controllers.AppHomeController;
 import com.o4codes.database.dbTransactions.AppConfigSession;
 import com.o4codes.database.dbTransactions.UserSession;
@@ -61,6 +62,7 @@ public class MainApp extends Application {
         stage.setOnCloseRequest( e -> {
             System.exit( 0 );
         } );
+
     }
 
     public static Stage showMainAppView() throws IOException {
@@ -93,6 +95,23 @@ public class MainApp extends Application {
         AnchorPane pane = loader.load();
 
         log.info( "User Profile Configurations" );
+        Scene scene = new Scene( pane );
+        Stage stage = new Stage();
+        stage.initModality( Modality.APPLICATION_MODAL );
+        stage.initStyle( StageStyle.UNDECORATED );
+        stage.setScene( scene );
+
+        return stage;
+    }
+
+    public static Stage showPomodoreConfigView() throws IOException {
+        String fxmlFile = "/fxml/pomodoreConfig.fxml";
+        log.debug( "Loading FXML for main view from: {}",fxmlFile );
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation( MainApp.class.getResource( fxmlFile ) );
+        AnchorPane pane = loader.load();
+
+        log.info( "Pomodore Configurations" );
         Scene scene = new Scene( pane );
         Stage stage = new Stage();
         stage.initModality( Modality.APPLICATION_MODAL );

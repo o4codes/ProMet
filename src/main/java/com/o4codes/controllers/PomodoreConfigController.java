@@ -78,6 +78,9 @@ public class PomodoreConfigController implements Initializable {
     @FXML
     private VBox vBox;
 
+    @FXML
+    private JFXButton stageCloseBtn;
+
     private int maxProjects, pomodoreDuration, shortBreak, longDuration;
 
     private Alerts alerts = new Alerts();
@@ -109,6 +112,10 @@ public class PomodoreConfigController implements Initializable {
         pomLongBreak20.setOnAction( e -> setPomodoreLongBreakValue( Integer.parseInt( pomLongBreak20.getText() )) );
 
         initDefaultSettings();
+
+        //handle event to close Stage
+        stageCloseBtn.setOnAction(e -> ((JFXButton)e.getSource()).getScene().getWindow().hide()
+        );
     }
 
     //initialize the default settings
@@ -274,7 +281,7 @@ public class PomodoreConfigController implements Initializable {
     }
 
     private void setSelectedButtonColor(JFXButton button) {
-        button.setStyle( "-fx-background-color: red; -fx-text-fill: white;" );
+        button.setStyle( "-fx-background-color: #ADC3F7; -fx-text-fill: white;" );
     }
 
     private void setUnSelectedButtonColor(JFXButton button) {

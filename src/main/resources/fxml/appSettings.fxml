@@ -23,7 +23,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                      <children>
-                        <Rectangle arcHeight="20.0" arcWidth="20.0" fill="DODGERBLUE" height="142.0" stroke="WHITE" strokeLineCap="ROUND" width="142.0" />
+                        <Rectangle fx:id="circularImageView" arcHeight="20.0" arcWidth="20.0" fill="DODGERBLUE" height="142.0" stroke="DODGERBLUE" strokeLineCap="ROUND" width="142.0" />
                         <HBox prefHeight="150.0" prefWidth="388.0" HBox.hgrow="ALWAYS">
                            <HBox.margin>
                               <Insets left="10.0" />
@@ -105,12 +105,12 @@
                            <children>
                               <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="167.0" prefWidth="208.0">
                                  <children>
-                                    <VBox alignment="CENTER" prefHeight="121.0" prefWidth="131.0" style="-fx-background-color: #fafafa; -fx-background-radius: 50%;" VBox.vgrow="ALWAYS">
+                                    <VBox alignment="CENTER" prefHeight="143.0" prefWidth="158.0" style="-fx-background-color: #fafafa; -fx-background-radius: 50%;" VBox.vgrow="ALWAYS">
                                        <VBox.margin>
                                           <Insets top="30.0" />
                                        </VBox.margin>
                                        <children>
-                                          <Label fx:id="taskIntervalValueLbl" prefHeight="42.0" prefWidth="65.0" text="45m">
+                                          <Label fx:id="taskIntervalValueLbl" alignment="CENTER" prefHeight="46.0" prefWidth="127.0" text="45m">
                                              <VBox.margin>
                                                 <Insets bottom="10.0" />
                                              </VBox.margin>
@@ -129,12 +129,12 @@
                               </VBox>
                               <VBox alignment="TOP_CENTER" fillWidth="false" layoutX="10.0" layoutY="20.0" prefHeight="167.0" prefWidth="208.0">
                                  <children>
-                                    <VBox alignment="CENTER" prefHeight="121.0" prefWidth="131.0" style="-fx-background-color: #fafafa; -fx-background-radius: 50%;" VBox.vgrow="ALWAYS">
+                                    <VBox alignment="CENTER" prefHeight="143.0" prefWidth="158.0" style="-fx-background-color: #fafafa; -fx-background-radius: 50%;" VBox.vgrow="ALWAYS">
                                        <VBox.margin>
                                           <Insets top="30.0" />
                                        </VBox.margin>
                                        <children>
-                                          <Label fx:id="shortRestIntervalValueLbl" text="45m">
+                                          <Label fx:id="shortRestIntervalValueLbl" alignment="CENTER" prefHeight="46.0" prefWidth="114.0" text="45m">
                                              <VBox.margin>
                                                 <Insets bottom="10.0" />
                                              </VBox.margin>
@@ -153,12 +153,12 @@
                               </VBox>
                               <VBox alignment="TOP_CENTER" fillWidth="false" layoutX="218.0" layoutY="20.0" prefHeight="167.0" prefWidth="208.0">
                                  <children>
-                                    <VBox alignment="CENTER" prefHeight="121.0" prefWidth="131.0" style="-fx-background-color: #fafafa; -fx-background-radius: 50%;" VBox.vgrow="ALWAYS">
+                                    <VBox alignment="CENTER" prefHeight="143.0" prefWidth="158.0" style="-fx-background-color: #fafafa; -fx-background-radius: 50%;" VBox.vgrow="ALWAYS">
                                        <VBox.margin>
                                           <Insets top="30.0" />
                                        </VBox.margin>
                                        <children>
-                                          <Label fx:id="longRestIntervalValueLbl" text="45m">
+                                          <Label fx:id="longRestIntervalValueLbl" alignment="CENTER" prefHeight="46.0" prefWidth="109.0" text="45m">
                                              <VBox.margin>
                                                 <Insets bottom="10.0" />
                                              </VBox.margin>
@@ -177,12 +177,12 @@
                               </VBox>
                               <VBox alignment="TOP_CENTER" fillWidth="false" layoutX="426.0" layoutY="20.0" prefHeight="167.0" prefWidth="208.0">
                                  <children>
-                                    <VBox alignment="CENTER" prefHeight="121.0" prefWidth="131.0" style="-fx-background-color: #fafafa; -fx-background-radius: 50%;" VBox.vgrow="ALWAYS">
+                                    <VBox alignment="CENTER" prefHeight="143.0" prefWidth="158.0" style="-fx-background-color: #fafafa; -fx-background-radius: 50%;" VBox.vgrow="ALWAYS">
                                        <VBox.margin>
                                           <Insets top="30.0" />
                                        </VBox.margin>
                                        <children>
-                                          <Label fx:id="cocurentsProjectsValueLbl" text="45m">
+                                          <Label fx:id="cocurentsProjectsValueLbl" alignment="CENTER" prefHeight="46.0" prefWidth="110.0" text="45m">
                                              <VBox.margin>
                                                 <Insets bottom="10.0" />
                                              </VBox.margin>
@@ -199,7 +199,6 @@
                                     </AnchorPane>
                                  </children>
                               </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                      </children>
