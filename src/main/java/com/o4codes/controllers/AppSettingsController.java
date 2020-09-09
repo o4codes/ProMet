@@ -120,12 +120,15 @@ public class AppSettingsController implements Initializable {
     }
 
     @FXML
-    void PasscodeChangeEvent(ActionEvent event) {
-
+    private void PasscodeChangeEvent(ActionEvent event) throws IOException {
+        BoxBlur blur = new BoxBlur( 5, 5, 5 );
+        stackPane.getParent().getParent().setEffect( blur );
+        MainApp.showPasscodeConfigView().showAndWait();
+        stackPane.getParent().getParent().setEffect( null );
     }
 
     @FXML
-    void PreferencesEditEvent(ActionEvent event) {
+    private void PreferencesEditEvent(ActionEvent event) {
 
     }
 

@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e7f0964-9957-4735-9650-c64b45e2dee8" name="Default Changelist" comment="pomodore, profile config fully implemented">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/o4codes/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/o4codes/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/o4codes/controllers/AppSettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/o4codes/controllers/AppSettingsController.java" afterDir="false" />
     </list>
+    <list id="1acb7734-1a8a-4234-b8ed-b79d1902016d" name="git ignore file added to curb excesses" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,41 +23,62 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/MainApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1988">
-              <caret line="89" column="67" selection-start-line="89" selection-start-column="67" selection-end-line="89" selection-end-column="67" />
+            <state relative-caret-position="92">
+              <caret line="104" column="5" lean-forward="true" selection-start-line="104" selection-start-column="5" selection-end-line="104" selection-end-column="5" />
               <folding>
+                <element signature="method#start#0;class#MainApp#0" />
+                <element signature="e#997#1155#0" />
+                <element signature="e#1021#1070#0" />
+                <element signature="e#1093#1145#0" />
+                <element signature="method#preLoad#0;class#MainApp#0" />
+                <element signature="method#showWelcomeView#0;class#MainApp#0" />
+                <element signature="e#2004#2050#0" />
+                <element signature="method#showMainAppView#0;class#MainApp#0" />
+                <element signature="e#2776#2823#0" />
                 <element signature="method#showProfileUpdateView#0;class#MainApp#0" />
+                <element signature="method#showPomodoreConfigView#0;class#MainApp#0" />
                 <element signature="method#main#0;class#MainApp#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/controllers/AppHomeController.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/controllers/PasscodeConfigController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4928">
-              <caret line="211" column="37" selection-start-line="211" selection-start-column="37" selection-end-line="211" selection-end-column="37" />
+            <state relative-caret-position="225">
+              <caret line="72" column="60" selection-start-line="72" selection-start-column="60" selection-end-line="72" selection-end-column="60" />
               <folding>
-                <element signature="method#showSettings#0;class#AppHomeController#0" />
-                <element signature="method#showTimeline#0;class#AppHomeController#0" />
-                <element signature="method#CloseAppEvent#0;class#AppHomeController#0" />
-                <element signature="method#exit#0;class#AppHomeController#0" />
-                <element signature="method#introAnimation#0;class#AppHomeController#0" />
-                <element signature="method#setNode#0;class#AppHomeController#0" />
-                <element signature="method#createPage#0;class#AppHomeController#0" />
+                <element signature="e#820#906#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/controllers/ProfileViewController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/styles/modules.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1204">
-              <caret line="68" column="45" selection-start-line="68" selection-start-column="45" selection-end-line="68" selection-end-column="45" />
+            <state relative-caret-position="756">
+              <caret line="78" column="26" selection-start-line="78" selection-start-column="26" selection-end-line="78" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/controllers/AppSettingsController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="113">
+              <caret line="125" column="41" selection-start-line="125" selection-start-column="41" selection-end-line="125" selection-end-column="41" />
               <folding>
-                <element signature="method#HandleUploadDeviceImage#0;class#ProfileViewController#0" />
+                <element signature="method#initialize#0;class#AppSettingsController#0" />
+                <element signature="e#2584#2682#0" />
+                <element signature="e#2720#2764#0" />
+                <element signature="method#EditPomodoreEvent#0;class#AppSettingsController#0" />
+                <element signature="method#PreferencesEditEvent#0;class#AppSettingsController#0" />
+                <element signature="method#getSavedPomodoreConfigurations#0;class#AppSettingsController#0" />
+                <element signature="method#getSavedUserConfiguration#0;class#AppSettingsController#0" />
+                <element signature="e#4619#4798#1" />
+                <element signature="e#4804#4915#1" />
               </folding>
             </state>
           </provider>
@@ -66,15 +87,33 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/controllers/WelcomeController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-371">
-              <caret line="317" column="17" lean-forward="true" selection-start-line="317" selection-start-column="17" selection-end-line="317" selection-end-column="17" />
+            <state relative-caret-position="421">
+              <caret line="529" column="9" selection-start-line="506" selection-start-column="7" selection-end-line="529" selection-end-column="9" />
               <folding>
+                <element signature="e#3730#6828#0" />
+                <element signature="e#3807#3875#0" />
+                <element signature="e#3913#3957#0" />
+                <element signature="e#4607#4724#0" />
+                <element signature="e#4762#6101#0" />
+                <element signature="e#5352#5768#1" />
+                <element signature="e#5786#6012#1" />
+                <element signature="e#6142#6233#0" />
+                <element signature="e#6274#6463#0" />
+                <element signature="e#6550#6815#0" />
                 <element signature="e#6874#7431#0" />
+                <element signature="e#6979#7296#1" />
+                <element signature="e#7302#7425#1" />
                 <element signature="e#7437#8346#0" />
                 <element signature="e#7501#8336#0" />
                 <element signature="e#8352#8727#0" />
                 <element signature="e#8577#8718#0" />
+                <element signature="e#8733#9829#0" />
+                <element signature="e#8792#9819#0" />
                 <element signature="e#8812#8877#0" />
+                <element signature="e#8935#9719#0" />
+                <element signature="e#8988#9501#1" />
+                <element signature="e#9157#9366#1" />
+                <element signature="e#9372#9483#1" />
                 <element signature="e#9507#9704#1" />
                 <element signature="e#9757#9809#0" />
                 <element signature="e#9835#10297#0" />
@@ -110,7 +149,11 @@
                 <element signature="e#13916#14081#0" />
                 <element signature="e#14108#14269#1" />
                 <element signature="e#14289#14418#1" />
-                <element signature="e#15362#16951#0" />
+                <element signature="e#14441#15356#0" />
+                <element signature="e#14657#14763#1" />
+                <element signature="e#14769#15350#1" />
+                <element signature="e#14929#15195#1" />
+                <element signature="e#15201#15340#1" />
                 <element signature="e#15729#15828#1" />
                 <element signature="e#15834#16945#1" />
                 <element signature="e#15901#16800#1" />
@@ -124,16 +167,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="28">
-              <caret line="1" column="10" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -144,27 +186,28 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/o4codes/MainApp.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/o4codes/controllers/PomodoreConfigController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/styles/modules.css" />
-        <option value="$PROJECT_DIR$/src/main/java/com/o4codes/controllers/AppSettingsController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/styles/styles.css" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/main/resources/fxml/pascodeConfig.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/o4codes/controllers/AppSettingsController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/o4codes/MainApp.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/o4codes/controllers/PasscodeConfigController.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="260" />
-    <option name="y" value="20" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
+    <option name="x" value="-7" />
+    <option name="width" value="697" />
+    <option name="height" value="775" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -179,12 +222,61 @@
               <item name="Promet" type="b2602c69:ProjectViewProjectNode" />
               <item name="Promet" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Promet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Promet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Promet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Promet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Promet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Promet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Promet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Promet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="o4codes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Promet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Promet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Promet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Promet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Promet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Promet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="fxml" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -224,6 +316,7 @@
       <list>
         <item itemvalue="Application.MainApp" />
         <item itemvalue="Application.MainApp" />
+        <item itemvalue="Application.MainApp" />
       </list>
     </recent_temporary>
   </component>
@@ -244,7 +337,7 @@
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25340393" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25340393" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -253,7 +346,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3277592" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -261,7 +354,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info active="true" anchor="bottom" id="Messages" order="10" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -316,6 +409,14 @@
               </option>
               <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
                 <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
               </option>
             </State>
           </value>
@@ -378,20 +479,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/styles/modules.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="30" lean-forward="true" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/controllers/AppSettingsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1317">
-          <caret line="120" lean-forward="true" selection-start-line="120" selection-end-line="120" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/styles/styles.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
@@ -399,22 +486,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/MainApp.java">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1988">
-          <caret line="89" column="67" selection-start-line="89" selection-start-column="67" selection-end-line="89" selection-end-column="67" />
+        <state relative-caret-position="28">
+          <caret line="1" column="9" lean-forward="true" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/controllers/ProfileViewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="68" column="45" selection-start-line="68" selection-start-column="45" selection-end-line="68" selection-end-column="45" />
           <folding>
-            <element signature="method#showProfileUpdateView#0;class#MainApp#0" />
-            <element signature="method#main#0;class#MainApp#0" />
+            <element signature="method#initializeFields#0;class#ProfileViewController#0" />
+            <element signature="method#numberTypedConsumers#0;class#ProfileViewController#0" />
+            <element signature="method#initialize#0;class#ProfileViewController#0" />
+            <element signature="method#HandleDefaultImage#0;class#ProfileViewController#0" />
+            <element signature="method#HandleUpdateProfile#0;class#ProfileViewController#0" />
+            <element signature="method#HandleUploadDeviceImage#0;class#ProfileViewController#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/controllers/AppHomeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4928">
-          <caret line="211" column="37" selection-start-line="211" selection-start-column="37" selection-end-line="211" selection-end-column="37" />
+        <state relative-caret-position="481">
+          <caret line="211" column="37" selection-start-line="208" selection-start-column="7" selection-end-line="211" selection-end-column="37" />
           <folding>
+            <element signature="method#initialize#0;class#AppHomeController#0" />
+            <element signature="e#2989#3114#0" />
+            <element signature="e#3152#4491#0" />
+            <element signature="e#3742#4158#1" />
+            <element signature="e#4176#4402#1" />
+            <element signature="e#4532#4623#0" />
+            <element signature="e#4664#4853#0" />
+            <element signature="method#setLoggedInUser#0;class#AppHomeController#0" />
+            <element signature="e#4932#5328#0" />
+            <element signature="e#4956#5228#0" />
+            <element signature="e#5266#5318#0" />
+            <element signature="method#setUserImage#0;class#AppHomeController#0" />
+            <element signature="e#5384#6187#0" />
+            <element signature="e#5433#5984#1" />
+            <element signature="e#5644#5842#1" />
+            <element signature="e#5848#5970#1" />
+            <element signature="e#5990#6176#1" />
+            <element signature="e#6225#6269#0" />
+            <element signature="method#showDashboard#0;class#AppHomeController#0" />
+            <element signature="method#showProjects#0;class#AppHomeController#0" />
             <element signature="method#showSettings#0;class#AppHomeController#0" />
             <element signature="method#showTimeline#0;class#AppHomeController#0" />
             <element signature="method#CloseAppEvent#0;class#AppHomeController#0" />
@@ -426,27 +544,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/controllers/ProfileViewController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/pascodeConfig.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1204">
-          <caret line="68" column="45" selection-start-line="68" selection-start-column="45" selection-end-line="68" selection-end-column="45" />
-          <folding>
-            <element signature="method#HandleUploadDeviceImage#0;class#ProfileViewController#0" />
-          </folding>
+        <state relative-caret-position="280">
+          <caret line="10" column="75" selection-start-line="10" selection-start-column="75" selection-end-line="10" selection-end-column="75" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/styles/modules.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="78" column="26" selection-start-line="78" selection-start-column="26" selection-end-line="78" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/controllers/WelcomeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-371">
-          <caret line="317" column="17" lean-forward="true" selection-start-line="317" selection-start-column="17" selection-end-line="317" selection-end-column="17" />
+        <state relative-caret-position="421">
+          <caret line="529" column="9" selection-start-line="506" selection-start-column="7" selection-end-line="529" selection-end-column="9" />
           <folding>
+            <element signature="e#3730#6828#0" />
+            <element signature="e#3807#3875#0" />
+            <element signature="e#3913#3957#0" />
+            <element signature="e#4607#4724#0" />
+            <element signature="e#4762#6101#0" />
+            <element signature="e#5352#5768#1" />
+            <element signature="e#5786#6012#1" />
+            <element signature="e#6142#6233#0" />
+            <element signature="e#6274#6463#0" />
+            <element signature="e#6550#6815#0" />
             <element signature="e#6874#7431#0" />
+            <element signature="e#6979#7296#1" />
+            <element signature="e#7302#7425#1" />
             <element signature="e#7437#8346#0" />
             <element signature="e#7501#8336#0" />
             <element signature="e#8352#8727#0" />
             <element signature="e#8577#8718#0" />
+            <element signature="e#8733#9829#0" />
+            <element signature="e#8792#9819#0" />
             <element signature="e#8812#8877#0" />
+            <element signature="e#8935#9719#0" />
+            <element signature="e#8988#9501#1" />
+            <element signature="e#9157#9366#1" />
+            <element signature="e#9372#9483#1" />
             <element signature="e#9507#9704#1" />
             <element signature="e#9757#9809#0" />
             <element signature="e#9835#10297#0" />
@@ -482,7 +623,11 @@
             <element signature="e#13916#14081#0" />
             <element signature="e#14108#14269#1" />
             <element signature="e#14289#14418#1" />
-            <element signature="e#15362#16951#0" />
+            <element signature="e#14441#15356#0" />
+            <element signature="e#14657#14763#1" />
+            <element signature="e#14769#15350#1" />
+            <element signature="e#14929#15195#1" />
+            <element signature="e#15201#15340#1" />
             <element signature="e#15729#15828#1" />
             <element signature="e#15834#16945#1" />
             <element signature="e#15901#16800#1" />
@@ -495,10 +640,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/MainApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="1" column="10" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
+        <state relative-caret-position="92">
+          <caret line="104" column="5" lean-forward="true" selection-start-line="104" selection-start-column="5" selection-end-line="104" selection-end-column="5" />
+          <folding>
+            <element signature="method#start#0;class#MainApp#0" />
+            <element signature="e#997#1155#0" />
+            <element signature="e#1021#1070#0" />
+            <element signature="e#1093#1145#0" />
+            <element signature="method#preLoad#0;class#MainApp#0" />
+            <element signature="method#showWelcomeView#0;class#MainApp#0" />
+            <element signature="e#2004#2050#0" />
+            <element signature="method#showMainAppView#0;class#MainApp#0" />
+            <element signature="e#2776#2823#0" />
+            <element signature="method#showProfileUpdateView#0;class#MainApp#0" />
+            <element signature="method#showPomodoreConfigView#0;class#MainApp#0" />
+            <element signature="method#main#0;class#MainApp#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/controllers/AppSettingsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="125" column="41" selection-start-line="125" selection-start-column="41" selection-end-line="125" selection-end-column="41" />
+          <folding>
+            <element signature="method#initialize#0;class#AppSettingsController#0" />
+            <element signature="e#2584#2682#0" />
+            <element signature="e#2720#2764#0" />
+            <element signature="method#EditPomodoreEvent#0;class#AppSettingsController#0" />
+            <element signature="method#PreferencesEditEvent#0;class#AppSettingsController#0" />
+            <element signature="method#getSavedPomodoreConfigurations#0;class#AppSettingsController#0" />
+            <element signature="method#getSavedUserConfiguration#0;class#AppSettingsController#0" />
+            <element signature="e#4619#4798#1" />
+            <element signature="e#4804#4915#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/o4codes/controllers/PasscodeConfigController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="72" column="60" selection-start-line="72" selection-start-column="60" selection-end-line="72" selection-end-column="60" />
+          <folding>
+            <element signature="e#820#906#0" />
+          </folding>
         </state>
       </provider>
     </entry>
