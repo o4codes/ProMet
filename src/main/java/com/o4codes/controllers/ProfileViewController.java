@@ -11,14 +11,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -35,7 +35,7 @@ public class ProfileViewController implements Initializable {
     private JFXButton closeBtn;
 
     @FXML
-    private Circle circluarImageView;
+    private Rectangle circularImageView;
 
     @FXML
     private JFXButton uploadDeviceImageBtn;
@@ -53,9 +53,6 @@ public class ProfileViewController implements Initializable {
     private TextField deviceNameField;
 
     @FXML
-    private PasswordField passwordField;
-
-    @FXML
     private JFXButton updateProfileBtn;
 
     @FXML
@@ -63,6 +60,9 @@ public class ProfileViewController implements Initializable {
 
     @FXML
     private StackPane stackPane;
+
+    @FXML
+    private Label appDescriptionLbl;
 
     private Alerts alerts = new Alerts();
 
@@ -73,7 +73,6 @@ public class ProfileViewController implements Initializable {
             nameField.setText( user.getName() );
             deviceNameField.setText( user.getDeviceName() );
             mobileNumberField.setText( user.getMobileNumber() );
-            passwordField.setText( user.getDevicePassword() );
             try {
                 UserSession.readDevicePicture( user );
             } catch (IOException | SQLException e) {
@@ -81,9 +80,9 @@ public class ProfileViewController implements Initializable {
             }
             if (user.getUserImage() == null) {
                 Image image = new Image( MainApp.class.getResource( "/images/robot.jpg" ).toString() );
-                circluarImageView.setFill( new ImagePattern( image ) );
+                circularImageView.setFill( new ImagePattern( image ) );
             } else {
-                circluarImageView.setFill( new ImagePattern( user.getUserImage() ) );
+                circularImageView.setFill( new ImagePattern( user.getUserImage() ) );
             }
         } );
     }
@@ -104,6 +103,10 @@ public class ProfileViewController implements Initializable {
 
         //set mobile field to accept only numbers
         mobileNumberField.setOnKeyTyped( this::numberTypedConsumers );
+
+        //set Fonts to some labels
+        appTitleLbl.setFont( Font.loadFont( MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Regular.ttf"), 20 ));
+        appDescriptionLbl.setFont( Font.loadFont( MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Regular.ttf"), 14 ));
     }
 
     @FXML
@@ -126,9 +129,9 @@ public class ProfileViewController implements Initializable {
                 }
                 if (WelcomeController.user.getUserImage() == null) {
                     Image image = new Image( MainApp.class.getResource( "/images/robot.jpg" ).toString() );
-                    circluarImageView.setFill( new ImagePattern( image ) );
+                    circularImageView.setFill( new ImagePattern( image ) );
                 } else {
-                    circluarImageView.setFill( new ImagePattern( WelcomeController.user.getUserImage() ) );
+                    circularImageView.setFill( new ImagePattern( WelcomeController.user.getUserImage() ) );
                 }
 
             } );
@@ -140,22 +143,20 @@ public class ProfileViewController implements Initializable {
         String name = nameField.getText();
         String mobileNumber = mobileNumberField.getText();
         String deviceName = deviceNameField.getText();
-        String password = passwordField.getText().trim();
         String oldName = WelcomeController.user.getName();
-        if (name.isEmpty() || mobileNumber.isEmpty() || deviceName.isEmpty() || password.isEmpty()) {
+        if (name.isEmpty() || mobileNumber.isEmpty() || deviceName.isEmpty()) {
             alerts.Notification( "Empty Field(s)", "Ensure all fields are filled up" );
         } else {
             if (validators.validateMobileNumber( mobileNumber )) {
                 WelcomeController.user.setMobileNumber( mobileNumber );
-                WelcomeController.user.setDevicePassword( password );
                 WelcomeController.user.setDeviceName( deviceName );
                 WelcomeController.user.setName( name );
 
-                alerts.materialConfirmAlert( stackPane,borderPane,"Profile Update","Your profile will be updated if you continue" );
+                alerts.materialConfirmAlert( stackPane, borderPane, "Profile Update", "Your profile will be updated if you continue" );
                 alerts.acceptBtn.setOnAction( e -> {
                     try {
-                        UserSession.updateUserDetails( WelcomeController.user,oldName );
-                        alerts.materialInfoAlert( stackPane,borderPane,"Update Success","Profile is updated successfully" );
+                        UserSession.updateUserDetails( WelcomeController.user, oldName );
+                        alerts.materialInfoAlert( stackPane, borderPane, "Update Success", "Profile is updated successfully" );
                     } catch (IOException | SQLException ex) {
                         ex.printStackTrace();
                     }
@@ -176,7 +177,7 @@ public class ProfileViewController implements Initializable {
         if (file != null) {
             UserSession.updateDevicePicture( file.getPath() );
             Image image = new Image( file.toURI().toString() );
-            circluarImageView.setFill( new ImagePattern( image ) );
+            circularImageView.setFill( new ImagePattern( image ) );
             alerts.materialInfoAlert( stackPane, borderPane, "Device Image Uploaded", "Device Image is uploaded successfully" );
         } else {
             alerts.materialInfoAlert( stackPane, borderPane, "Invalid Image", "The image selected is not valid" );

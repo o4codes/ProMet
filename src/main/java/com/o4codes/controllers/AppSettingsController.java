@@ -6,10 +6,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -80,8 +82,11 @@ public class AppSettingsController implements Initializable {
     }
 
     @FXML
-    void EditProfileEvent(ActionEvent event) {
-
+    private void EditProfileEvent(ActionEvent event) throws IOException {
+        BoxBlur blur = new BoxBlur( 3, 3, 3 );
+        stackPane.getParent().getParent().setEffect( blur );
+        MainApp.showProfileUpdateView().showAndWait();
+        stackPane.getParent().getParent().setEffect( null );
     }
 
     @FXML

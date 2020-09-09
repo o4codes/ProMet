@@ -56,6 +56,14 @@
     -fx-background-color: #ADC3F7;
 }
 
+.secondaryButton{
+    -fx-text-fill: #2f2f2f;
+    -fx-font-Size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 7px;
+    -fx-border-color: #ADC3F7;
+}
+
 .casualPane{
     -fx-background-radius: 10px;
     -fx-background-color: white;
@@ -63,11 +71,11 @@
 
 .main-button{
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
-    -fx-background-color: rgba(63,76,119,1);
+    -fx-background-color: #2F4475;
     -fx-text-fill: white;
     -fx-font-Size: 14px;
     -fx-font-weight: bold;
-    -fx-background-radius: 10 0 10 0;
+    -fx-background-radius: 5;
 }
 
 .closeButton {

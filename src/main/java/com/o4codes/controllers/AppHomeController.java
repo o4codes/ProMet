@@ -219,7 +219,7 @@ public class AppHomeController implements Initializable {
 
     @FXML
     private void showSettings(ActionEvent event) throws IOException {
-        createPage( "/fxml/appSettingsView.fxml" );
+        createPage( "/fxml/appSettings.fxml" );
     }
 
     @FXML

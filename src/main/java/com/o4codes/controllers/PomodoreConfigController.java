@@ -20,7 +20,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class AppConfigController implements Initializable {
+public class PomodoreConfigController implements Initializable {
     @FXML
     private JFXButton maxProjects1;
 

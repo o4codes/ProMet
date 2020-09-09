@@ -86,13 +86,13 @@ public class MainApp extends Application {
     }
 
     public static Stage showProfileUpdateView() throws IOException {
-        String fxmlFile = "/fxml/profileView.fxml";
+        String fxmlFile = "/fxml/profileConfig.fxml";
         log.debug( "Loading FXML for main view from: {}",fxmlFile );
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation( MainApp.class.getResource( fxmlFile ) );
         AnchorPane pane = loader.load();
 
-        log.info( "Showing Welcome scene" );
+        log.info( "User Profile Configurations" );
         Scene scene = new Scene( pane );
         Stage stage = new Stage();
         stage.initModality( Modality.APPLICATION_MODAL );
