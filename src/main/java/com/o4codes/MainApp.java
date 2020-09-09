@@ -53,7 +53,7 @@ public class MainApp extends Application {
         loader.setLocation( MainApp.class.getResource( fxmlFile ) );
         Parent rootNode = loader.load();
 
-        log.debug( "Showing Welcome scene" );
+        log.info( "Showing Welcome scene" );
         Scene scene = new Scene( rootNode );
         stage.initStyle( StageStyle.UNDECORATED );
         stage.setScene( scene );
@@ -64,15 +64,14 @@ public class MainApp extends Application {
     }
 
     public static Stage showMainAppView() throws IOException {
-        log.info( "Starting Hello JavaFX and Maven demonstration application" );
         String fxmlFile = "/fxml/appHome.fxml";
-        log.debug( "Loading FXML for main view from: {}", fxmlFile );
+        log.debug( "Loading FXML for main view from: {}",fxmlFile );
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation( MainApp.class.getResource( fxmlFile ) );
         Parent rootNode = loader.load();
         AppHomeController controller = loader.getController();
 
-        log.debug( "Showing Welcome scene" );
+        log.info( "Showing Welcome scene" );
         Scene scene = new Scene( rootNode );
 
         Stage myStage = new Stage();
@@ -88,11 +87,12 @@ public class MainApp extends Application {
 
     public static Stage showProfileUpdateView() throws IOException {
         String fxmlFile = "/fxml/profileView.fxml";
-        log.debug( "Loading FXML for main view from: {}", fxmlFile );
+        log.debug( "Loading FXML for main view from: {}",fxmlFile );
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation( MainApp.class.getResource( fxmlFile ) );
         AnchorPane pane = loader.load();
-        log.debug( "Showing Welcome scene" );
+
+        log.info( "Showing Welcome scene" );
         Scene scene = new Scene( pane );
         Stage stage = new Stage();
         stage.initModality( Modality.APPLICATION_MODAL );
