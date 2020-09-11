@@ -1,0 +1,49 @@
+.background{
+  -fx-background-color:  linear-gradient(#36D1DC,rgba(63,76,119,1));
+  -fx-background-color: white;
+}
+
+
+.pane-background{
+    -fx-background-color: #fafafa;
+}
+
+.cards{
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+}
+.nav_icons{
+    -fx-Fill:  #2F4475;
+}
+
+.nav_buttons{
+    -fx-font-size: 11px;
+    -fx-font-weight: Bold;
+    -fx-text-fill: Black;
+}
+
+.nav_buttons: hover{
+    -fx-background-color: #e0e0e0;
+}
+
+.pane-circle{
+    -fx-font-weight: Bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+
+}
+
+.module-title {
+    -fx-text-fill: #4d4d4d;
+
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+
+.closeButton:hover {
+    -fx-background-color: red;
+}
+
+.title-bar-btn:hover{
+    -fx-background-color: #e0e0e0;
+}

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="700.0" prefWidth="1100.0" stylesheets="@../styles/appHome.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.o4codes.controllers.AppHomeController">
+   <children>
+      <StackPane fx:id="stackPane" layoutX="241.0" layoutY="232.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane fx:id="borderPane" prefHeight="200.0" prefWidth="200.0" styleClass="background">
+               <left>
+                  <VBox alignment="TOP_CENTER" prefHeight="650.0" prefWidth="79.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="416.0" prefWidth="94.0" spacing="20.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <JFXButton fx:id="dashboardBtn" contentDisplay="TOP" onAction="#showDashboard" prefHeight="60.0" prefWidth="79.0" styleClass="nav_buttons" text="Dashboard" textFill="WHITE">
+                                 <graphic>
+                                    <MaterialDesignIconView glyphName="VIEW_DASHBOARD" size="20" styleClass="nav_icons" />
+                                 </graphic>
+                                 <font>
+                                    <Font name="System Bold" size="10.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="projectsBtn" contentDisplay="TOP" layoutX="11.0" layoutY="196.0" onAction="#showProjects" prefHeight="60.0" prefWidth="79.0" styleClass="nav_buttons" text="Projects">
+                                 <graphic>
+                                    <MaterialDesignIconView glyphName="CLIPBOARD_TEXT" size="20" styleClass="nav_icons" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="timelineBtn" contentDisplay="TOP" layoutX="11.0" layoutY="218.0" onAction="#showTimeline" prefHeight="60.0" prefWidth="79.0" styleClass="nav_buttons" text="Timeline">
+                                 <graphic>
+                                    <MaterialDesignIconView glyphName="CHECKBOX_MARKED_CIRCLE_OUTLINE" size="20" styleClass="nav_icons" />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="settingsBtn" contentDisplay="TOP" layoutX="11.0" layoutY="241.0" onAction="#showSettings" prefHeight="60.0" prefWidth="79.0" styleClass="nav_buttons" text="Settings">
+                                 <graphic>
+                                    <MaterialDesignIconView glyphName="SETTINGS" size="20" styleClass="nav_icons" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                        </VBox>
+                        <VBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="113.0" prefHeight="117.0" prefWidth="53.0">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <children>
+                              <JFXButton fx:id="signOutBtn" contentDisplay="TOP" onAction="#signOutEvent" prefHeight="60.0" prefWidth="79.0" styleClass="nav_buttons" text="Sign Out">
+                                 <graphic>
+                                    <MaterialDesignIconView glyphName="LOGOUT" size="20" styleClass="nav_icons" />
+                                 </graphic>
+                                 <VBox.margin>
+                                    <Insets bottom="30.0" />
+                                 </VBox.margin>
+                              </JFXButton>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </left>
+               <center>
+                  <VBox styleClass="pane-background" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox fillHeight="false" prefHeight="31.0" prefWidth="981.0">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                           </VBox.margin>
+                           <children>
+                              <HBox fillHeight="false" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label fx:id="moduleTitleLbl" styleClass="module-title" text="Module Title">
+                                       <HBox.margin>
+                                          <Insets top="10.0" />
+                                       </HBox.margin></Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="43.0" prefWidth="493.0">
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                                 <children>
+                                    <VBox prefHeight="43.0" prefWidth="501.0">
+                                       <children>
+                                          <Label fx:id="profileNameLbl" alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="468.0" text="Profile Name">
+                                             <padding>
+                                                <Insets right="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label fx:id="deviceNameLbl" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="22.0" prefWidth="449.0" text="Device Name">
+                                             <padding>
+                                                <Insets right="5.0" />
+                                             </padding>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <Rectangle fx:id="profileImage" arcHeight="10.0" arcWidth="10.0" fill="#618df5" height="43.0" stroke="#618df5" strokeType="INSIDE" width="42.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <AnchorPane fx:id="contentPane" prefHeight="650.0" prefWidth="995.0" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" />
+                           </VBox.margin>
+                        </AnchorPane>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="1021.0">
+                           <children>
+                              <Label fx:id="dateTimeLbl" text="5:04 PM 23rd September,2020" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="20.0" right="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </center>
+               <top>
+                  <HBox fx:id="titleBar" alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="1100.0" style="-fx-background-color: #2F4475;" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
+                           </padding>
+                           <children>
+                              <Label text="Project Management" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="140.0" spacing="5.0">
+                           <children>
+                              <JFXButton fx:id="minimizeBtn" contentDisplay="GRAPHIC_ONLY" layoutX="85.0" layoutY="17.0" styleClass="title-bar-btn">
+                                 <graphic>
+                                    <MaterialDesignIconView fill="WHITE" glyphName="MINUS" rotate="180.0" size="15" />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="maximizeBtn" contentDisplay="GRAPHIC_ONLY" styleClass="title-bar-btn">
+                                 <graphic>
+                                    <MaterialDesignIconView fill="#2f4475" glyphName="CHECKBOX_BLANK" size="12" stroke="WHITE" />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="appCloseBtn" contentDisplay="GRAPHIC_ONLY" onAction="#CloseAppEvent" prefHeight="26.0" prefWidth="15.0" ripplerFill="RED" styleClass="closeButton" text="x">
+                                 <graphic>
+                                    <MaterialDesignIconView fill="WHITE" glyphName="WINDOW_CLOSE" size="15" stroke="WHITE" strokeWidth="0.2" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </HBox>
+               </top>
+            </BorderPane>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>

@@ -50,7 +50,6 @@ public class AppHomeController implements Initializable {
     @FXML
     private JFXButton settingsBtn;
 
-
     @FXML
     private JFXButton signOutBtn;
 
@@ -93,7 +92,6 @@ public class AppHomeController implements Initializable {
     private double lastX = 0.0d, lastY = 0.0d, lastWidth = 0.0d, lastHeight = 0.0d;
 
     private double xOffset = 0, yOffset = 0;
-
 
     private Alerts alerts = new Alerts();
 
@@ -164,41 +162,6 @@ public class AppHomeController implements Initializable {
 
         }
 
-    private void setLoggedInUser(){
-        Platform.runLater( () -> {
-            try {
-                WelcomeController.user = UserSession.getMainUser();
-                deviceNameLbl.setText( WelcomeController.user.getDeviceName() );
-                profileNameLbl.setText( WelcomeController.user.getName() );
-                setUserImage();
-            } catch (SQLException | IOException e) {
-                e.printStackTrace();
-            }
-        } );
-    }
-
-    private void setUserImage(){
-        try {
-            if (UserSession.isTableNotEmpty()) {
-                WelcomeController.user = UserSession.getMainUser();
-                UserSession.readDevicePicture( WelcomeController.user );
-
-                if (WelcomeController.user.getUserImage() == null) {
-                    Image image = new Image( MainApp.class.getResource( "/images/robot.jpg" ).toString() );
-                    profileImage.setFill( new ImagePattern( image ) );
-                } else {
-                    profileImage.setFill( new ImagePattern( WelcomeController.user.getUserImage() ) );
-                }
-            } else {
-                Image image = new Image( MainApp.class.getResource( "/images/robot.jpg" ).toString() );
-                profileImage.setFill( new ImagePattern( image ) );
-            }
-
-        } catch (SQLException | IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @FXML
     private void showDashboard(ActionEvent event) {
 
@@ -206,15 +169,15 @@ public class AppHomeController implements Initializable {
 
     @FXML
     private void showEditProfile(ActionEvent event) throws IOException {
-        BoxBlur blur = new BoxBlur( 3, 3, 3 );
+        BoxBlur blur = new BoxBlur( 5, 5, 5 );
         borderPane.setEffect( blur );
         MainApp.showProfileUpdateView().showAndWait();
         borderPane.setEffect( null );
     }
 
     @FXML
-    private void showProjects(ActionEvent event) {
-
+    private void showProjects(ActionEvent event) throws IOException {
+        createPage( "/fxml/projectDashboard.fxml" );
     }
 
     @FXML
@@ -299,6 +262,41 @@ public class AppHomeController implements Initializable {
         AnchorPane.setBottomAnchor( home, 0.0 );
         AnchorPane.setLeftAnchor( home, 0.0 );
         AnchorPane.setRightAnchor( home, 0.0 );
+    }
+
+    private void setLoggedInUser(){
+        Platform.runLater( () -> {
+            try {
+                WelcomeController.user = UserSession.getMainUser();
+                deviceNameLbl.setText( WelcomeController.user.getDeviceName() );
+                profileNameLbl.setText( WelcomeController.user.getName() );
+                setUserImage();
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
+        } );
+    }
+
+    private void setUserImage(){
+        try {
+            if (UserSession.isTableNotEmpty()) {
+                WelcomeController.user = UserSession.getMainUser();
+                UserSession.readDevicePicture( WelcomeController.user );
+
+                if (WelcomeController.user.getUserImage() == null) {
+                    Image image = new Image( MainApp.class.getResource( "/images/robot.jpg" ).toString() );
+                    profileImage.setFill( new ImagePattern( image ) );
+                } else {
+                    profileImage.setFill( new ImagePattern( WelcomeController.user.getUserImage() ) );
+                }
+            } else {
+                Image image = new Image( MainApp.class.getResource( "/images/robot.jpg" ).toString() );
+                profileImage.setFill( new ImagePattern( image ) );
+            }
+
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

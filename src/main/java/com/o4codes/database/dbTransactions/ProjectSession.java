@@ -113,7 +113,7 @@ public class ProjectSession {
     }
 
     // select all projects from projects Table
-    public static ObservableList getProjects() throws IOException, SQLException {
+    public static ObservableList<Project> getProjects() throws IOException, SQLException, NullPointerException {
         ObservableList<Project> projects = FXCollections.observableArrayList();
         Connection connection = DbConfig.Connector();
         String query = "SELECT * FROM Projects ORDER BY BeginDate";
@@ -127,7 +127,7 @@ public class ProjectSession {
                     rst.getString( "Description" ),
                     LocalDate.parse( rst.getString( "BeginDate" ) ),
                     LocalDate.parse( rst.getString( "DueDate" ) ),
-                    LocalDate.parse( rst.getString( "CompletionDate" ) ) ) );
+                    rst.getString( "CompletionDate" ) == null ? null : LocalDate.parse( rst.getString( "CompletionDate" )) ));
         }
         connection.close();
         return projects;

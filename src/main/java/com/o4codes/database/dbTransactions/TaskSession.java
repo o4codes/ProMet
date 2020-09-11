@@ -212,6 +212,21 @@ public class TaskSession {
         return taskNo;
     }
 
+    public static int finishedTasksCountInProject(String projectId) throws IOException, SQLException {
+        Connection con = DbConfig.Connector();
+        int taskNo = 0;
+        String query = "SELECT COUNT(*) FROM Tasks WHERE ProjectId ='"+projectId+"' AND CompletionDate = ? ";
+        assert con != null;
+        PreparedStatement preparedStatement = con.prepareStatement( query );
+        preparedStatement.setString( 1, null );
+        ResultSet rst = preparedStatement.executeQuery();
+        while (rst.next()) {
+            taskNo = rst.getInt( 1 );
+        }
+        con.close();
+
+        return taskNo;
+    }
     // get count of all tasks in a  project in projects Table
     public static int allTasksCount() throws IOException, SQLException {
         Connection con = DbConfig.Connector();

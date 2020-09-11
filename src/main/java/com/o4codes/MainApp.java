@@ -138,6 +138,23 @@ public class MainApp extends Application {
         return stage;
     }
 
+    public static Stage showProjectConfigView() throws IOException {
+        String fxmlFile = "/fxml/projectConfig.fxml";
+        log.debug( "Loading FXML for main view from: {}",fxmlFile );
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation( MainApp.class.getResource( fxmlFile ) );
+        AnchorPane pane = loader.load();
+
+        log.info( "Project Configuration" );
+        Scene scene = new Scene( pane );
+        Stage stage = new Stage();
+        stage.initModality( Modality.APPLICATION_MODAL );
+        stage.initStyle( StageStyle.UNDECORATED );
+        stage.setScene( scene );
+
+        return stage;
+    }
+
     public static void main(String[] args) throws Exception {
         launch( args );
 

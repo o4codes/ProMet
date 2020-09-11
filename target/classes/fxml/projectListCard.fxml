@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="961.0" spacing="5.0" styleClass="list-item-border" stylesheets="@../styles/modules.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.o4codes.controllers.ProjectListCardController">
+   <children>
+      <AnchorPane prefHeight="57.0" prefWidth="279.0" HBox.hgrow="ALWAYS">
+         <children>
+            <Label fx:id="projectListName" styleClass="first-list-item" text="NNPX News Website" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="11.0" layoutY="11.0" prefHeight="57.0" prefWidth="292.0" HBox.hgrow="ALWAYS">
+         <children>
+            <Label fx:id="projectListDescription" alignment="CENTER" text="The making of diferent of the version sof supuerman to them people of mamincure to see the queen to the read " wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="170.0" layoutY="11.0" prefHeight="57.0" prefWidth="152.0" HBox.hgrow="ALWAYS">
+         <children>
+            <Label fx:id="projectListStartDate" alignment="CENTER" text="1 February, 2020" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="329.0" layoutY="11.0" prefHeight="57.0" prefWidth="159.0" HBox.hgrow="ALWAYS">
+         <children>
+            <Label fx:id="projectListTaskNumber" alignment="CENTER" text="12/20 Tasks" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="488.0" layoutY="11.0" prefHeight="57.0" prefWidth="159.0" HBox.hgrow="ALWAYS">
+         <children>
+            <Label fx:id="projectListEndDate" alignment="CENTER" text="3rd February 2020" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="647.0" layoutY="11.0" prefHeight="57.0" prefWidth="159.0" HBox.hgrow="ALWAYS">
+         <children>
+            <Label fx:id="projectListStatus" alignment="CENTER_RIGHT" text="Ongoing" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</HBox>

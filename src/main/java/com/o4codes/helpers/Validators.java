@@ -5,6 +5,7 @@
  */
 package com.o4codes.helpers;
 
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,4 +32,10 @@ public class Validators {
        return regMatcher.matches();
         
     }
+
+    public int wordCount(String sentence){
+        StringTokenizer tokens = new StringTokenizer( sentence );
+        return tokens.countTokens();
+    }
+
 }
