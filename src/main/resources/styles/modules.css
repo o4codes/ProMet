@@ -130,3 +130,8 @@
 .fields:focused{
     -fx-border-color: #bdbdbd;
 }
+
+.progressSpinner .arc{
+    -fx-stroke:  #19982D;
+    -fx-stroke-width: 10;
+}

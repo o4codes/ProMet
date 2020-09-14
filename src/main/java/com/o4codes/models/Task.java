@@ -4,16 +4,17 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Task {
-    private String taskId, projectId, title;
+    private String taskId, projectId, title, description;
     private LocalDate beginDate, deadlineDate, completionDate;
     private LocalTime beginTime, deadlineTime, completionTime;
     private int duration;
     private boolean mileStone;
 
-    public Task(String taskId, String projectId, String title, int duration, LocalDate beginDate, LocalTime beginTime, LocalDate deadlineDate, LocalTime deadlineTime, LocalDate completionDate, LocalTime completionTime, boolean mileStone) {
+    public Task(String taskId, String projectId, String title, String description, int duration, LocalDate beginDate, LocalTime beginTime, LocalDate deadlineDate, LocalTime deadlineTime, LocalDate completionDate, LocalTime completionTime, boolean mileStone) {
         this.taskId = taskId;
         this.projectId = projectId;
         this.title = title;
+        this.description = description;
         this.duration = duration;
         this.beginDate = beginDate;
         this.beginTime = beginTime;
@@ -24,9 +25,10 @@ public class Task {
         this.mileStone = mileStone;
     }
 
-    public Task(String projectId, String title, int duration, LocalDate beginDate, LocalTime beginTime, LocalDate deadlineDate, LocalTime deadlineTime, boolean milestone ) {
+    public Task(String projectId, String title, String description, int duration, LocalDate beginDate, LocalTime beginTime, LocalDate deadlineDate, LocalTime deadlineTime, boolean milestone ) {
         this.projectId = projectId;
         this.title = title;
+        this.description = description;
         this.duration = duration;
         this.beginDate = beginDate;
         this.beginTime = beginTime;
@@ -57,6 +59,14 @@ public class Task {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public LocalDate getBeginDate() {

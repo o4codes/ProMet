@@ -1,11 +1,13 @@
 package com.o4codes.controllers;
 
+import com.o4codes.MainApp;
 import com.o4codes.database.dbTransactions.TaskSession;
 import com.o4codes.helpers.Utils;
 import com.o4codes.models.Project;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,7 +35,7 @@ public class ProjectListCardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        projectListName.setFont( Font.loadFont( MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Bold.ttf"), 12 ));
     }
 
     void fillCardDetailsUp(Project project) throws IOException, SQLException {

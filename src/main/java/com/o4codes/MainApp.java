@@ -2,8 +2,7 @@ package com.o4codes;
 
 import com.jfoenix.controls.JFXDecorator;
 import com.o4codes.controllers.AppHomeController;
-import com.o4codes.database.dbTransactions.AppConfigSession;
-import com.o4codes.database.dbTransactions.UserSession;
+import com.o4codes.database.dbTransactions.*;
 import com.o4codes.helpers.Alerts;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -43,6 +42,9 @@ public class MainApp extends Application {
         // create Db and Tables
         UserSession.createUserTable();
         AppConfigSession.createAppConfigTable();
+        ProjectSession.createProjectsTable();
+        TaskSession.createTaskTable();
+        TaskTimelineSession.createTaskTimeLineTable();
     }
 
     public static void showWelcomeView() throws IOException {

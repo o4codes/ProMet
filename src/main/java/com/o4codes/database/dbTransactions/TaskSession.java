@@ -25,7 +25,7 @@ public class TaskSession {
         }
         if (!table_names.contains( table_name.toLowerCase() )) {
             String query = "CREATE TABLE "+table_name+" (`TaskId` INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "`ProjectId` TEXT REFERENCES `Projects` (`Id`), `Title` TEXT, `Duration` INTEGER, "+
+                    "`ProjectId` TEXT REFERENCES `Projects` (`Id`), `Title` TEXT, `Description` TEXT, `Duration` INTEGER, "+
                     "`BeginDate` TEXT, `BeginTime` TEXT, `DeadlineDate` TEXT, `DeadlineTime` TEXT, " +
                     "`CompletionDate` TEXT, `CompletionTime` TEXT, `Milestone` BOOLEAN);";
             PreparedStatement pst = con.prepareStatement( query );
@@ -38,8 +38,8 @@ public class TaskSession {
     //insert task to task table
     public static boolean insertTask(Task task) throws IOException, SQLException {
         Connection con  = DbConfig.Connector();
-        String query = "INSERT INTO Tasks (ProjectId, Title, Duration, BeginDate, BeginTime, DeadlineDate, DeadlineTime, Milestone) " +
-                "VALUES (?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO Tasks (ProjectId, Title, Dedscription, Duration, BeginDate, BeginTime, DeadlineDate, DeadlineTime, Milestone) " +
+                "VALUES (?,?,?,?,?,?,?,?,?)";
         assert con != null;
         PreparedStatement pst = con.prepareStatement( query );
         pst.setString(1,task.getProjectId());
@@ -62,16 +62,17 @@ public class TaskSession {
     //update task in table
     public static void updateTask(Task task) throws IOException, SQLException {
         Connection con = DbConfig.Connector();
-        String query = "UPDATE Tasks SET Title = ?, Duration = ?, DeadlineDate = ?, DeadlineTime = ?, CompletionDate = ?, CompletionTime = ?, Milestone = ? WHERE TaskId ='"+task.getTaskId()+"' ";
+        String query = "UPDATE Tasks SET Title = ?, Description = ?, Duration = ?, DeadlineDate = ?, DeadlineTime = ?, CompletionDate = ?, CompletionTime = ?, Milestone = ? WHERE TaskId ='"+task.getTaskId()+"' ";
         assert con != null;
         PreparedStatement pst = con.prepareStatement( query );
         pst.setString( 1, task.getTitle() );
-        pst.setInt( 2,task.getDuration() );
-        pst.setString( 3,task.getDeadlineDate().toString() );
-        pst.setString( 4,task.getDeadlineTime().toString() );
-        pst.setString( 5,task.getCompletionDate() == null ? null : task.getCompletionDate().toString() );
-        pst.setString( 6,task.getCompletionTime() == null ? null : task.getCompletionTime().toString() );
-        pst.setBoolean( 7,task.isMileStone() );
+        pst.setString( 2, task.getDescription() );
+        pst.setInt( 3,task.getDuration() );
+        pst.setString( 4,task.getDeadlineDate().toString() );
+        pst.setString( 5,task.getDeadlineTime().toString() );
+        pst.setString( 6,task.getCompletionDate() == null ? null : task.getCompletionDate().toString() );
+        pst.setString( 7,task.getCompletionTime() == null ? null : task.getCompletionTime().toString() );
+        pst.setBoolean( 8,task.isMileStone() );
 
         pst.executeUpdate();
         con.close();
@@ -126,7 +127,7 @@ public class TaskSession {
         ResultSet rst = con.prepareStatement( query ).executeQuery();
         while (rst.next()){
             task = new Task( String.valueOf(rst.getInt( "TaskId" )),
-                    rst.getString( "ProjectId"), rst.getString( "Title" ),rst.getInt( "Duration" ),
+                    rst.getString( "ProjectId"), rst.getString( "Title" ),rst.getString( "Description" ),rst.getInt( "Duration" ),
                     LocalDate.parse( rst.getString( "BeginDate" )), LocalTime.parse( rst.getString( "BeginTime" ) ),
                     LocalDate.parse( rst.getString( "DeadlineDate" )),LocalTime.parse( rst.getString( "DeadlineTime" )),
                     (rst.getString( "CompletionDate" ) != null) ? LocalDate.parse( rst.getString( "CompletionDate" ) ):null,
@@ -146,7 +147,7 @@ public class TaskSession {
         ResultSet rst = con.prepareStatement( query ).executeQuery();
         while (rst.next()){
             task = new Task( String.valueOf(rst.getInt( "TaskId" )),
-                    rst.getString( "ProjectId"), rst.getString( "Title" ),rst.getInt(  "Duration"),
+                    rst.getString( "ProjectId"), rst.getString( "Title" ),rst.getString( "Description" ), rst.getInt(  "Duration"),
                     LocalDate.parse( rst.getString( "BeginDate" )), LocalTime.parse( rst.getString( "BeginTime" ) ),
                     LocalDate.parse( rst.getString( "DeadlineDate" )),LocalTime.parse( rst.getString( "DeadlineTime" )),
                     (rst.getString( "CompletionDate" ) != null) ? LocalDate.parse( rst.getString( "CompletionDate" ) ):null,
@@ -166,7 +167,7 @@ public class TaskSession {
         ResultSet rst = con.prepareStatement( query ).executeQuery();
         while (rst.next()){
             task = new Task( String.valueOf(rst.getInt( "TaskId" )),
-                    rst.getString( "ProjectId"), rst.getString( "Title" ), rst.getInt( "Duration" ),
+                    rst.getString( "ProjectId"), rst.getString( "Title" ),rst.getString( "Description" ), rst.getInt( "Duration" ),
                     LocalDate.parse( rst.getString( "BeginDate" )), LocalTime.parse( rst.getString( "BeginTime" ) ),
                     LocalDate.parse( rst.getString( "DeadlineDate" )),LocalTime.parse( rst.getString( "DeadlineTime" )),
                     (rst.getString( "CompletionDate" ) != null) ? LocalDate.parse( rst.getString( "CompletionDate" ) ):null,
@@ -186,7 +187,7 @@ public class TaskSession {
         ResultSet rst = con.prepareStatement( query ).executeQuery();
         while (rst.next()){
             tasks.add(new Task( String.valueOf(rst.getInt( "TaskId" )),
-                    rst.getString( "ProjectId"), rst.getString( "Title" ), rst.getInt( "Duration" ),
+                    rst.getString( "ProjectId"), rst.getString( "Title" ), rst.getString( "Description" ), rst.getInt( "Duration" ),
                     LocalDate.parse( rst.getString( "BeginDate" )), LocalTime.parse( rst.getString( "BeginTime" ) ),
                     LocalDate.parse( rst.getString( "DeadlineDate" )),LocalTime.parse( rst.getString( "DeadlineTime" )),
                     (rst.getString( "CompletionDate" ) != null) ? LocalDate.parse( rst.getString( "CompletionDate" ) ):null,
