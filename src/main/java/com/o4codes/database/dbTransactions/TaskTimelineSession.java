@@ -5,7 +5,6 @@ import com.o4codes.models.TaskTimeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import javax.xml.transform.Result;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
@@ -30,6 +29,9 @@ public class TaskTimelineSession {
                     "`ExecutionDate` TEXT, `ExecutionTime` TEXT);";
             PreparedStatement pst = con.prepareStatement( query );
             pst.executeUpdate();
+            System.out.println("Tasks Timeline Table is created");
+        } else {
+            System.out.println("Tasks Timeline Table already exists");
         }
         con.close();
     }

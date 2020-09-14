@@ -10,6 +10,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class TaskSession {
     //create task table
@@ -30,6 +31,9 @@ public class TaskSession {
                     "`CompletionDate` TEXT, `CompletionTime` TEXT, `Milestone` BOOLEAN);";
             PreparedStatement pst = con.prepareStatement( query );
             pst.executeUpdate();
+            System.out.println("Tasks Table created");
+        } else {
+            System.out.println("Tasks Table already exists");
         }
         con.close();
 
@@ -178,6 +182,26 @@ public class TaskSession {
         return task;
     }
 
+    //get a particular task
+    public static Task getLastTask(String projectId) throws IOException, SQLException {
+        Task task = null;
+        Connection con = DbConfig.Connector();
+        String query = "SELECT * FROM Tasks WHERE ProjectId = '" + projectId + "' ORDER BY TaskId DESC LIMIT 1 ";
+        assert con != null;
+        ResultSet rst = con.prepareStatement(query).executeQuery();
+        while (rst.next()) {
+            task = new Task(String.valueOf(rst.getInt("TaskId")),
+                    rst.getString("ProjectId"), rst.getString("Title"), rst.getString("Description"), rst.getInt("Duration"),
+                    LocalDate.parse(rst.getString("BeginDate")), LocalTime.parse(rst.getString("BeginTime")),
+                    LocalDate.parse(rst.getString("DeadlineDate")), LocalTime.parse(rst.getString("DeadlineTime")),
+                    (rst.getString("CompletionDate") != null) ? LocalDate.parse(rst.getString("CompletionDate")) : null,
+                    (rst.getString("CompletionTime") != null) ? LocalTime.parse(rst.getString("CompletionTime")) : null,
+                    rst.getBoolean("Milestone"));
+        }
+        con.close();
+        return task;
+    }
+
     //get all tasks
     public static ObservableList<Task> getAllTasks(int TaskId) throws IOException, SQLException {
         ObservableList<Task> tasks = FXCollections.observableArrayList();
@@ -197,6 +221,50 @@ public class TaskSession {
         con.close();
         return tasks;
     }
+
+    //get all tasks
+    public static ObservableList<Task> getAllTasks(String projectId) throws IOException, SQLException {
+        ObservableList<Task> tasks = FXCollections.observableArrayList();
+        Connection con = DbConfig.Connector();
+        String query = "SELECT * FROM Tasks WHERE TaskId ='" + projectId + "' ";
+        assert con != null;
+        ResultSet rst = con.prepareStatement(query).executeQuery();
+        while (rst.next()) {
+            tasks.add(new Task(String.valueOf(rst.getInt("TaskId")),
+                    rst.getString("ProjectId"), rst.getString("Title"), rst.getString("Description"), rst.getInt("Duration"),
+                    LocalDate.parse(rst.getString("BeginDate")), LocalTime.parse(rst.getString("BeginTime")),
+                    LocalDate.parse(rst.getString("DeadlineDate")), LocalTime.parse(rst.getString("DeadlineTime")),
+                    (rst.getString("CompletionDate") != null) ? LocalDate.parse(rst.getString("CompletionDate")) : null,
+                    (rst.getString("CompletionTime") != null) ? LocalTime.parse(rst.getString("CompletionTime")) : null,
+                    rst.getBoolean("Milestone")));
+        }
+        con.close();
+        return tasks;
+    }
+
+    //get all unfinished tasks in project
+    public static ObservableList<Task> getUnfinishedTasks(String projectId) throws IOException, SQLException {
+        ObservableList<Task> tasks = FXCollections.observableArrayList();
+        Connection con = DbConfig.Connector();
+        String query = "SELECT * FROM Tasks WHERE ProjectId ='" + projectId + "' AND CompletionDate = ? ";
+        assert con != null;
+        PreparedStatement pst = con.prepareStatement(query);
+        pst.setString(1, null);
+        ResultSet rst = pst.executeQuery();
+        while (rst.next()) {
+            tasks.add(new Task(String.valueOf(rst.getInt("TaskId")),
+                    rst.getString("ProjectId"), rst.getString("Title"), rst.getString("Description"), rst.getInt("Duration"),
+                    LocalDate.parse(rst.getString("BeginDate")), LocalTime.parse(rst.getString("BeginTime")),
+                    LocalDate.parse(rst.getString("DeadlineDate")), LocalTime.parse(rst.getString("DeadlineTime")),
+                    (rst.getString("CompletionDate") != null) ? LocalDate.parse(rst.getString("CompletionDate")) : null,
+                    (rst.getString("CompletionTime") != null) ? LocalTime.parse(rst.getString("CompletionTime")) : null,
+                    rst.getBoolean("Milestone")));
+        }
+        con.close();
+        tasks.sort(Comparator.comparing(Task::getDeadlineDate));
+        return tasks;
+    }
+
 
     // get count of all tasks in a  project in projects Table
     public static int tasksCountInProject(String projectId) throws IOException, SQLException {
@@ -228,6 +296,7 @@ public class TaskSession {
 
         return taskNo;
     }
+
     // get count of all tasks in a  project in projects Table
     public static int allTasksCount() throws IOException, SQLException {
         Connection con = DbConfig.Connector();
@@ -242,5 +311,6 @@ public class TaskSession {
 
         return taskNo;
     }
+
 
 }

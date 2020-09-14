@@ -29,6 +29,9 @@ public class ProjectSession {
                     "`DueDate` TEXT, `CompletionDate` TEXT);";
             PreparedStatement pst = con.prepareStatement( query );
             pst.executeUpdate();
+            System.out.println("Projects Table is created");
+        } else {
+            System.out.println("Projects Table already exists");
         }
         con.close();
     }

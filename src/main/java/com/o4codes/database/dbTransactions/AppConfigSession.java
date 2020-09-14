@@ -3,7 +3,6 @@ package com.o4codes.database.dbTransactions;
 import com.o4codes.database.DbConfig;
 import com.o4codes.helpers.Utils;
 import com.o4codes.models.AppConfiguration;
-import org.sqlite.JDBC;
 
 import java.io.IOException;
 import java.sql.*;
@@ -29,9 +28,11 @@ public class AppConfigSession {
             PreparedStatement pst = con.prepareStatement( query );
             pst.executeUpdate();
             con.close();
+            System.out.println("App configurations table is created");
 
             //insert default configurations on app install;
             insertDefaultAppConfigurations();
+
         }
         else {
             System.out.println( "App configurations table already exists" );

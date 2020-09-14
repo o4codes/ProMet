@@ -26,6 +26,7 @@ public class UserSession {
             String query = "CREATE TABLE " + table_name + " (`DeviceImage` BLOB, `Name` TEXT, `MobileNo` TEXT, `DeviceName` TEXT, `DevicePassword` TEXT);";
             PreparedStatement pst = con.prepareStatement( query );
             pst.executeUpdate();
+            System.out.println("Users Table is created");
         }
         else {
             System.out.println( "Users Table already exists" );

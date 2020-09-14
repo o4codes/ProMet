@@ -37,6 +37,9 @@ public class Task {
         this.mileStone = milestone;
     }
 
+    public Task() {
+    }
+
     public String getTaskId() {
         return taskId;
     }
@@ -132,4 +135,6 @@ public class Task {
     public void setDuration(int duration) {
         this.duration = duration;
     }
+
+
 }
