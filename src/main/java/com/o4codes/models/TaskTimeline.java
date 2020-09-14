@@ -4,12 +4,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class TaskTimeline {
-    private int taskId;
+    private int taskId, taskTimeSpent;
     private LocalDate executionDate;
     private LocalTime executionTime;
 
-    public TaskTimeline(int taskId, LocalDate executionDate, LocalTime executionTime) {
+    public TaskTimeline(int taskId, int taskTimeSpent, LocalDate executionDate, LocalTime executionTime) {
         this.taskId = taskId;
+        this.taskTimeSpent = taskTimeSpent;
         this.executionDate = executionDate;
         this.executionTime = executionTime;
     }
@@ -20,6 +21,14 @@ public class TaskTimeline {
 
     public void setTaskId(int taskId) {
         this.taskId = taskId;
+    }
+
+    public int getTaskTimeSpent() {
+        return taskTimeSpent;
+    }
+
+    public void setTaskTimeSpent(int taskTimeSpent) {
+        this.taskTimeSpent = taskTimeSpent;
     }
 
     public LocalDate getExecutionDate() {

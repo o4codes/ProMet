@@ -38,7 +38,7 @@ public class TaskSessionTest {
         TaskSession.updateTask( task );
         assertEquals( "Not Equal", TaskSession.getTaskById( Integer.parseInt( task.getTaskId() ) ).getCompletionDate(), task.getCompletionDate() );
         assertTrue( "Not deleted", TaskSession.deleteTask( Integer.parseInt( task.getTaskId() ) ) );
-        TaskTimeline taskTimeline = new TaskTimeline( Integer.parseInt( task.getTaskId() ), LocalDate.now(), LocalTime.now() );
+        TaskTimeline taskTimeline = new TaskTimeline( Integer.parseInt( task.getTaskId() ), 20, LocalDate.now(), LocalTime.now() );
         TaskTimelineSession.insertTaskTimeLine( taskTimeline );
         assertEquals( "Not equals", TaskTimelineSession.getTaskAllTimeLine().size(), 1 );
     }

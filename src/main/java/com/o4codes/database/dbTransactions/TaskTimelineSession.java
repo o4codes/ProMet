@@ -26,7 +26,7 @@ public class TaskTimelineSession {
             table_names.add( rst.getString( "TABLE_NAME" ).toLowerCase() );
         }
         if (!table_names.contains( table_name.toLowerCase() )) {
-            String query = "CREATE TABLE " + table_name + " (`TaskId` INTEGER REFERENCES `Tasks` (`TaskId`), `Title` TEXT, " +
+            String query = "CREATE TABLE " + table_name + " (`TaskId` INTEGER REFERENCES `Tasks` (`TaskId`), `Title` TEXT, `TimeConsumed` INTEGER " +
                     "`ExecutionDate` TEXT, `ExecutionTime` TEXT);";
             PreparedStatement pst = con.prepareStatement( query );
             pst.executeUpdate();
@@ -37,14 +37,31 @@ public class TaskTimelineSession {
     //insert into Task Timeline Table
     public static void insertTaskTimeLine(TaskTimeline taskTimeline) throws IOException, SQLException {
         Connection connection = DbConfig.Connector();
-        String query = "INSERT INTO TaskTimeLine (TaskId, ExecutionDate, ExecutionTime) VALUES (?,?,?)";
+        String query = "INSERT INTO TaskTimeLine (TaskId, TimeConsumed ExecutionDate, ExecutionTime) VALUES (?,?,?,?)";
         assert connection != null;
         PreparedStatement pst = connection.prepareStatement( query );
         pst.setInt( 1, taskTimeline.getTaskId() );
-        pst.setString( 2, taskTimeline.getExecutionDate().toString() );
-        pst.setString( 3, taskTimeline.getExecutionTime().toString() );
+        pst.setInt( 2,taskTimeline.getTaskTimeSpent() );
+        pst.setString( 3, taskTimeline.getExecutionDate().toString() );
+        pst.setString( 4, taskTimeline.getExecutionTime().toString() );
         pst.execute();
         connection.close();
+    }
+
+    //get all TaskTimeline
+    public static ObservableList<TaskTimeline> getTaskTimeLineByTaskId(String taskId) throws IOException, SQLException {
+        ObservableList<TaskTimeline> timelineList = FXCollections.observableArrayList();
+        Connection connection = DbConfig.Connector();
+        String query = "SELECT * FROM TaskTimeLine WHERE TaskId = '"+taskId+"' ";
+        assert connection != null;
+        ResultSet rst = connection.prepareStatement( query ).executeQuery();
+        while(rst.next()){
+            timelineList.add( new TaskTimeline( rst.getInt( "TaskId" ),
+                    rst.getInt( "TimeConsumed" ),
+                    rst.getString( "ExecutionDate" ) == null ? null : LocalDate.parse(rst.getString( "ExecutionDate" )),
+                    rst.getString( "ExecutionTime" ) == null ? null : LocalTime.parse(  rst.getString( "ExecutionTime" ))) );
+        }
+        return timelineList;
     }
 
     //get all TaskTimeline
@@ -56,7 +73,9 @@ public class TaskTimelineSession {
         ResultSet rst = connection.prepareStatement( query ).executeQuery();
         while(rst.next()){
             timelineList.add( new TaskTimeline( rst.getInt( "TaskId" ),
-                    LocalDate.parse(rst.getString( "ExecutionDate" )), LocalTime.parse(rst.getString( "ExecutionTime" )) ) );
+                    rst.getInt( "TimeConsumed" ),
+                    rst.getString( "ExecutionDate" ) == null ? null : LocalDate.parse(rst.getString( "ExecutionDate" )),
+                    rst.getString( "ExecutionTime" ) == null ? null : LocalTime.parse(  rst.getString( "ExecutionTime" ))) );
         }
         return timelineList;
     }
