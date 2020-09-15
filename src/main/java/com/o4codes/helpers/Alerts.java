@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.events.JFXDialogEvent;
-import com.sun.deploy.panel.NodeBorder;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -54,7 +53,7 @@ public class Alerts {
                 "    -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13px; -fx-Pref-Width: 103px;" );
         acceptBtn.setPrefSize( 103, 29 );
 
-        List<JFXButton> controls = Arrays.asList(cancelBtn, acceptBtn);
+        List<JFXButton> controls = Arrays.asList( cancelBtn, acceptBtn );
         controls.forEach( controlButton -> {
             controlButton.getStyleClass().add( "dialogButton" );
             controlButton.addEventHandler( ActionEvent.ACTION, (ActionEvent event) -> {
@@ -65,12 +64,12 @@ public class Alerts {
         } );
         Label headingLabel = new Label( Heading );
         headingLabel.setStyle( " -fx-font-weight: bold; -fx-font-size: 16px; " );
-        Label messageLabel = new Label(message);
-        messageLabel.setPrefSize( 500,156 );
+        Label messageLabel = new Label( message );
+        messageLabel.setPrefSize( 500, 156 );
         dialogLayout.setHeading( headingLabel );
         dialogLayout.setBody( messageLabel );
-        dialogLayout.setPrefSize( 600,156 );
-        dialog.setPrefSize( 600,156 );
+        dialogLayout.setPrefSize( 600, 156 );
+        dialog.setPrefSize( 600, 156 );
         dialogLayout.setActions( controls );
         dialog.show();
         dialog.setOnDialogClosed( (JFXDialogEvent event1) -> {
@@ -80,7 +79,7 @@ public class Alerts {
 
     }
 
-    public void materialInfoAlert(StackPane rootPane, Node nodeBlur, String Heading, String message){
+    public void materialInfoAlert(StackPane rootPane, Node nodeBlur, String Heading, String message) {
         BoxBlur blur = new BoxBlur( 3, 3, 3 );
         dialogLayout = new JFXDialogLayout();
         dialog = new JFXDialog( rootPane, dialogLayout, JFXDialog.DialogTransition.TOP );
@@ -105,12 +104,12 @@ public class Alerts {
 
         Label headingLabel = new Label( Heading );
         headingLabel.setStyle( " -fx-font-weight: bold; -fx-font-size: 16px; " );
-        Label messageLabel = new Label(message);
+        Label messageLabel = new Label( message );
         messageLabel.setPrefSize( 500, 156 );
         dialogLayout.setHeading( headingLabel );
         dialogLayout.setBody( messageLabel );
-        dialogLayout.setPrefSize( 600,156 );
-        dialog.setPrefSize( 600,156 );
+        dialogLayout.setPrefSize( 600, 156 );
+        dialog.setPrefSize( 600, 156 );
         dialogLayout.setActions( controls );
         dialog.show();
         dialog.setOnDialogClosed( (JFXDialogEvent event1) -> {

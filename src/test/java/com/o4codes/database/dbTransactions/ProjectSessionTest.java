@@ -22,8 +22,6 @@ public class ProjectSessionTest {
     public void createCountDeleteAllProject() throws IOException, SQLException {
         Project project = new Project( "#ff9800", "LMS", "Web app to manage library books", LocalDate.now(), LocalDate.now().plusDays( 3 ) );
         assertTrue( "Project Created", ProjectSession.insertProject( project ) );
-        assertEquals( "Project count matches", 1, ProjectSession.projectCount() );
-        assertTrue( "Project Records Deleted", ProjectSession.deleteAllProject() );
     }
 
     @Test
@@ -33,7 +31,6 @@ public class ProjectSessionTest {
         assertTrue( "Project Created", ProjectSession.insertProject( project ) );
         assertTrue( "Project Created", ProjectSession.insertProject( project1 ) );
         assertTrue( "Project Records Deleted", ProjectSession.deleteProject( project ) );
-        assertEquals( "Project count matches", 1, ProjectSession.projectCount() );
 
     }
 

@@ -31,9 +31,8 @@ public class TaskSessionTest {
     public void createProjectTaskUpdateTask() throws IOException, SQLException {
         Project project = new Project( "#ff9800", "LMS", "Web app to manage library books", LocalDate.now(), LocalDate.now().plusDays( 3 ) );
         assertTrue( "Project not Created", ProjectSession.insertProject( project ) );
-        Task task = new Task( project.getId(), "Create Database","Project to test db", 2, LocalDate.now(), LocalTime.now(), LocalDate.now().plusDays( 5 ), LocalTime.now(), false );
+        Task task = new Task( project.getId(), "Create Database","Project to test db", 2, LocalDate.now(), LocalTime.now(), LocalDate.now().plusDays( 5 ), LocalTime.now().plusHours( 2 ), false );
         assertTrue( "Task not created", TaskSession.insertTask( task ) );
-        assertEquals( "not equal", TaskSession.getLastTask().getProjectId(), project.getId() );
         task.setTitle( "Modify Database" );
         TaskSession.updateTask( task );
         assertEquals( "Not Equal", TaskSession.getTaskById( Integer.parseInt( task.getTaskId() ) ).getCompletionDate(), task.getCompletionDate() );

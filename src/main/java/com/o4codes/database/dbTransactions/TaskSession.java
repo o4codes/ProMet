@@ -42,18 +42,19 @@ public class TaskSession {
     //insert task to task table
     public static boolean insertTask(Task task) throws IOException, SQLException {
         Connection con  = DbConfig.Connector();
-        String query = "INSERT INTO Tasks (ProjectId, Title, Dedscription, Duration, BeginDate, BeginTime, DeadlineDate, DeadlineTime, Milestone) " +
+        String query = "INSERT INTO Tasks (ProjectId, Title, Description, Duration, BeginDate, BeginTime, DeadlineDate, DeadlineTime, Milestone) " +
                 "VALUES (?,?,?,?,?,?,?,?,?)";
         assert con != null;
         PreparedStatement pst = con.prepareStatement( query );
         pst.setString(1,task.getProjectId());
         pst.setString( 2,task.getTitle() );
-        pst.setInt( 3, task.getDuration() );
-        pst.setString( 4, task.getBeginDate().toString() );
-        pst.setString( 5,task.getBeginTime().toString() );
-        pst.setString( 6,task.getDeadlineDate().toString() );
-        pst.setString( 7,task.getDeadlineTime().toString() );
-        pst.setBoolean( 8,task.isMileStone() );
+        pst.setString( 3, task.getDescription() );
+        pst.setInt( 4, task.getDuration() );
+        pst.setString( 5, task.getBeginDate().toString() );
+        pst.setString( 6,task.getBeginTime().toString() );
+        pst.setString( 7,task.getDeadlineDate().toString() );
+        pst.setString( 8,task.getDeadlineTime().toString() );
+        pst.setBoolean( 9,task.isMileStone() );
 
         pst.execute();
         con.close();

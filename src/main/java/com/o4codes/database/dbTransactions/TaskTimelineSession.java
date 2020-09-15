@@ -25,8 +25,7 @@ public class TaskTimelineSession {
             table_names.add( rst.getString( "TABLE_NAME" ).toLowerCase() );
         }
         if (!table_names.contains( table_name.toLowerCase() )) {
-            String query = "CREATE TABLE " + table_name + " (`TaskId` INTEGER REFERENCES `Tasks` (`TaskId`), `Title` TEXT, `TimeConsumed` INTEGER " +
-                    "`ExecutionDate` TEXT, `ExecutionTime` TEXT);";
+            String query = "CREATE TABLE " + table_name + " (`TaskId` INTEGER REFERENCES `Tasks` (`TaskId`), `Title` TEXT, `TimeConsumed` INTEGER,`ExecutionDate` TEXT, `ExecutionTime` TEXT);";
             PreparedStatement pst = con.prepareStatement( query );
             pst.executeUpdate();
             System.out.println("Tasks Timeline Table is created");
@@ -39,7 +38,7 @@ public class TaskTimelineSession {
     //insert into Task Timeline Table
     public static void insertTaskTimeLine(TaskTimeline taskTimeline) throws IOException, SQLException {
         Connection connection = DbConfig.Connector();
-        String query = "INSERT INTO TaskTimeLine (TaskId, TimeConsumed ExecutionDate, ExecutionTime) VALUES (?,?,?,?)";
+        String query = "INSERT INTO TaskTimeLine (TaskId, TimeConsumed, ExecutionDate, ExecutionTime) VALUES (?,?,?,?)";
         assert connection != null;
         PreparedStatement pst = connection.prepareStatement( query );
         pst.setInt( 1, taskTimeline.getTaskId() );
