@@ -84,7 +84,7 @@ public class ProjectConfigController implements Initializable {
                 alerts.Notification( "WORD_LIMIT EXCEED", "Project description has exceeded word limit" );
             } else {
                 Project project = new Project( colorTheme, projectTitle, projectDescription, LocalDate.now(), dueDate );
-                if (ProjectSession.insertProject( project )) {
+                if (ProjectSession.insertProject(project).getId().equals(project.getId())) {
                    alerts.materialInfoAlert( stackPane,vBox,"Project Created","New Project is successfully created" );
                 }
                 else {

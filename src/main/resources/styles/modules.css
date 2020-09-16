@@ -90,7 +90,7 @@
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
     -fx-background-color: #2F4475;
     -fx-text-fill: white;
-    -fx-font-Size: 14px;
+    -fx-font-Size: 13px;
     -fx-font-weight: bold;
     -fx-background-radius: 5;
 }

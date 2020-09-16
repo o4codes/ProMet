@@ -37,7 +37,7 @@ public class ProjectSession {
     }
 
     //insert project into projects Table
-    public static boolean insertProject(Project project) throws SQLException, IOException {
+    public static Project insertProject(Project project) throws SQLException, IOException {
         Connection con = DbConfig.Connector();
         project.setId( String.valueOf( LocalDateTime.now().hashCode() ) );
         String query = "INSERT INTO Projects (Id,ColorTheme, Title, Description, BeginDate, DueDate, CompletionDate) " +
@@ -54,7 +54,7 @@ public class ProjectSession {
         pst.execute();
         con.close();
 
-        return getProjectById( project.getId() ).getId().equals( project.getId() );
+        return project;
     }
 
     //delete a project from projects Table
@@ -110,6 +110,27 @@ public class ProjectSession {
                     LocalDate.parse( rst.getString( "BeginDate" ) ),
                     LocalDate.parse( rst.getString( "DueDate" ) ),
                     rst.getString( "CompletionDate") == null ? null : LocalDate.parse( rst.getString( "CompletionDate") ) );
+        }
+        connection.close();
+        return project;
+    }
+
+    //select a particular project from projects Table
+    public static Project getProjectByTitle(String Title) throws IOException, SQLException {
+        Connection connection = DbConfig.Connector();
+        Project project = null;
+        String query = "SELECT * FROM Projects WHERE Title='" + Title + "' ";
+        assert connection != null;
+        ResultSet rst = connection.prepareStatement(query).executeQuery();
+        while (rst.next()) {
+            project = new Project(
+                    rst.getString("Id"),
+                    rst.getString("ColorTheme"),
+                    rst.getString("Title"),
+                    rst.getString("Description"),
+                    LocalDate.parse(rst.getString("BeginDate")),
+                    LocalDate.parse(rst.getString("DueDate")),
+                    rst.getString("CompletionDate") == null ? null : LocalDate.parse(rst.getString("CompletionDate")));
         }
         connection.close();
         return project;
