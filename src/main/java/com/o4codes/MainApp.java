@@ -1,9 +1,7 @@
 package com.o4codes;
 
-import com.jfoenix.controls.JFXDecorator;
 import com.o4codes.controllers.AppHomeController;
 import com.o4codes.database.dbTransactions.*;
-import com.o4codes.helpers.Alerts;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +28,7 @@ public class MainApp extends Application {
         MainApp.stage = stage;
         Platform.runLater( () -> {
             try {
-               showWelcomeView();
+                showWelcomeView();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -69,7 +67,7 @@ public class MainApp extends Application {
 
     public static Stage showMainAppView() throws IOException {
         String fxmlFile = "/fxml/appHome.fxml";
-        log.debug( "Loading FXML for main view from: {}",fxmlFile );
+        log.debug( "Loading FXML for main view from: {}", fxmlFile );
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation( MainApp.class.getResource( fxmlFile ) );
         Parent rootNode = loader.load();
@@ -91,7 +89,7 @@ public class MainApp extends Application {
 
     public static Stage showProfileUpdateView() throws IOException {
         String fxmlFile = "/fxml/profileConfig.fxml";
-        log.debug( "Loading FXML for main view from: {}",fxmlFile );
+        log.debug( "Loading FXML for main view from: {}", fxmlFile );
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation( MainApp.class.getResource( fxmlFile ) );
         AnchorPane pane = loader.load();
@@ -108,7 +106,7 @@ public class MainApp extends Application {
 
     public static Stage showPomodoreConfigView() throws IOException {
         String fxmlFile = "/fxml/pomodoreConfig.fxml";
-        log.debug( "Loading FXML for main view from: {}",fxmlFile );
+        log.debug( "Loading FXML for main view from: {}", fxmlFile );
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation( MainApp.class.getResource( fxmlFile ) );
         AnchorPane pane = loader.load();
@@ -125,7 +123,7 @@ public class MainApp extends Application {
 
     public static Stage showPasscodeConfigView() throws IOException {
         String fxmlFile = "/fxml/pascodeConfig.fxml";
-        log.debug( "Loading FXML for main view from: {}",fxmlFile );
+        log.debug( "Loading FXML for main view from: {}", fxmlFile );
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation( MainApp.class.getResource( fxmlFile ) );
         AnchorPane pane = loader.load();
@@ -142,7 +140,7 @@ public class MainApp extends Application {
 
     public static Stage showProjectConfigView() throws IOException {
         String fxmlFile = "/fxml/projectConfig.fxml";
-        log.debug( "Loading FXML for main view from: {}",fxmlFile );
+        log.debug( "Loading FXML for main view from: {}", fxmlFile );
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation( MainApp.class.getResource( fxmlFile ) );
         AnchorPane pane = loader.load();

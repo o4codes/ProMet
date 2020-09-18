@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="485.0" prefWidth="390.0" stylesheets="@../styles/modules.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.o4codes.controllers.TaskConfigController">
+   <styleClass>
+      <String fx:value="background" />
+      <String fx:value="border" />
+   </styleClass>
+   <children>
+      <StackPane layoutX="95.0" layoutY="184.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="358.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label fx:id="formTitleLbl" text="Create Task" />
+                           </children>
+                        </HBox>
+                        <JFXButton fx:id="closeBtn" contentDisplay="GRAPHIC_ONLY" ripplerFill="#ff3c00">
+                           <graphic>
+                              <MaterialDesignIconView glyphName="WINDOW_CLOSE" size="17" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+                  <Label styleClass="fields-label" text="Task Title">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="taskTitleField" promptText="Enter the Task Title" styleClass="fields" />
+                  <Label layoutX="25.0" layoutY="81.0" styleClass="fields-label" text="Task Description">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <JFXTextArea fx:id="taskDescriptionField" focusColor="#eeeeee" prefHeight="63.0" prefWidth="358.0" promptText="Describe the task with a max of 20 words" styleClass="fields" unFocusColor="#eeeeee">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </JFXTextArea>
+                  <Label layoutX="25.0" layoutY="139.0" styleClass="fields-label" text="Time planned for task">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Spinner fx:id="durationHourField" prefHeight="25.0" prefWidth="135.0">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Spinner>
+                        <AnchorPane>
+                           <children>
+                              <Label text="Hour" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                        <Spinner fx:id="durationMinField" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="135.0">
+                           <HBox.margin>
+                              <Insets left="30.0" right="5.0" />
+                           </HBox.margin>
+                        </Spinner>
+                        <AnchorPane layoutX="159.0" layoutY="10.0">
+                           <children>
+                              <Label text="Min" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="2.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="56.0" prefWidth="358.0" spacing="15.0">
+                     <children>
+                        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="fields-label" text="Deadline Date" />
+                              <AnchorPane>
+                                 <children>
+                                    <JFXDatePicker fx:id="deadlineDateField" defaultColor="#2f4475" promptText="Set Task Deadline Date" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="10.0" layoutY="10.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="fields-label" text="Deadline Time" />
+                              <AnchorPane>
+                                 <children>
+                                    <JFXTimePicker fx:id="deadlineTimeField" defaultColor="#2f4475" promptText="Set Task Deadline Time" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <JFXCheckBox fx:id="mileStoneTaskToggle" text="Milestone Task">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </JFXCheckBox>
+                  <JFXButton fx:id="createEditTaskBtn" onAction="#CreateEditTaskEvent" prefHeight="25.0" prefWidth="423.0" styleClass="main-button" text="Create Task">
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>
