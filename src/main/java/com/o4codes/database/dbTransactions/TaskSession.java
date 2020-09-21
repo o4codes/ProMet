@@ -204,10 +204,10 @@ public class TaskSession {
     }
 
     //get all tasks
-    public static ObservableList<Task> getAllTasks(int TaskId) throws IOException, SQLException {
+    public static ObservableList<Task> getAllTasks() throws IOException, SQLException {
         ObservableList<Task> tasks = FXCollections.observableArrayList();
         Connection con = DbConfig.Connector();
-        String query = "SELECT * FROM Tasks WHERE TaskId ='"+TaskId+"' ";
+        String query = "SELECT * FROM Tasks ";
         assert con != null;
         ResultSet rst = con.prepareStatement( query ).executeQuery();
         while (rst.next()){
@@ -266,7 +266,6 @@ public class TaskSession {
         return tasks;
     }
 
-
     // get count of all tasks in a  project in projects Table
     public static int tasksCountInProject(String projectId) throws IOException, SQLException {
         Connection con = DbConfig.Connector();
@@ -282,6 +281,7 @@ public class TaskSession {
         return taskNo;
     }
 
+    // get number of completed tasks within projects
     public static int finishedTasksCountInProject(String projectId) throws IOException, SQLException {
         Connection con = DbConfig.Connector();
         int taskNo = 0;

@@ -1,7 +1,10 @@
 package com.o4codes;
 
 import com.o4codes.controllers.AppHomeController;
+import com.o4codes.controllers.TaskConfigController;
 import com.o4codes.database.dbTransactions.*;
+import com.o4codes.models.Project;
+import com.o4codes.models.Task;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -154,6 +157,28 @@ public class MainApp extends Application {
 
         return stage;
     }
+
+    public static Stage showTaskConfigView(Project project , Task task) throws IOException {
+        String fxmlFile = "/fxml/taskConfig.fxml";
+        log.debug( "Loading FXML for main view from: {}", fxmlFile );
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation( MainApp.class.getResource( fxmlFile ) );
+        AnchorPane pane = loader.load();
+
+        TaskConfigController controller = loader.getController();
+        controller.setProject( project );
+        controller.setTask( task );
+
+        log.info( "Task Configuration" );
+        Scene scene = new Scene( pane );
+        Stage stage = new Stage();
+        stage.initModality( Modality.APPLICATION_MODAL );
+        stage.initStyle( StageStyle.UNDECORATED );
+        stage.setScene( scene );
+
+        return stage;
+    }
+
 
     public static void main(String[] args) throws Exception {
         launch( args );

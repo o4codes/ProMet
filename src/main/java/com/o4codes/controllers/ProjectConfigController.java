@@ -58,8 +58,6 @@ public class ProjectConfigController implements Initializable {
 
     private Validators validate;
 
-    private final int MAX_DESCRIPION_WORDS = 20;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //event to close pane when the close button is pressed
@@ -80,7 +78,8 @@ public class ProjectConfigController implements Initializable {
         if (projectTitle.isEmpty() || projectDescription.isEmpty() || dueDate == null) {
             alerts.Notification( "EMPTY FIELD(S)", "Ensure all fields are filled up" );
         } else {
-            if (validate.wordCount( projectDescription ) > MAX_DESCRIPION_WORDS) {
+            int MAX_DESCRIPTION_WORDS = 20;
+            if (validate.wordCount( projectDescription ) > MAX_DESCRIPTION_WORDS) {
                 alerts.Notification( "WORD_LIMIT EXCEED", "Project description has exceeded word limit" );
             } else {
                 Project project = new Project( colorTheme, projectTitle, projectDescription, LocalDate.now(), dueDate );

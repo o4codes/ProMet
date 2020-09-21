@@ -151,7 +151,6 @@ public class ProjectDashboardController implements Initializable {
 
                             Task task1 = TaskSession.getUnfinishedTasks(project.getId()).get(0);
 
-
                             // get the card from the view
                             String fxmlFile = "/fxml/deadlineCard.fxml";
                             FXMLLoader loader = new FXMLLoader();

@@ -53,22 +53,22 @@ public class TaskListCardController implements Initializable {
     }
 
     @FXML
-    void DeleteTaskEvent(ActionEvent event) {
+    private void DeleteTaskEvent(ActionEvent event) {
 
     }
 
     @FXML
-    void EditTaskEvent(ActionEvent event) {
+    private void EditTaskEvent(ActionEvent event) {
 
     }
 
     @FXML
-    void MarkAsDoneEvent(ActionEvent event) {
+    private void MarkAsDoneEvent(ActionEvent event) {
 
     }
 
     @FXML
-    void ResumeTaskEvent(ActionEvent event) {
+    private void ResumeTaskEvent(ActionEvent event) {
 
     }
 
