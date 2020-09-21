@@ -2,7 +2,9 @@ package com.o4codes.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXProgressBar;
-import javafx.event.ActionEvent;
+import com.o4codes.database.dbTransactions.TaskSession;
+import com.o4codes.database.dbTransactions.TaskTimelineSession;
+import com.o4codes.models.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -10,7 +12,11 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class TaskListCardController implements Initializable {
@@ -27,49 +33,70 @@ public class TaskListCardController implements Initializable {
     private Label timeUsedLbl;
 
     @FXML
-    private Label timeLeftLbl;
+    Label timeLeftLbl;
 
     @FXML
-    private MenuItem editTaskBtn;
+    MenuItem editTaskBtn;
 
     @FXML
-    private MenuItem deleteTaskBtn;
+    MenuItem deleteTaskBtn;
 
     @FXML
-    private MenuItem markAsDoneBtn;
+    MenuItem markAsDoneBtn;
 
     @FXML
-    private HBox finishedTaskIconPane;
+    HBox finishedTaskIconPane;
 
     @FXML
-    private AnchorPane resumeBtnPane;
+    AnchorPane resumeBtnPane;
 
     @FXML
-    private JFXButton resumeTaskBtn;
+    JFXButton resumeTaskBtn;
+
+    private Task task;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        taskTtitleLbl.setText(task.getTitle());
+        taskDescriptionLbl.setText(task.getDescription());
+        double durationInSeconds = task.getDuration() * 60;
+
+        double timeUsed = 0;
+        try {
+            timeUsed = TaskTimelineSession.getTaskTotalTimeConsumed(task); // this is in seconds
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
+        double timeLeft = durationInSeconds - timeUsed;
+        taskProgressBar.setProgress(timeUsed / durationInSeconds);
+        timeLeftLbl.setText((int) timeLeft + " seconds");
+        timeUsedLbl.setText((int) timeUsed + " seconds");
+
+        if (this.task.getCompletionDate() == null) {
+            resumeBtnPane.toFront();
+        } else {
+            finishedTaskIconPane.toFront();
+        }
+    }
+
+    public void deleteTask() throws IOException, SQLException {
+        TaskSession.deleteTask(Integer.parseInt(this.task.getTaskId()));
+    }
+
+    public void editTask() {
 
     }
 
-    @FXML
-    private void DeleteTaskEvent(ActionEvent event) {
+    public void markAsDone() throws IOException, SQLException {
+        this.task.setCompletionTime(LocalTime.now());
+        this.task.setCompletionDate(LocalDate.now());
 
+        TaskSession.updateTask(this.task);
     }
 
-    @FXML
-    private void EditTaskEvent(ActionEvent event) {
 
-    }
-
-    @FXML
-    private void MarkAsDoneEvent(ActionEvent event) {
-
-    }
-
-    @FXML
-    private void ResumeTaskEvent(ActionEvent event) {
-
+    public void setTask(Task task) {
+        this.task = task;
     }
 
 

@@ -1,6 +1,7 @@
 package com.o4codes.database.dbTransactions;
 
 import com.o4codes.database.DbConfig;
+import com.o4codes.models.Task;
 import com.o4codes.models.TaskTimeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -99,5 +100,19 @@ public class TaskTimelineSession {
         PreparedStatement pst = con.prepareStatement( query );
         pst.execute();
         con.close();
+    }
+
+    //get time used in a task
+    public static int getTaskTotalTimeConsumed(Task task) throws IOException, SQLException {
+        int timeConsumed = 0; // time consumed is in seconds
+        Connection con = DbConfig.Connector();
+        String query = "SELECT * FROM TaskTimeLine WHERE TaskId = '" + task.getTaskId() + "' ";
+        assert con != null;
+        ResultSet rst = con.prepareStatement(query).executeQuery();
+        while (rst.next()) {
+            timeConsumed += rst.getInt("TimeConsumed");
+        }
+
+        return timeConsumed;
     }
 }
