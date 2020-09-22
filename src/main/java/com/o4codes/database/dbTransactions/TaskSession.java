@@ -227,7 +227,7 @@ public class TaskSession {
     public static ObservableList<Task> getAllTasks(String projectId) throws IOException, SQLException {
         ObservableList<Task> tasks = FXCollections.observableArrayList();
         Connection con = DbConfig.Connector();
-        String query = "SELECT * FROM Tasks WHERE TaskId ='" + projectId + "' ";
+        String query = "SELECT * FROM Tasks WHERE ProjectId ='" + projectId + "' ";
         assert con != null;
         ResultSet rst = con.prepareStatement(query).executeQuery();
         while (rst.next()) {
@@ -247,7 +247,7 @@ public class TaskSession {
     public static ObservableList<Task> getUnfinishedTasks(String projectId) throws IOException, SQLException {
         ObservableList<Task> tasks = FXCollections.observableArrayList();
         Connection con = DbConfig.Connector();
-        String query = "SELECT * FROM Tasks WHERE ProjectId = ? ";
+        String query = "SELECT * FROM Tasks WHERE ProjectId = ? AND CompletionDate IS NULL ";
         assert con != null;
         PreparedStatement pst = con.prepareStatement(query);
         pst.setString(1, projectId);

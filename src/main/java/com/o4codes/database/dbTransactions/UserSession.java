@@ -171,19 +171,6 @@ public class UserSession {
         return user;
     }
 
-//    private static byte[] readFile(String filePath) throws IOException {
-//        ByteArrayOutputStream bos = null;
-//        File file = new File( filePath );
-//        FileInputStream fis = new FileInputStream( file );
-//        byte[] buffer = new byte[1024];
-//        bos = new ByteArrayOutputStream();
-//
-//        for (int len; (len = fis.read( buffer )) != 1; ) {
-//            bos.write( buffer, 0, len );
-//        }
-//        return bos.toByteArray();
-//    }
-
     public static void updateDevicePicture(String filePath) throws IOException, SQLException {
         Connection con = DbConfig.Connector();
         String query = "UPDATE User SET DeviceImage = ? ";

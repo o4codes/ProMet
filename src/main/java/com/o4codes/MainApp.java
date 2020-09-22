@@ -1,6 +1,7 @@
 package com.o4codes;
 
 import com.o4codes.controllers.AppHomeController;
+import com.o4codes.controllers.ProjectConfigController;
 import com.o4codes.controllers.TaskConfigController;
 import com.o4codes.database.dbTransactions.*;
 import com.o4codes.models.Project;
@@ -141,12 +142,17 @@ public class MainApp extends Application {
         return stage;
     }
 
-    public static Stage showProjectConfigView() throws IOException {
+    public static Stage showProjectConfigView(Project project) throws IOException {
         String fxmlFile = "/fxml/projectConfig.fxml";
         log.debug( "Loading FXML for main view from: {}", fxmlFile );
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation( MainApp.class.getResource( fxmlFile ) );
         AnchorPane pane = loader.load();
+
+        //set Controller
+        ProjectConfigController projectConfig = loader.getController();
+        projectConfig.setProject( project );
+        projectConfig.setFieldDetails();
 
         log.info( "Project Configuration" );
         Scene scene = new Scene( pane );

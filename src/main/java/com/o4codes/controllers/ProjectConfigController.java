@@ -3,6 +3,7 @@ package com.o4codes.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXColorPicker;
 import com.jfoenix.controls.JFXDatePicker;
+import com.o4codes.MainApp;
 import com.o4codes.database.dbTransactions.ProjectSession;
 import com.o4codes.helpers.Alerts;
 import com.o4codes.helpers.Validators;
@@ -16,6 +17,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.net.URL;
@@ -58,6 +61,8 @@ public class ProjectConfigController implements Initializable {
 
     private Validators validate;
 
+    private Project project;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //event to close pane when the close button is pressed
@@ -66,6 +71,10 @@ public class ProjectConfigController implements Initializable {
         //initialize helper classes
         alerts = new Alerts();
         validate = new Validators();
+
+        //set Fonts
+        paneTitleLbl.setFont( Font.loadFont( MainApp.class.getResourceAsStream( "/fonts/Lato/Lato-Bold.ttf" ), 15 )  );
+
     }
 
     @FXML
@@ -82,17 +91,43 @@ public class ProjectConfigController implements Initializable {
             if (validate.wordCount( projectDescription ) > MAX_DESCRIPTION_WORDS) {
                 alerts.Notification( "WORD_LIMIT EXCEED", "Project description has exceeded word limit" );
             } else {
-                Project project = new Project( colorTheme, projectTitle, projectDescription, LocalDate.now(), dueDate );
-                if (ProjectSession.insertProject(project).getId().equals(project.getId())) {
-                   alerts.materialInfoAlert( stackPane,vBox,"Project Created","New Project is successfully created" );
+                if (createProjectBtn.getText().equals( "Update Project" )){
+                    this.project.setColorTheme( colorTheme );
+                    this.project.setDueDate( dueDate );
+                    this.project.setDescription( projectDescription );
+                    this.project.setTitle( projectTitle );
+
+                    ProjectSession.updateProject( project );
+                    alerts.materialInfoAlert( stackPane,vBox,"Project Updated","'"+this.project.getTitle()+"Project Updated successfully" );
                 }
                 else {
-                    alerts.materialInfoAlert( stackPane,vBox,"Project Creation Failed","Check Project details, project creation failed" );
+                    Project project = new Project( colorTheme, projectTitle, projectDescription, LocalDate.now(), dueDate );
+                    if (ProjectSession.insertProject(project).getId().equals(project.getId())) {
+                        alerts.materialInfoAlert( stackPane,vBox,"Project Created","New Project is successfully created" );
+                    }
+                    else {
+                        alerts.materialInfoAlert( stackPane,vBox,"Project Creation Failed","Check Project details, project creation failed" );
+                    }
                 }
 
             }
         }
     }
 
+    public void setProject(Project project){
+        this.project = project;
+    };
+
+    public void setFieldDetails(){
+        //set field details on update state
+        if (this.project != null){
+            projectTitleField.setText( project.getTitle() );
+            projectDescriptionField.setText( project.getDescription() );
+            colorThemeField.setValue( Color.valueOf(project.getColorTheme()) );
+            dueDateField.setValue( project.getDueDate() );
+            createProjectBtn.setText( "Update Project" );
+        }
+
+    }
 
 }

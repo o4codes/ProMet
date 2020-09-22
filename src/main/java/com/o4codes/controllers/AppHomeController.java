@@ -1,8 +1,6 @@
 package com.o4codes.controllers;
 
-import animatefx.animation.Bounce;
-import animatefx.animation.FadeInLeft;
-import animatefx.animation.FadeOutLeft;
+import animatefx.animation.*;
 import com.jfoenix.controls.JFXButton;
 import com.o4codes.MainApp;
 import com.o4codes.database.dbTransactions.UserSession;
@@ -233,13 +231,14 @@ public class AppHomeController implements Initializable {
             node.setLayoutX( 0 );
             node.setLayoutY( 0 );
             node.setOpacity( 0 );
-            FadeInLeft fade = new FadeInLeft( node );
+            FadeIn fade = new FadeIn( node );
             fade.setDelay( Duration.seconds( 1 ) );
             fade.play();
         }
         else {
-            FadeOutLeft fadeOutLeft = new FadeOutLeft( contentPane.getChildren().get( 0 ) );
+            FadeOut fadeOutLeft = new FadeOut( contentPane.getChildren().get( 0 ) );
             fadeOutLeft.play();
+            fadeOutLeft.setSpeed( 2.0 );
             fadeOutLeft.getTimeline().setOnFinished( e -> {
                 contentPane.getChildren().clear();
                 contentPane.getChildren().add( node );
@@ -247,7 +246,7 @@ public class AppHomeController implements Initializable {
                 node.setLayoutX( 0 );
                 node.setLayoutY( 0 );
                 node.setOpacity( 0 );
-                FadeInLeft fade = new FadeInLeft( node );
+                FadeIn fade = new FadeIn( node );
                 fade.setDelay( Duration.seconds( 1 ) );
                 fade.play();
             } );

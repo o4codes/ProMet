@@ -3,11 +3,17 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXProgressBar?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
 <?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
 <HBox prefHeight="74.0" prefWidth="536.0" spacing="10.0" stylesheets="@../styles/modules.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.o4codes.controllers.TaskListCardController">
    <children>
       <VBox prefHeight="66.0" prefWidth="229.0" spacing="5.0" HBox.hgrow="ALWAYS">
@@ -20,7 +26,7 @@
          <children>
             <AnchorPane>
                <children>
-                  <Label fx:id="taskTtitleLbl" text="Task Title" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Label fx:id="taskTitleLbl" text="Task Title" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="63.0" prefWidth="189.0" VBox.vgrow="ALWAYS">
@@ -57,9 +63,9 @@
          <children>
             <MenuButton contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="white-bg" text="MenuButton">
                <items>
-                   <MenuItem fx:id="editTaskBtn" mnemonicParsing="false" text="Edit"/>
-                   <MenuItem fx:id="deleteTaskBtn" mnemonicParsing="false" text="Delete"/>
-                   <MenuItem fx:id="markAsDoneBtn" mnemonicParsing="false" text="Mark as Done"/>
+                   <MenuItem fx:id="editTaskBtn" mnemonicParsing="false" text="Edit" />
+                   <MenuItem fx:id="deleteTaskBtn" mnemonicParsing="false" text="Delete" />
+                   <MenuItem fx:id="markAsDoneBtn" mnemonicParsing="false" text="Mark as Done" />
                </items>
                <graphic>
                   <MaterialDesignIconView glyphName="DOTS_VERTICAL" size="15" />
@@ -77,9 +83,7 @@
                   </HBox>
                   <AnchorPane fx:id="resumeBtnPane" prefHeight="10.0" prefWidth="121.0">
                      <children>
-                         <JFXButton fx:id="resumeTaskBtn" contentDisplay="RIGHT" prefHeight="12.0" prefWidth="101.0"
-                                    styleClass="uploadPhotoBtn" text="Resume" AnchorPane.bottomAnchor="0.0"
-                                    AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0">
+                         <JFXButton fx:id="resumeTaskBtn" contentDisplay="RIGHT" prefHeight="12.0" prefWidth="101.0" styleClass="uploadPhotoBtn" text="Resume" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0">
                            <graphic>
                               <MaterialDesignIconView glyphName="PLAYLIST_PLAY" rotate="-180.0" size="15" />
                            </graphic>

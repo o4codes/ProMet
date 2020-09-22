@@ -42,30 +42,37 @@ public class DeadlineCardController implements Initializable {
     @FXML
     private Label cardDueDateLblValue;
 
+    private Task task;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //set fonts down
         cardProjectTitleLbl.setFont(Font.loadFont(MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Regular.ttf"), 14));
         cardTaskTitleLbl.setFont(Font.loadFont(MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Bold.ttf"), 12));
-        cardTaskDescriptionLbl.setFont(Font.loadFont(MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Regular.ttf"), 13));
+        cardTaskDescriptionLbl.setFont(Font.loadFont(MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Regular.ttf"), 10));
         cardDueDateLbl.setFont(Font.loadFont(MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Bold.ttf"), 12));
         cardDueDateLblValue.setFont(Font.loadFont(MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Regular.ttf"), 12));
         cardProjectDescriptionLbl.setFont(Font.loadFont(MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Regular.ttf"), 12));
     }
 
-    void fillCardDetails(Task task) throws IOException, SQLException {
-        cardTaskTitleLbl.setText(task.getTitle());
-        cardTaskDescriptionLbl.setText(task.getDescription());
-        cardDueDateLblValue.setText(task.getDeadlineDate().toString());
-        cardProjectTitleLbl.setText(ProjectSession.getProjectById(task.getProjectId()).getTitle());
-        cardProjectDescriptionLbl.setText(ProjectSession.getProjectById(task.getProjectId()).getDescription());
-        cardProjectProgressIndicator.setProgress(getTaskProgress(task));
+    void setTask(Task task) throws IOException, SQLException {
+        this.task = task;
+        fillCardDetailsTask();
     }
 
-    private double getTaskProgress(Task task) throws IOException, SQLException {
-        float seconds_to_be_used = task.getDuration(); // duration of tasks is registered in seconds.
+    private void fillCardDetailsTask () throws IOException, SQLException {
+        cardTaskTitleLbl.setText(this.task.getTitle());
+        cardTaskDescriptionLbl.setText(this.task.getDescription());
+        cardDueDateLblValue.setText(this.task.getDeadlineDate().toString());
+        cardProjectTitleLbl.setText(ProjectSession.getProjectById(this.task.getProjectId()).getTitle());
+        cardProjectDescriptionLbl.setText(ProjectSession.getProjectById(this.task.getProjectId()).getDescription());
+        cardProjectProgressIndicator.setProgress(getTaskProgress());
+    }
+
+    private double getTaskProgress() throws IOException, SQLException {
+        float seconds_to_be_used = this.task.getDuration(); // duration of tasks is registered in seconds.
         float seconds_used = 0;
-        for (TaskTimeline timeline : TaskTimelineSession.getTaskTimeLineByTaskId(task.getTaskId())) {
+        for (TaskTimeline timeline : TaskTimelineSession.getTaskTimeLineByTaskId(this.task.getTaskId())) {
             seconds_used += timeline.getTaskTimeSpent();
         }
 

@@ -1,6 +1,6 @@
 package com.o4codes.controllers;
 
-import animatefx.animation.SlideInLeft;
+import animatefx.animation.FadeInLeft;
 import animatefx.animation.SlideOutLeft;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
@@ -11,7 +11,6 @@ import com.o4codes.database.dbTransactions.TaskTimelineSession;
 import com.o4codes.helpers.Alerts;
 import com.o4codes.models.Project;
 import com.o4codes.models.Task;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -82,46 +81,36 @@ public class TaskDashboardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // set external fonts to labels
-        projectTitleLbl.setFont(Font.loadFont(MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Bold.ttf"), 16));
-        projectDescriptionLbl.setFont(Font.loadFont(MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Regular.ttf"), 13));
-        projectCreationDateLbl.setFont(Font.loadFont(MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Light.ttf"), 13));
-        projectDueDateLbl.setFont(Font.loadFont(MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Light.ttf"), 13));
-        dueDateTitleLbl.setFont(Font.loadFont(MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Regular.ttf"), 13));
-        taskFractionProgressLbl.setFont(Font.loadFont(MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Regular.ttf"), 13));
-        timeFractionProgressLbl.setFont(Font.loadFont(MainApp.class.getResourceAsStream("/fonts/Lato/Lato-Regular.ttf"), 13));
+        projectTitleLbl.setFont( Font.loadFont( MainApp.class.getResourceAsStream( "/fonts/Lato/Lato-Bold.ttf" ), 20 ) );
+        projectDescriptionLbl.setFont( Font.loadFont( MainApp.class.getResourceAsStream( "/fonts/Lato/Lato-Regular.ttf" ), 13 ) );
+        projectCreationDateLbl.setFont( Font.loadFont( MainApp.class.getResourceAsStream( "/fonts/Lato/Lato-Light.ttf" ), 13 ) );
+        projectDueDateLbl.setFont( Font.loadFont( MainApp.class.getResourceAsStream( "/fonts/Lato/Lato-Light.ttf" ), 13 ) );
+        dueDateTitleLbl.setFont( Font.loadFont( MainApp.class.getResourceAsStream( "/fonts/Lato/Lato-Bold.ttf" ), 14 ) );
+        taskFractionProgressLbl.setFont( Font.loadFont( MainApp.class.getResourceAsStream( "/fonts/Lato/Lato-Regular.ttf" ), 13 ) );
+        timeFractionProgressLbl.setFont( Font.loadFont( MainApp.class.getResourceAsStream( "/fonts/Lato/Lato-Regular.ttf" ), 13 ) );
 
         //initialize alert classes
         alerts = new Alerts();
-
-        //initialize labels with value from db
-        try {
-            projectTitleLbl.setText(project.getTitle());
-            projectDescriptionLbl.setText(project.getDescription());
-            projectCreationDateLbl.setText("Created on " + project.getBeginDate().toString());
-            projectDueDateLbl.setText(project.getDueDate().toString());
-            taskFractionProgressLbl.setText(TaskSession.finishedTasksCountInProject(project.getId()) + "/" + TaskSession.tasksCountInProject(project.getId()) + " tasks");
-            timeFractionProgressLbl.setText(totalTimeUsed() + "/" + totaltimeToBeUsed() + " seconds");
-            projectSpinnerLbl.setProgress((double) TaskSession.finishedTasksCountInProject(project.getId()) / (double) TaskSession.tasksCountInProject(project.getId()));
-        } catch (IOException | SQLException e) {
-            e.printStackTrace();
-        }
-
-        //initialize tasks available and set to list
-        setTasksListInProject();
     }
 
     @FXML
-    private void AddNewTaskEvent(ActionEvent event) throws IOException {
-        BoxBlur boxBlur = new BoxBlur(5, 5, 5);
-        stackPane.setEffect(boxBlur);
-        MainApp.showTaskConfigView(project, null).showAndWait();
-        stackPane.setEffect(null);
+    private void AddNewTaskEvent(ActionEvent event) throws IOException, SQLException {
+        BoxBlur boxBlur = new BoxBlur( 5, 5, 5 );
+        stackPane.setEffect( boxBlur );
+        MainApp.showTaskConfigView( project, null ).showAndWait();
+        stackPane.setEffect( null );
         setTasksListInProject();
+        fillPageDetails();
     }
 
     @FXML
-    private void EditProjectDetailsEvent(ActionEvent event) {
-
+    private void EditProjectDetailsEvent(ActionEvent event) throws IOException, SQLException {
+        BoxBlur boxBlur = new BoxBlur( 5, 5, 5 );
+        stackPane.setEffect( boxBlur );
+        MainApp.showProjectConfigView( this.project ).showAndWait();
+        stackPane.setEffect( null );
+        setTasksListInProject();
+        fillPageDetails();
     }
 
     @FXML
@@ -129,91 +118,95 @@ public class TaskDashboardController implements Initializable {
 
     }
 
-    public void setProject(Project project) {
+    public void setProject(Project project) throws IOException, SQLException {
         this.project = project;
+        fillPageDetails();
     }
 
-    private void setTasksListInProject() {
-        Platform.runLater(() -> {
-            try {
-                //get all tasks with the project
-                for (Task task : TaskSession.getAllTasks(project.getId())) {
-                    String fxmlFile = "/fxml/taskListCard.fxml";
-                    FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(MainApp.class.getResource(fxmlFile));
-                    HBox card = loader.load();
+    void setTasksListInProject() {
+        try {
+            //get all tasks with the project
+            tasksContainerPane.getChildren().clear();
+            for (Task task : TaskSession.getAllTasks( project.getId() )) {
+                System.out.println( "Getting tasks" );
+                String fxmlFile = "/fxml/taskListCard.fxml";
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation( MainApp.class.getResource( fxmlFile ) );
+                HBox card = loader.load();
 
-                    // inject task details into view
-                    TaskListCardController taskListController = loader.getController();
-                    taskListController.setTask(task);
-                    tasksContainerPane.getChildren().add(card);
+                // inject task details into view
+                TaskListCardController taskListController = loader.getController();
+                taskListController.setTask( task );
+                tasksContainerPane.getChildren().add( card );
 
-                    //add events to card buttons
+                //animate the card entry
+                FadeInLeft slideIn = new FadeInLeft( card );
+                slideIn.play();
 
-                    //edit task event
-                    taskListController.editTaskBtn.setOnAction(e -> {
+                //add events to card buttons
+
+                //edit task event
+                taskListController.editTaskBtn.setOnAction( e -> {
+                    try {
+                        BoxBlur blur = new BoxBlur( 5, 5, 5 );
+                        stackPane.setEffect( blur );
+                        MainApp.showTaskConfigView( null, task ).showAndWait();
+                        stackPane.setEffect( null );
+                        setTasksListInProject();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                } );
+
+                // mark task as done event
+                taskListController.markAsDoneBtn.setOnAction( e -> {
+                    alerts.materialConfirmAlert( stackPane, vBox, "Confirm Task Completion", "Proceed to mark task as complete" );
+                    alerts.acceptBtn.setOnAction( ev -> {
                         try {
-                            BoxBlur blur = new BoxBlur(5, 5, 5);
-                            stackPane.setEffect(blur);
-                            MainApp.showTaskConfigView(null, task).showAndWait();
-                            stackPane.setEffect(null);
+                            taskListController.markAsDone();
+                            alerts.materialInfoAlert( stackPane, vBox, "Task Complete", "'" + task.getTitle() + "' has been marked as a complete task " );
+                            taskListController.finishedTaskIconPane.toFront();
                             setTasksListInProject();
-                        } catch (IOException ex) {
+                        } catch (IOException | SQLException ex) {
                             ex.printStackTrace();
                         }
-                    });
 
-                    // mark task as done event
-                    taskListController.markAsDoneBtn.setOnAction(e -> {
-                        alerts.materialConfirmAlert(stackPane, vBox, "Confirm Task Completion", "Proceed to mark task as complete");
-                        alerts.acceptBtn.setOnAction(ev -> {
+                    } );
+                } );
+
+                //delete task Event
+                taskListController.deleteTaskBtn.setOnAction( e -> {
+                    alerts.materialConfirmAlert( stackPane, vBox, "Confirm Task Delete", "Proceed to delete this task" );
+                    alerts.acceptBtn.setOnAction( ev -> {
+                        SlideOutLeft slide = new SlideOutLeft( card );
+                        slide.play();
+                        slide.getTimeline().setOnFinished( eve -> {
                             try {
-                                taskListController.markAsDone();
-                                alerts.materialInfoAlert(stackPane, vBox, "Task Complete", "'" + task.getTitle() + "' has been marked as a complete task ");
-                                taskListController.finishedTaskIconPane.toFront();
+                                taskListController.deleteTask();
                                 setTasksListInProject();
                             } catch (IOException | SQLException ex) {
                                 ex.printStackTrace();
                             }
+                        } );
+                    } );
+                } );
 
-                        });
-                    });
+                //Resume task
+                taskListController.resumeTaskBtn.setOnAction( e -> {
+                    alerts.Notification( "UNDEVELOPED", "Feature soon coming" );
+                } );
 
-                    //delete task Event
-                    taskListController.deleteTaskBtn.setOnAction(e -> {
-                        alerts.materialConfirmAlert(stackPane, vBox, "Confirm Task Delete", "Proceed to delete this task");
-                        alerts.acceptBtn.setOnAction(ev -> {
-                            SlideOutLeft slide = new SlideOutLeft(card);
-                            slide.play();
-                            slide.getTimeline().setOnFinished(eve -> {
-                                try {
-                                    taskListController.deleteTask();
-                                    setTasksListInProject();
-                                } catch (IOException | SQLException ex) {
-                                    ex.printStackTrace();
-                                }
-                            });
-                        });
-                    });
 
-                    //Resume task
-                    taskListController.resumeTaskBtn.setOnAction(e -> {
-                        alerts.Notification("UNDEVELOPED", "Feature soon coming");
-                    });
-
-                    //animate the card entry
-                    SlideInLeft slideIn = new SlideInLeft(card);
-                    slideIn.play();
-                }
-            } catch (IOException | SQLException e) {
-                e.printStackTrace();
             }
-        });
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
-    private int totaltimeToBeUsed() throws IOException, SQLException {
+    private int totalTimeToBeUsed() throws IOException, SQLException {
         int totalTimeInSeconds = 0;
-        for (Task task : TaskSession.getAllTasks(project.getId())) {
+        for (Task task : TaskSession.getAllTasks( project.getId() )) {
             int timeInSeconds = task.getDuration() * 60;
             totalTimeInSeconds += timeInSeconds;
         }
@@ -222,10 +215,21 @@ public class TaskDashboardController implements Initializable {
 
     private int totalTimeUsed() throws IOException, SQLException {
         int timeInSeconds = 0;
-        for (Task task : TaskSession.getAllTasks(project.getId())) {
-            timeInSeconds += TaskTimelineSession.getTaskTotalTimeConsumed(task);
+        for (Task task : TaskSession.getAllTasks( project.getId() )) {
+            timeInSeconds += TaskTimelineSession.getTaskTotalTimeConsumed( task );
         }
         return timeInSeconds;
+    }
+
+    private void fillPageDetails() throws IOException, SQLException {
+        projectTitleLbl.setText( project.getTitle() );
+        projectDescriptionLbl.setText( project.getDescription() );
+        projectCreationDateLbl.setText( "Created on " + project.getBeginDate().toString() );
+        projectDueDateLbl.setText( project.getDueDate().toString() );
+        taskFractionProgressLbl.setText( TaskSession.finishedTasksCountInProject( project.getId() ) + "/" + TaskSession.tasksCountInProject( project.getId() ) + " tasks" );
+        timeFractionProgressLbl.setText( totalTimeUsed() + "/" + totalTimeToBeUsed() + " seconds" );
+        projectSpinnerLbl.setProgress( (double) TaskSession.finishedTasksCountInProject( project.getId() ) / (double) TaskSession.tasksCountInProject( project.getId() ) );
+
     }
 
 }

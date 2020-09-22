@@ -119,7 +119,7 @@ public class PomodoreConfigController implements Initializable {
     }
 
     //initialize the default settings
-    public void initDefaultSettings(){
+    private void initDefaultSettings(){
         Platform.runLater( () -> {
             try {
                 AppConfiguration appConfiguration = AppConfigSession.getAppConfig();
@@ -138,7 +138,6 @@ public class PomodoreConfigController implements Initializable {
             }
         });
     }
-
 
     @FXML
     private void HandleUpdateSettings(ActionEvent event) {
@@ -285,7 +284,7 @@ public class PomodoreConfigController implements Initializable {
     }
 
     private void setUnSelectedButtonColor(JFXButton button) {
-        button.setStyle( "-fx-background-color: white;" );
+        button.setStyle( "-fx-background-color: #e0e0e0;" );
     }
 
 }

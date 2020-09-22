@@ -2,34 +2,37 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import de.jensd.fx.glyphs.materialdesignicons.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+
 <AnchorPane fx:id="root" prefHeight="560.0" prefWidth="981.0" styleClass="background" stylesheets="@../styles/modules.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.o4codes.controllers.ProjectDashboardController">
    <children>
       <StackPane fx:id="rootStackPane" prefHeight="150.0" prefWidth="200.0" styleClass="background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-             <VBox fx:id="emptyProjectPane" alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0"
-                   spacing="20.0" styleClass="background">
+             <VBox fx:id="emptyProjectPane" alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="20.0" styleClass="background">
                  <children>
                      <StackPane prefHeight="150.0" prefWidth="174.0">
                          <children>
-                             <Circle fill="#a5c4f7" radius="81.0" stroke="#a5c4f7" strokeType="INSIDE"/>
-                             <MaterialDesignIconView fill="#455b95" glyphName="FILE" size="60"/>
-                             <Line endX="100.0" rotate="135.0" startX="-100.0" stroke="#fafafa" strokeWidth="10.0"/>
+                             <Circle fill="#a5c4f7" radius="81.0" stroke="#a5c4f7" strokeType="INSIDE" />
+                             <MaterialDesignIconView fill="#455b95" glyphName="FILE" size="60" />
+                             <Line endX="100.0" rotate="135.0" startX="-100.0" stroke="#fafafa" strokeWidth="10.0" />
                          </children>
                      </StackPane>
-                     <Label fx:id="no_project_lbl" text="No Projects"/>
-                     <JFXButton fx:id="createNewProjectBtn" contentDisplay="RIGHT" onAction="#CreateNewProjectEvent"
-                                style="-fx-background-color: #455b95; -fx-background-radius: 5;" text="Create New"
-                                textFill="WHITE">
+                     <Label fx:id="no_project_lbl" text="No Projects" />
+                     <JFXButton fx:id="createNewProjectBtn" contentDisplay="RIGHT" onAction="#CreateNewProjectEvent" style="-fx-background-color: #455b95; -fx-background-radius: 5;" text="Create New" textFill="WHITE">
                          <VBox.margin>
-                             <Insets top="-15.0"/>
+                             <Insets top="-15.0" />
                          </VBox.margin>
                          <graphic>
-                             <MaterialDesignIconView fill="WHITE" glyphName="PLUS" size="15"/>
+                             <MaterialDesignIconView fill="WHITE" glyphName="PLUS" size="15" />
                          </graphic>
                      </JFXButton>
                  </children>
@@ -41,25 +44,23 @@
                <children>
                    <StackPane>
                        <children>
-                           <ScrollPane fx:id="unemptyTasksPane" fitToHeight="true" prefHeight="243.0" prefWidth="961.0"
-                                       styleClass="background">
+                           <ScrollPane fx:id="unemptyTasksPane" fitToHeight="true" prefHeight="243.0" prefWidth="961.0" styleClass="background">
                                <content>
-                                   <HBox fx:id="deadlineProjectList" spacing="10.0" styleClass="background"/>
+                                   <HBox fx:id="deadlineProjectList" spacing="10.0" styleClass="background" />
                                </content>
                            </ScrollPane>
                            <VBox fx:id="emptyTasksPane" alignment="CENTER" styleClass="background">
                                <children>
                                    <StackPane prefHeight="136.0" prefWidth="961.0">
                                        <children>
-                                           <Circle fill="#a5c4f7" radius="68.0" stroke="#a5c4f7" strokeType="INSIDE"/>
-                                           <MaterialDesignIconView fill="#455b95" glyphName="FILE" size="60"/>
-                                           <Line endX="100.0" rotate="135.0" startX="-100.0" stroke="#fafafa"
-                                                 strokeWidth="10.0"/>
+                                           <Circle fill="#a5c4f7" radius="68.0" stroke="#a5c4f7" strokeType="INSIDE" />
+                                           <MaterialDesignIconView fill="#455b95" glyphName="FILE" size="60" />
+                                           <Line endX="100.0" rotate="135.0" startX="-100.0" stroke="#fafafa" strokeWidth="10.0" />
                                        </children>
                                    </StackPane>
                                    <Label fx:id="no_tasks_yet" text="No tasks available yet">
                                        <VBox.margin>
-                                           <Insets top="20.0"/>
+                                           <Insets top="20.0" />
                                        </VBox.margin>
                                    </Label>
                                </children>
@@ -119,6 +120,7 @@
                   </StackPane>
                </children>
             </VBox>
+            <AnchorPane fx:id="contentPane" prefHeight="200.0" prefWidth="200.0" styleClass="background" />
          </children>
       </StackPane>
    </children>

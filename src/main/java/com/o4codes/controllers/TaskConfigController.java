@@ -77,10 +77,7 @@ public class TaskConfigController implements Initializable {
         alerts = new Alerts();
 
         // set fields to insert or update state if task is null;
-        if (task != null) {
-            fillUpEditDetails( task );
-            createEditTaskBtn.setText( "Update Task" );
-        }
+
 
         //set spinner min and max values
         durationHourField.setValueFactory( new SpinnerValueFactory.IntegerSpinnerValueFactory( 1, 100 ) );
@@ -164,17 +161,20 @@ public class TaskConfigController implements Initializable {
 
     public void setTask(Task task) {
         this.task = task;
+        fillUpEditDetails();
     }
 
-    private void fillUpEditDetails(Task task) {
-        taskTitleField.setText( task.getTitle() );
-        taskDescriptionField.setText( task.getDescription() );
-        mileStoneTaskToggle.setSelected( task.isMileStone() );
-        deadlineDateField.setValue( task.getDeadlineDate() );
-        deadlineTimeField.setValue( task.getDeadlineTime() );
-        durationHourField.getValueFactory().setValue( task.getDuration() / 60 );
-        durationMinField.getValueFactory().setValue( task.getDuration() % 60 );
-
+    private void fillUpEditDetails() {
+        if (task != null) {
+            createEditTaskBtn.setText( "Update Task" );
+            taskTitleField.setText( task.getTitle() );
+            taskDescriptionField.setText( task.getDescription() );
+            mileStoneTaskToggle.setSelected( task.isMileStone() );
+            deadlineDateField.setValue( task.getDeadlineDate() );
+            deadlineTimeField.setValue( task.getDeadlineTime() );
+            durationHourField.getValueFactory().setValue( task.getDuration() / 60 );
+            durationMinField.getValueFactory().setValue( task.getDuration() % 60 );
+        }
     }
 
 
