@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 import com.o4codes.MainApp;
+import com.o4codes.database.dbTransactions.ProjectSession;
 import com.o4codes.database.dbTransactions.TaskSession;
 import com.o4codes.database.dbTransactions.TaskTimelineSession;
 import com.o4codes.helpers.Alerts;
@@ -150,10 +151,10 @@ public class TaskDashboardController implements Initializable {
                     try {
                         BoxBlur blur = new BoxBlur( 5, 5, 5 );
                         stackPane.setEffect( blur );
-                        MainApp.showTaskConfigView( null, task ).showAndWait();
+                        MainApp.showTaskConfigView(ProjectSession.getProjectById(task.getProjectId()), task).showAndWait();
                         stackPane.setEffect( null );
                         setTasksListInProject();
-                    } catch (IOException ex) {
+                    } catch (IOException | SQLException ex) {
                         ex.printStackTrace();
                     }
                 } );

@@ -1,7 +1,7 @@
 
 .main-panel {
     -fx-background-color: white;
-    -fx-border-color: #e0e0e0;
+    -fx-border-color: #2F4475;
 }
 
 .background {
@@ -99,10 +99,9 @@
     -fx-text-fill: white;
     -fx-font-family: "sans-serif";
     -fx-font-Size: 15px;
-    -fx-font-weight: bold;
-    -fx-background-radius: 20px;
+}
+.closeButton:hover {
     -fx-background-color: red;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 
 .settings-label{
@@ -146,5 +145,14 @@
 
  .progress-bar > .track{
      -fx-background-color: #bdbdbd;
+ }
+
+ .title-bar {
+     -fx-background-color: #2F4475;
+ }
+
+ .task-title-bar{
+    -fx-background-color: #4A8EF5;
+    -fx-text-fill: white;
  }
 
