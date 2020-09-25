@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="594.0" prefWidth="983.0" styleClass="main-panel" stylesheets="@../styles/modules.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.o4codes.controllers.PomodoreActivityController">
+   <children>
+      <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <top>
+                  <HBox fx:id="titleBar" alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="1100.0" styleClass="title-bar" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
+                           </padding>
+                           <children>
+                              <Label text="Pomodore Activities" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="140.0" spacing="5.0">
+                           <children>
+                              <JFXButton fx:id="minimizeBtn" contentDisplay="GRAPHIC_ONLY" layoutX="85.0" layoutY="17.0" styleClass="title-bar-btn">
+                                 <graphic>
+                                    <MaterialDesignIconView fill="WHITE" glyphName="MINUS" rotate="180.0" size="15" />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="appCloseBtn" contentDisplay="GRAPHIC_ONLY" prefHeight="26.0" prefWidth="15.0" ripplerFill="RED" styleClass="closeButton" text="x">
+                                 <graphic>
+                                    <MaterialDesignIconView fill="WHITE" glyphName="WINDOW_CLOSE" size="15" stroke="WHITE" strokeWidth="0.2" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </HBox>
+               </top>
+               <center>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <VBox HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label prefHeight="17.0" prefWidth="234.0" text="Project tasks">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <ScrollPane fitToWidth="true" prefHeight="465.0" prefWidth="259.0" styleClass="white-bg">
+                                 <content>
+                                    <VBox fx:id="projectTaskList" spacing="10.0" />
+                                 </content>
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </ScrollPane>
+                           </children>
+                           <styleClass>
+                              <String fx:value="white-bg" />
+                              <String fx:value="background-radius" />
+                           </styleClass>
+                           <effect>
+                              <DropShadow height="5.0" radius="2.0" width="5.0" />
+                           </effect>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </VBox>
+                        <VBox prefHeight="465.0" prefWidth="264.0">
+                           <children>
+                              <Label fx:id="taskTitleLbl" alignment="CENTER" prefHeight="78.0" prefWidth="264.0" text="Task title" textAlignment="CENTER" wrapText="true">
+                                 <styleClass>
+                                    <String fx:value="background-radius" />
+                                    <String fx:value="task-title-bar" />
+                                 </styleClass>
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="timerLbl" alignment="CENTER" prefHeight="17.0" prefWidth="263.0" text="00 : 00">
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" top="20.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="76.0" />
+                                 </font>
+                              </Label>
+                              <AnchorPane prefHeight="133.0" prefWidth="264.0">
+                                 <children>
+                                    <JFXButton fx:id="tenMinsAdditionalBtn" layoutX="80.0" layoutY="54.0" onAction="#addTenMinsToTaskExec" prefHeight="69.0" prefWidth="74.0" style="-fx-background-color: #2F4475; -fx-background-radius: 40;" text="+10m" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="20.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton fx:id="nextTaskBtn" layoutX="176.0" layoutY="20.0" onAction="#NextTaskEventBtn" prefHeight="69.0" prefWidth="74.0" style="-fx-background-color: #2F4475; -fx-background-radius: 40;" text="Next" textFill="WHITE" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton fx:id="pauseTaskExecBtn" layoutX="100.0" layoutY="55.0" onAction="#PauseTaskExecEvent" prefHeight="69.0" prefWidth="74.0" style="-fx-background-color: #2F4475; -fx-background-radius: 40;" text="Pause" textFill="WHITE">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="513.0" prefWidth="278.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label prefHeight="17.0" prefWidth="234.0" text="Pomodore Cycle">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <ScrollPane fitToWidth="true" prefHeight="338.0" prefWidth="272.0" styleClass="white-bg" VBox.vgrow="ALWAYS">
+                                 <content>
+                                    <VBox fx:id="pomodoreCycleList" spacing="10.0" />
+                                 </content>
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </ScrollPane>
+                              <Label layoutX="20.0" layoutY="20.0" prefHeight="17.0" prefWidth="234.0" text="Task Description">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <VBox prefHeight="97.0" prefWidth="272.0" spacing="10.0" styleClass="background">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="-5.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <Label fx:id="taskDescriptionLbl" alignment="TOP_LEFT" prefHeight="91.0" prefWidth="284.0" text="task description">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <effect>
+                              <DropShadow height="5.0" radius="2.0" width="5.0" />
+                           </effect>
+                           <styleClass>
+                              <String fx:value="white-bg" />
+                              <String fx:value="background-radius" />
+                           </styleClass>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </HBox>
+               </center>
+            </BorderPane>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>
