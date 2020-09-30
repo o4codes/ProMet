@@ -196,7 +196,10 @@ public class TaskDashboardController implements Initializable {
                 taskListController.resumeTaskBtn.setOnAction( e -> {
 //                    alerts.Notification( "UNDEVELOPED", "Feature soon coming" );
                     try {
+                        BoxBlur blur = new BoxBlur(10,10,10);
+                        this.stackPane.setEffect(blur);
                         MainApp.showPomodoreActivity( project ).showAndWait();
+                        stackPane.setEffect(null);
                         setTasksListInProject();
                     } catch (IOException ex) {
                         ex.printStackTrace();
