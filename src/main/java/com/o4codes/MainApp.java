@@ -1,6 +1,7 @@
 package com.o4codes;
 
 import com.o4codes.controllers.AppHomeController;
+import com.o4codes.controllers.PomodoreActivityController;
 import com.o4codes.controllers.ProjectConfigController;
 import com.o4codes.controllers.TaskConfigController;
 import com.o4codes.database.dbTransactions.*;
@@ -20,6 +21,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.Duration;
 
 public class MainApp extends Application {
     private static final Logger log = LoggerFactory.getLogger( MainApp.class );
@@ -27,6 +29,7 @@ public class MainApp extends Application {
     public static Stage stage;
 
     public void start(Stage stage) throws Exception {
+
         //boot up necessary resources
         preLoad();
         MainApp.stage = stage;
@@ -185,6 +188,26 @@ public class MainApp extends Application {
         return stage;
     }
 
+    public static Stage showPomodoreActivity(Project project) throws IOException {
+        String fxmlFile = "/fxml/pomodoreActivity.fxml";
+        log.debug( "Loading FXML for main view from: {}", fxmlFile );
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation( MainApp.class.getResource( fxmlFile ) );
+        AnchorPane pane = loader.load();
+
+        //set Controller
+        PomodoreActivityController pomodoreActivityController = loader.getController();
+        pomodoreActivityController.setProject( project );
+
+        log.info( "Project Configuration" );
+        Scene scene = new Scene( pane );
+        Stage stage = new Stage();
+        stage.initModality( Modality.APPLICATION_MODAL );
+        stage.initStyle( StageStyle.UNDECORATED );
+        stage.setScene( scene );
+
+        return stage;
+    }
 
     public static void main(String[] args) throws Exception {
         launch( args );

@@ -151,7 +151,7 @@ public class TaskDashboardController implements Initializable {
                     try {
                         BoxBlur blur = new BoxBlur( 5, 5, 5 );
                         stackPane.setEffect( blur );
-                        MainApp.showTaskConfigView(ProjectSession.getProjectById(task.getProjectId()), task).showAndWait();
+                        MainApp.showTaskConfigView( ProjectSession.getProjectById( task.getProjectId() ), task ).showAndWait();
                         stackPane.setEffect( null );
                         setTasksListInProject();
                     } catch (IOException | SQLException ex) {
@@ -194,10 +194,14 @@ public class TaskDashboardController implements Initializable {
 
                 //Resume task
                 taskListController.resumeTaskBtn.setOnAction( e -> {
-                    alerts.Notification( "UNDEVELOPED", "Feature soon coming" );
+//                    alerts.Notification( "UNDEVELOPED", "Feature soon coming" );
+                    try {
+                        MainApp.showPomodoreActivity( project ).showAndWait();
+                        setTasksListInProject();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                 } );
-
-
             }
         } catch (IOException | SQLException e) {
             e.printStackTrace();

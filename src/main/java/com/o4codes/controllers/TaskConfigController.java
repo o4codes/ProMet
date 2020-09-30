@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -108,7 +109,8 @@ public class TaskConfigController implements Initializable {
             boolean isMileStone = mileStoneTaskToggle.isSelected();
             int durationHour = durationHourField.getValue();
             int durationMinute = durationMinField.getValue();
-            int totalDurationInMinutes = (60 * durationHour) + durationMinute;
+//            int totalDurationInMinutes = (60 * durationHour) + durationMinute;
+            int totalDurationInMinutes = (int) Duration.hours(durationHour).toMinutes() + durationMinute;
             LocalDateTime maxTaskDurationDateTime = LocalDateTime.now().plusHours( durationHour ).plusMinutes( durationMinute );
             LocalDateTime taskDeadlineDateTime = LocalDateTime.of( deadlineDate, deadlineTime );
 

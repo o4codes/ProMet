@@ -81,8 +81,7 @@ public class AppHomeController implements Initializable {
     @FXML
     private JFXButton minimizeBtn;
 
-    @FXML
-    private AnchorPane root;
+    @FXML AnchorPane root;
 
     @FXML
     private HBox titleBar;

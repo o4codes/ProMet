@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="594.0" prefWidth="983.0" styleClass="main-panel" stylesheets="@../styles/modules.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.o4codes.controllers.PomodoreActivityController">
    <children>
       <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -73,7 +72,7 @@
                               </Label>
                               <ScrollPane fitToWidth="true" prefHeight="465.0" prefWidth="259.0" styleClass="white-bg">
                                  <content>
-                                    <VBox fx:id="projectTaskList" spacing="10.0" />
+                                    <VBox fx:id="projectTaskList" spacing="2.0" />
                                  </content>
                                  <padding>
                                     <Insets left="10.0" right="10.0" top="10.0" />
@@ -146,7 +145,7 @@
                               </Label>
                               <ScrollPane fitToWidth="true" prefHeight="338.0" prefWidth="272.0" styleClass="white-bg" VBox.vgrow="ALWAYS">
                                  <content>
-                                    <VBox fx:id="pomodoreCycleList" spacing="10.0" />
+                                    <VBox fx:id="pomodoreCycleList" spacing="2.0" />
                                  </content>
                                  <padding>
                                     <Insets left="10.0" right="10.0" top="10.0" />
