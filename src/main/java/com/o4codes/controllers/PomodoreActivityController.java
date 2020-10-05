@@ -4,11 +4,21 @@ import animatefx.animation.FadeInLeft;
 import animatefx.animation.FadeOutLeft;
 import com.jfoenix.controls.JFXButton;
 import com.o4codes.MainApp;
+import com.o4codes.database.dbTransactions.AppConfigSession;
 import com.o4codes.database.dbTransactions.TaskSession;
+import com.o4codes.database.dbTransactions.TaskTimelineSession;
 import com.o4codes.helpers.Alerts;
+import com.o4codes.models.AppConfiguration;
 import com.o4codes.models.Project;
 import com.o4codes.models.Task;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,7 +30,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,6 +68,9 @@ public class PomodoreActivityController implements Initializable {
     private JFXButton pauseTaskExecBtn;
 
     @FXML
+    private JFXButton startTasksBtn;
+
+    @FXML
     private VBox pomodoreCycleList;
 
     @FXML
@@ -75,10 +90,33 @@ public class PomodoreActivityController implements Initializable {
 
     private Alerts alerts;
 
+    private AppConfiguration appConfiguration;
+
+    private Timeline timeline;
+
+    private StringProperty timerText;
+
+    private Integer STARTTIME = 0;
+
+    private IntegerProperty timeSeconds;
+
+    private AudioClip notify;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //initialize alerts class
-        alerts = new Alerts();
+
+        //initialize  class
+        try {
+            alerts = new Alerts();
+            timerText = new SimpleStringProperty();
+            timeSeconds = new SimpleIntegerProperty( STARTTIME );
+            appConfiguration = AppConfigSession.getAppConfig();
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
+        //bind timer to label
+        timerLbl.textProperty().bind( timeSeconds.asString() );
+        timerText.set( "00:00" );
         //handle window title bar events
         //close window events
         appCloseBtn.setOnAction( e -> ((JFXButton) e.getSource()).getScene().getWindow().hide() );
@@ -108,8 +146,49 @@ public class PomodoreActivityController implements Initializable {
     }
 
     @FXML
-    void PauseTaskExecEvent(ActionEvent event) {
+    private void PauseTaskExecEvent(ActionEvent event) {
+        this.timeline.pause();
+        startTasksBtn.setDisable( false );
+        startTasksBtn.setText( "Resume" );
+        pauseTaskExecBtn.setDisable( true );
+    }
 
+    @FXML
+    private void StartTaskExecEvent(ActionEvent event) {
+        if (startTasksBtn.getText().equals( "Resume" )) {
+            timeline.playFrom( getTimelineDuration() );
+        } else {
+            if (taskCollection.size() < 4) {
+                alerts.materialInfoAlert( stackPane, borderPane, "Pomodore Tasks", "Ensure four(4) tasks are set" );
+            } else {
+                alerts.materialConfirmAlert( stackPane, borderPane, "Pomodore Cycle Execution", "Proceed to begin tasks execution" );
+                alerts.acceptBtn.setOnAction( e -> {
+                    try {
+                        startTasksBtn.setDisable( true );
+                        for (Task task : taskCollection) {
+                            taskTitleLbl.setText( task.getTitle() );
+                            taskDescriptionLbl.setText( task.getDescription() );
+
+                            int timeUsed = TaskTimelineSession.getTaskTotalTimeConsumed( task ); // in seconds
+                            int taskDuration = task.getDuration() * 60; // in seconds
+                            int timeLeft = taskDuration - timeUsed; // in seconds
+                            int pomodoreDuration = (int) Duration.minutes( appConfiguration.getTaskDuration() ).toSeconds();
+                            if (timeLeft <= pomodoreDuration) {
+                                getTimeline( timeLeft );
+                                timeline.playFromStart();
+                            } else {
+                                getTimeline( pomodoreDuration );
+                                timeline.playFromStart();
+                            }
+
+                        }
+                    } catch (IOException | SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                } );
+
+            }
+        }
     }
 
     @FXML
@@ -216,7 +295,7 @@ public class PomodoreActivityController implements Initializable {
         fillUpProjectTasks( project );
     }
 
-    public HBox breakCards(boolean isBreakShort) throws IOException, SQLException {
+    private HBox breakCards(boolean isBreakShort) throws IOException, SQLException {
         String fxmlFile = "/fxml/breaksCard.fxml";
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation( MainApp.class.getResource( fxmlFile ) );
@@ -232,4 +311,37 @@ public class PomodoreActivityController implements Initializable {
         return card;
     }
 
+    private void setTimerText() {
+        int hours = (timeSeconds.getValue() / 60 / 60);
+        int minutes = (timeSeconds.getValue() / 60) & 60;
+        int seconds = timeSeconds.getValue() % 60;
+
+        if (hours <= 0) {
+            timerText.set( String.format( "%02d:%02d", minutes, seconds ) );
+        } else {
+            timerText.set( String.format( "%02d:%02d:%02d", hours, minutes, seconds ) );
+        }
+
+    }
+
+    private void getTimeline(int remainingSeconds) {
+        timeline = new Timeline();
+        STARTTIME = remainingSeconds;
+        timeSeconds.set( remainingSeconds );
+//        timeline.setCycleCount( remainingSeconds );
+        timeline.getKeyFrames().add( new KeyFrame( Duration.seconds( STARTTIME + 1 ),
+                new KeyValue( timeSeconds, 0 ) ) );
+
+    }
+
+    private Duration getTimelineDuration() {
+        return timeline.getCurrentTime();
+    }
+
+    private void countDown(int remainingSeconds) {
+        remainingSeconds = remainingSeconds - 1;
+    }
+
+
 }
+
