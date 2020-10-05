@@ -8,6 +8,7 @@ import com.o4codes.database.dbTransactions.AppConfigSession;
 import com.o4codes.database.dbTransactions.TaskSession;
 import com.o4codes.database.dbTransactions.TaskTimelineSession;
 import com.o4codes.helpers.Alerts;
+import com.o4codes.helpers.Utils;
 import com.o4codes.models.AppConfiguration;
 import com.o4codes.models.Project;
 import com.o4codes.models.Task;
@@ -15,6 +16,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringBinding;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -96,9 +99,8 @@ public class PomodoreActivityController implements Initializable {
 
     private StringProperty timerText;
 
-    private Integer STARTTIME = 0;
 
-    private IntegerProperty timeSeconds;
+    private Integer timeSeconds;
 
     private AudioClip notify;
 
@@ -109,35 +111,36 @@ public class PomodoreActivityController implements Initializable {
         try {
             alerts = new Alerts();
             timerText = new SimpleStringProperty();
-            timeSeconds = new SimpleIntegerProperty( STARTTIME );
+            timeSeconds = 0;
             appConfiguration = AppConfigSession.getAppConfig();
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
         //bind timer to label
-        timerLbl.textProperty().bind( timeSeconds.asString() );
-        timerText.set( "00:00" );
+        timerText.set("00:00");
+        timerLbl.textProperty().bind(timerText);
+
         //handle window title bar events
         //close window events
-        appCloseBtn.setOnAction( e -> ((JFXButton) e.getSource()).getScene().getWindow().hide() );
+        appCloseBtn.setOnAction(e -> ((JFXButton) e.getSource()).getScene().getWindow().hide());
 
         //minimize window event
-        minimizeBtn.setOnAction( e -> {
+        minimizeBtn.setOnAction(e -> {
             Stage stage = (Stage) minimizeBtn.getScene().getWindow();
-            stage.setIconified( true );
-        } );
+            stage.setIconified(true);
+        });
 
         //event to move window from one source to another
-        titleBar.setOnMousePressed( e -> {
+        titleBar.setOnMousePressed(e -> {
             xOffset = e.getSceneX();
             yOffset = e.getScreenY();
-        } );
+        });
 
-        titleBar.setOnMouseDragged( e -> {
+        titleBar.setOnMouseDragged(e -> {
             Stage stage = (Stage) minimizeBtn.getScene().getWindow();
-            stage.setX( e.getScreenX() - xOffset );
-            stage.setY( e.getScreenY() - yOffset );
-        } );
+            stage.setX(e.getScreenX() - xOffset);
+            stage.setY(e.getScreenY() - yOffset);
+        });
     }
 
     @FXML
@@ -147,45 +150,43 @@ public class PomodoreActivityController implements Initializable {
 
     @FXML
     private void PauseTaskExecEvent(ActionEvent event) {
-        this.timeline.pause();
-        startTasksBtn.setDisable( false );
-        startTasksBtn.setText( "Resume" );
-        pauseTaskExecBtn.setDisable( true );
+        timeline.pause();
+        startTasksBtn.setDisable(false);
+        startTasksBtn.setText("Resume");
+        pauseTaskExecBtn.setDisable(true);
     }
 
     @FXML
     private void StartTaskExecEvent(ActionEvent event) {
-        if (startTasksBtn.getText().equals( "Resume" )) {
-            timeline.playFrom( getTimelineDuration() );
+        if (startTasksBtn.getText().equals("Resume")) {
+            timeline.playFrom(getTimelineDuration());
         } else {
             if (taskCollection.size() < 4) {
-                alerts.materialInfoAlert( stackPane, borderPane, "Pomodore Tasks", "Ensure four(4) tasks are set" );
+                alerts.materialInfoAlert(stackPane, borderPane, "Pomodore Tasks", "Ensure four(4) tasks are set");
             } else {
-                alerts.materialConfirmAlert( stackPane, borderPane, "Pomodore Cycle Execution", "Proceed to begin tasks execution" );
-                alerts.acceptBtn.setOnAction( e -> {
+                alerts.materialConfirmAlert(stackPane, borderPane, "Pomodore Cycle Execution", "Proceed to begin tasks execution");
+                alerts.acceptBtn.setOnAction(e -> {
                     try {
-                        startTasksBtn.setDisable( true );
+                        startTasksBtn.setDisable(true);
                         for (Task task : taskCollection) {
-                            taskTitleLbl.setText( task.getTitle() );
-                            taskDescriptionLbl.setText( task.getDescription() );
+                            taskTitleLbl.setText(task.getTitle());
+                            taskDescriptionLbl.setText(task.getDescription());
 
-                            int timeUsed = TaskTimelineSession.getTaskTotalTimeConsumed( task ); // in seconds
+                            int timeUsed = TaskTimelineSession.getTaskTotalTimeConsumed(task); // in seconds
                             int taskDuration = task.getDuration() * 60; // in seconds
                             int timeLeft = taskDuration - timeUsed; // in seconds
-                            int pomodoreDuration = (int) Duration.minutes( appConfiguration.getTaskDuration() ).toSeconds();
+                            int pomodoreDuration = (int) Duration.minutes(appConfiguration.getTaskDuration()).toSeconds();
                             if (timeLeft <= pomodoreDuration) {
-                                getTimeline( timeLeft );
-                                timeline.playFromStart();
+                                getTimeline(timeLeft);
                             } else {
-                                getTimeline( pomodoreDuration );
-                                timeline.playFromStart();
+                                getTimeline(pomodoreDuration);
                             }
 
                         }
                     } catch (IOException | SQLException ex) {
                         ex.printStackTrace();
                     }
-                } );
+                });
 
             }
         }
@@ -197,84 +198,84 @@ public class PomodoreActivityController implements Initializable {
     }
 
     private void fillUpProjectTasks(Project project) {
-        Platform.runLater( () -> {
+        Platform.runLater(() -> {
             try {
-                for (Task task : TaskSession.getUnfinishedTasks( project.getId() )) {
+                for (Task task : TaskSession.getUnfinishedTasks(project.getId())) {
                     String fxmlFile = "/fxml/pomdoreActivityTasks.fxml";
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation( MainApp.class.getResource( fxmlFile ) );
+                    loader.setLocation(MainApp.class.getResource(fxmlFile));
                     HBox card = loader.load();
 
                     // inject task details into view
                     PomodoreActivityTasksController pomodoreTasks = loader.getController();
-                    pomodoreTasks.setTask( task );
-                    projectTaskList.getChildren().add( card );
+                    pomodoreTasks.setTask(task);
+                    projectTaskList.getChildren().add(card);
 
                     //animate the card entry
-                    FadeInLeft slideIn = new FadeInLeft( card );
+                    FadeInLeft slideIn = new FadeInLeft(card);
                     slideIn.play();
 
                     //add events to the card
                     // when the pane is double clicked it is added to the pomodore task cycle list
-                    card.setOnMouseClicked( e -> {
+                    card.setOnMouseClicked(e -> {
                         try {
                             if (e.getClickCount() == 2) { // when pane is double clicked the event is triggered
                                 if (taskCollection.size() < 4) {
                                     String fxmlFile2 = "/fxml/pomodoreActivityCycle.fxml";
                                     FXMLLoader loader2 = new FXMLLoader();
-                                    loader2.setLocation( MainApp.class.getResource( fxmlFile2 ) );
+                                    loader2.setLocation(MainApp.class.getResource(fxmlFile2));
                                     HBox card2 = loader2.load();
 
                                     // inject the newly added task into the view
                                     PomodoreActivityCycleController pomodoreTaskCycle = loader2.getController();
-                                    pomodoreTaskCycle.setTask( task );
-                                    pomodoreCycleList.getChildren().add( card2 );
+                                    pomodoreTaskCycle.setTask(task);
+                                    pomodoreCycleList.getChildren().add(card2);
 
                                     //animate the card entry
-                                    FadeInLeft slide = new FadeInLeft( card2 );
+                                    FadeInLeft slide = new FadeInLeft(card2);
                                     slide.play();
 
-                                    taskCollection.add( task ); // add tasks to list of tasks to be worked on
-                                    int taskCardIndex = pomodoreCycleList.getChildren().indexOf( card2 );
+                                    taskCollection.add(task); // add tasks to list of tasks to be worked on
+                                    int taskCardIndex = pomodoreCycleList.getChildren().indexOf(card2);
                                     // add breaks card
                                     if (taskCollection.size() <= 3) {
-                                        pomodoreCycleList.getChildren().add( breakCards( true ) );
+                                        pomodoreCycleList.getChildren().add(breakCards(true));
                                     } else {
-                                        pomodoreCycleList.getChildren().add( breakCards( false ) );
+                                        pomodoreCycleList.getChildren().add(breakCards(false));
                                     }
 
                                     // add events to the card2 to remove the task from the list when double clicked
-                                    pomodoreTaskCycle.removeTaskButton.setOnAction( ev -> {
+                                    pomodoreTaskCycle.removeTaskButton.setOnAction(ev -> {
 
-                                        FadeOutLeft fadeOutLeft = new FadeOutLeft( card2 );
+                                        FadeOutLeft fadeOutLeft = new FadeOutLeft(card2);
                                         fadeOutLeft.play();
-                                        fadeOutLeft.getTimeline().setOnFinished( eve -> {
+                                        fadeOutLeft.getTimeline().setOnFinished(eve -> {
                                             try {
                                                 if (pomodoreCycleList.getChildren().size() == 8) {
                                                     if (taskCardIndex == 6) {
-                                                        pomodoreCycleList.getChildren().remove( taskCardIndex + 1 );
+                                                        pomodoreCycleList.getChildren().remove(taskCardIndex + 1);
                                                     } else {
                                                         int lastIndex = pomodoreCycleList.getChildren().size() - 1;
-                                                        pomodoreCycleList.getChildren().remove( lastIndex );
-                                                        pomodoreCycleList.getChildren().remove( taskCardIndex + 1 );
-                                                        pomodoreCycleList.getChildren().add( breakCards( true ) );
+                                                        pomodoreCycleList.getChildren().remove(lastIndex);
+                                                        pomodoreCycleList.getChildren().remove(taskCardIndex + 1);
+                                                        pomodoreCycleList.getChildren().add(breakCards(true));
                                                     }
 
                                                 } else if (pomodoreCycleList.getChildren().size() == 1) {
-                                                    pomodoreCycleList.getChildren().remove( taskCardIndex + 1 );
+                                                    pomodoreCycleList.getChildren().remove(taskCardIndex + 1);
                                                 } else {
-                                                    int indexOfCard = pomodoreCycleList.getChildren().indexOf( card2 );
-                                                    pomodoreCycleList.getChildren().remove( indexOfCard + 1 );
+                                                    int indexOfCard = pomodoreCycleList.getChildren().indexOf(card2);
+                                                    pomodoreCycleList.getChildren().remove(indexOfCard + 1);
                                                 }
-                                                pomodoreCycleList.getChildren().remove( card2 );
-                                                taskCollection.remove( task );
+                                                pomodoreCycleList.getChildren().remove(card2);
+                                                taskCollection.remove(task);
                                             } catch (IOException | SQLException ex) {
                                                 ex.printStackTrace();
                                             }
-                                        } );
-                                    } );
+                                        });
+                                    });
                                 } else {
-                                    alerts.materialInfoAlert( stackPane, borderPane, "Tasks Limit", "Only a total of four(4) tasks is allowed to be worked on" );
+                                    alerts.materialInfoAlert(stackPane, borderPane, "Tasks Limit", "Only a total of four(4) tasks is allowed to be worked on");
                                 }
                             }
 
@@ -282,64 +283,59 @@ public class PomodoreActivityController implements Initializable {
                             ex.printStackTrace();
                         }
 
-                    } );
+                    });
                 }
             } catch (IOException | SQLException e) {
                 e.printStackTrace();
             }
-        } );
+        });
     }
 
     public void setProject(Project project) {
         this.project = project;
-        fillUpProjectTasks( project );
+        fillUpProjectTasks(project);
     }
 
     private HBox breakCards(boolean isBreakShort) throws IOException, SQLException {
         String fxmlFile = "/fxml/breaksCard.fxml";
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation( MainApp.class.getResource( fxmlFile ) );
+        loader.setLocation(MainApp.class.getResource(fxmlFile));
         HBox card = loader.load();
 
         BreaksCardControler breaksCard = loader.getController();
-        breaksCard.setLabels( isBreakShort );
+        breaksCard.setLabels(isBreakShort);
 
         //animate the card entry
-        FadeInLeft slide = new FadeInLeft( card );
+        FadeInLeft slide = new FadeInLeft(card);
         slide.play();
 
         return card;
     }
 
     private void setTimerText() {
-        int hours = (timeSeconds.getValue() / 60 / 60);
-        int minutes = (timeSeconds.getValue() / 60) & 60;
-        int seconds = timeSeconds.getValue() % 60;
-
-        if (hours <= 0) {
-            timerText.set( String.format( "%02d:%02d", minutes, seconds ) );
-        } else {
-            timerText.set( String.format( "%02d:%02d:%02d", hours, minutes, seconds ) );
-        }
+        timeSeconds--;
+        timerText.set(Utils.getTimeLeftInMinutes(timeSeconds));
 
     }
 
     private void getTimeline(int remainingSeconds) {
         timeline = new Timeline();
-        STARTTIME = remainingSeconds;
-        timeSeconds.set( remainingSeconds );
+        timeline.setCycleCount(remainingSeconds);
+        timeSeconds = remainingSeconds;
 //        timeline.setCycleCount( remainingSeconds );
-        timeline.getKeyFrames().add( new KeyFrame( Duration.seconds( STARTTIME + 1 ),
-                new KeyValue( timeSeconds, 0 ) ) );
-
+        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(2),
+                e -> {
+                    setTimerText();
+                    if (timeSeconds <= 0) {
+                        timeline.stop();
+                    }
+                }
+        ));
+        timeline.playFromStart();
     }
 
     private Duration getTimelineDuration() {
         return timeline.getCurrentTime();
-    }
-
-    private void countDown(int remainingSeconds) {
-        remainingSeconds = remainingSeconds - 1;
     }
 
 

@@ -109,7 +109,7 @@
                                     <Insets bottom="20.0" top="20.0" />
                                  </VBox.margin>
                                  <font>
-                                    <Font size="76.0" />
+                                    <Font size="41.0" />
                                  </font>
                               </Label>
                               <AnchorPane prefHeight="212.0" prefWidth="264.0">
@@ -173,7 +173,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="-5.0" />
                                  </VBox.margin>
                                  <children>
-                                    <Label fx:id="taskDescriptionLbl" alignment="TOP_LEFT" prefHeight="91.0" prefWidth="284.0" text="task description">
+                                    <Label fx:id="taskDescriptionLbl" alignment="TOP_LEFT" prefHeight="91.0" prefWidth="284.0" text="task description" wrapText="true">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>

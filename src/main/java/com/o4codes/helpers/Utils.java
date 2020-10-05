@@ -34,7 +34,7 @@ public class Utils {
             durationMinutes = minutes + "mins";
         } else {
             int remaining_seconds = (int) (seconds - Duration.minutes( minutes ).toSeconds());
-            durationMinutes = minutes + " minutes " + remaining_seconds + " seconds";
+            durationMinutes = minutes + " m " + remaining_seconds + " s";
         }
         return durationMinutes;
     }
