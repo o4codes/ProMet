@@ -13,13 +13,8 @@ import com.o4codes.models.AppConfiguration;
 import com.o4codes.models.Project;
 import com.o4codes.models.Task;
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.StringBinding;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -99,8 +94,7 @@ public class PomodoreActivityController implements Initializable {
 
     private StringProperty timerText;
 
-
-    private Integer timeSeconds;
+    private double timeSeconds;
 
     private AudioClip notify;
 
@@ -313,8 +307,8 @@ public class PomodoreActivityController implements Initializable {
     }
 
     private void setTimerText() {
-        timeSeconds--;
-        timerText.set(Utils.getTimeLeftInMinutes(timeSeconds));
+        timeSeconds = timeSeconds - 0.25;
+        timerText.set(Utils.setCountDownFormat(timeSeconds));
 
     }
 
@@ -323,7 +317,7 @@ public class PomodoreActivityController implements Initializable {
         timeline.setCycleCount(remainingSeconds);
         timeSeconds = remainingSeconds;
 //        timeline.setCycleCount( remainingSeconds );
-        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(2),
+        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1),
                 e -> {
                     setTimerText();
                     if (timeSeconds <= 0) {

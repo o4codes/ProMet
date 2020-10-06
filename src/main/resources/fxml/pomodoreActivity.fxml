@@ -114,12 +114,7 @@
                               </Label>
                               <AnchorPane prefHeight="212.0" prefWidth="264.0">
                                  <children>
-                                    <JFXButton fx:id="tenMinsAdditionalBtn" layoutX="80.0" layoutY="54.0" onAction="#addTenMinsToTaskExec" prefHeight="69.0" prefWidth="74.0" style="-fx-background-color: #2F4475; -fx-background-radius: 40;" text="+10m" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="20.0">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </JFXButton>
-                                    <JFXButton fx:id="nextTaskBtn" layoutX="176.0" layoutY="20.0" onAction="#NextTaskEventBtn" prefHeight="69.0" prefWidth="74.0" style="-fx-background-color: #2F4475; -fx-background-radius: 40;" text="Next" textFill="WHITE" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+                                    <JFXButton fx:id="nextTaskBtn" layoutX="95.0" layoutY="24.0" onAction="#NextTaskEventBtn" prefHeight="69.0" prefWidth="74.0" style="-fx-background-color: #2F4475; -fx-background-radius: 40;" text="Next" textFill="WHITE" AnchorPane.rightAnchor="95.0" AnchorPane.topAnchor="24.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
